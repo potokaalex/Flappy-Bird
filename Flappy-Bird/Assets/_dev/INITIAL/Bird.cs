@@ -29,11 +29,11 @@ public class Bird : MonoBehaviour
     {
         velocity += acceleration * Time.fixedDeltaTime;
 
-        //if (velocity.y > 200)
-        //{
-        //    velocity.y = 200;
-        //   Debug.Log(200);
-        //}
+        if (velocity.y > 200)
+        {
+            velocity.y = 200;
+            Debug.Log(200);
+        }
 
         if (velocity.y < 0)//взлетаем
         {

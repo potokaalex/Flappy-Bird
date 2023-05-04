@@ -9,21 +9,24 @@
 public static class GameComponentsLookup {
 
     public const int LinkToGameObject = 0;
-    public const int Position = 1;
-    public const int Rotation = 2;
-    public const int Velocity = 3;
+    public const int Bird = 1;
+    public const int Position = 2;
+    public const int Rotation = 3;
+    public const int Velocity = 4;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
         "LinkToGameObject",
+        "Bird",
         "Position",
         "Rotation",
         "Velocity"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(FlappyBird.Gameplay.Common.LinkToGameObject),
+        typeof(FlappyBird.Common.LinkToGameObject),
+        typeof(FlappyBird.Gameplay.Bird.BirdComponent),
         typeof(FlappyBird.Gameplay.Transforms.Position),
         typeof(FlappyBird.Gameplay.Transforms.Rotation),
         typeof(FlappyBird.Gameplay.Transforms.Velocity)

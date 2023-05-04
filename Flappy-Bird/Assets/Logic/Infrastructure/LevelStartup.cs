@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using FlappyBird.Gameplay.Bird;
 
 public class LevelStartup : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class LevelStartup : MonoBehaviour
     {
         var ecs = new LevelEcs(_gameLoop);
 
-        ecs.InitializeEntities(_birdConfiguration);
+        ecs.InitializeConfigurations(_birdConfiguration);
+        ecs.InitializeEntities();
         ecs.InitializeSystems();
     }
 }

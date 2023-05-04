@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public FlappyBird.Gameplay.Common.LinkToGameObject linkToGameObject { get { return (FlappyBird.Gameplay.Common.LinkToGameObject)GetComponent(GameComponentsLookup.LinkToGameObject); } }
+    public FlappyBird.Common.LinkToGameObject linkToGameObject { get { return (FlappyBird.Common.LinkToGameObject)GetComponent(GameComponentsLookup.LinkToGameObject); } }
     public bool hasLinkToGameObject { get { return HasComponent(GameComponentsLookup.LinkToGameObject); } }
 
     public void AddLinkToGameObject(UnityEngine.GameObject newGameObject) {
         var index = GameComponentsLookup.LinkToGameObject;
-        var component = (FlappyBird.Gameplay.Common.LinkToGameObject)CreateComponent(index, typeof(FlappyBird.Gameplay.Common.LinkToGameObject));
+        var component = (FlappyBird.Common.LinkToGameObject)CreateComponent(index, typeof(FlappyBird.Common.LinkToGameObject));
         component.GameObject = newGameObject;
         AddComponent(index, component);
     }
 
     public void ReplaceLinkToGameObject(UnityEngine.GameObject newGameObject) {
         var index = GameComponentsLookup.LinkToGameObject;
-        var component = (FlappyBird.Gameplay.Common.LinkToGameObject)CreateComponent(index, typeof(FlappyBird.Gameplay.Common.LinkToGameObject));
+        var component = (FlappyBird.Common.LinkToGameObject)CreateComponent(index, typeof(FlappyBird.Common.LinkToGameObject));
         component.GameObject = newGameObject;
         ReplaceComponent(index, component);
     }
