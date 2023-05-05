@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using FlappyBird.Gameplay.Common;
+using UnityEngine;
 using System;
-using FlappyBird.Common;
 
 public class GameLoop : MonoBehaviour
 {

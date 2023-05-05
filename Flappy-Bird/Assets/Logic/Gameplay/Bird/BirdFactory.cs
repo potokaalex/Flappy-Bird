@@ -1,22 +1,25 @@
-﻿using UnityEngine;
+﻿using Entitas.Unity;
+using UnityEngine;
 
 namespace FlappyBird.Gameplay.Bird
 {
     public class BirdFactory
     {
         private BirdConfiguration _config;
-        private Contexts _contexts;
+        private LevelContext _context;
 
-        public BirdFactory(Contexts contexts)
+        public BirdFactory(LevelContext levelContext, BirdConfiguration config)
         {
-            _config = contexts.config.birdConfiguration;
-            _contexts = contexts;
+            _context = levelContext;
+            _config = config;
         }
 
         public void Create()
         {
             var gameObject = Object.Instantiate(_config.Prefab);
-            var entity = _contexts.game.CreateEntity();
+            var entity = _context.CreateEntity();
+
+            gameObject.Link(entity);
 
             entity.AddLinkToGameObject(gameObject);
             entity.AddPosition(_config.SpawnPoint.position);

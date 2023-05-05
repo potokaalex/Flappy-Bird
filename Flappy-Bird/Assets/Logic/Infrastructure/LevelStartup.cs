@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using FlappyBird.Gameplay.Bird;
+﻿using FlappyBird.Gameplay.Bird;
+using UnityEngine;
 
 public class LevelStartup : MonoBehaviour
 {
