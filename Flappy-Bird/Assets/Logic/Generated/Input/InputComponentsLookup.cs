@@ -8,15 +8,18 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
+    public const int FlyUp = 0;
+    public const int Input = 1;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 2;
 
     public static readonly string[] componentNames = {
-
+        "FlyUp",
+        "Input"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(FlappyBird.Gameplay.Bird.FlyUpComponent),
+        typeof(FlappyBird.Gameplay.Common.Input.InputComponent)
     };
 }

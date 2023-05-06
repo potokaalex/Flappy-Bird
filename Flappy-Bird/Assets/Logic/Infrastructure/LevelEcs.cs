@@ -3,6 +3,8 @@ using UnityEngine;
 using FlappyBird.Gameplay.Common.Transforms;
 using FlappyBird.Gameplay.Bird;
 using FlappyBird.Gameplay.Common.Collision;
+using FlappyBird.Gameplay.Common.Input;
+using UnityEngine.InputSystem;
 
 public class LevelEcs
 {
@@ -39,13 +41,22 @@ public class LevelEcs
         birdFactory.Create();
     }
 
-    public void InitializeSystems()
+    public void InitializeSystems(InputAction birdFlyUpAction)
     {
-        _physicsSystems
-            .Add(new BirdSystems(_contexts, _gameLoop.PhysicsDeltaTime))
-            .Add(new TransformSystems(_contexts.level, _gameLoop.PhysicsDeltaTime))
-            .Add(new CollisionCleanupSystem(_contexts.level));
+        var inputEntity = _contexts.input.CreateEntity();
+        inputEntity.isInput = true;
 
+        birdFlyUpAction.Enable();
+
+        _physicsSystems
+            .Add(new BirdInputSystem(_contexts.input.inputEntity, birdFlyUpAction))
+            .Add(new BirdSystems(_contexts, _gameLoop.PhysicsDeltaTime))
+
+            .Add(new TestSystem(_contexts))
+
+            .Add(new TransformSystems(_contexts.level, _gameLoop.PhysicsDeltaTime))
+            .Add(new CollisionCleanupSystem(_contexts.level))
+            .Add(new InputCleanupSystem(inputEntity));
 
         _physicsSystems.Initialize();
     }

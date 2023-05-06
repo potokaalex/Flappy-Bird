@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 1200257879}
   - component: {fileID: 1200257881}
   - component: {fileID: 1200257880}
+  - component: {fileID: 1200257882}
   m_Layer: 0
   m_Name: Startup
   m_TagString: Untagged
@@ -470,6 +471,35 @@ MonoBehaviour:
     MaxVelocity: 0
     MinVelocity: -1
   _gameLoop: {fileID: 1200257880}
+  _birdFlyUpAction:
+    m_Name: Bird Fly Up
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a6be6356-6867-487f-a852-b637a76bd565
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: cbe98e6d-30d7-448e-a65d-1a7d86b43bdb
+      m_Path: <Keyboard>/anyKey
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Bird Fly Up
+      m_Flags: 0
+    m_Flags: 0
+--- !u!114 &1200257882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200257877}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f1dc68632323b42918be433d84e7ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1641250271
 GameObject:
   m_ObjectHideFlags: 0
