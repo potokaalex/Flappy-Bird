@@ -1,9 +1,9 @@
 ﻿using Entitas;
 using UnityEngine;
-using FlappyBird.Gameplay.Common.Transforms;
+using FlappyBird.Gameplay.Transforms;
 using FlappyBird.Gameplay.Bird;
-using FlappyBird.Gameplay.Common.Collision;
-using FlappyBird.Gameplay.Common.Input;
+using FlappyBird.Gameplay.Input;
+using FlappyBird.Gameplay.Collision;
 using UnityEngine.InputSystem;
 
 public class LevelEcs
@@ -32,6 +32,7 @@ public class LevelEcs
         var entity = _contexts.configs.CreateEntity();
 
         entity.AddBirdConfiguration(birdConfiguration.SpawnPoint, birdConfiguration.Prefab,
+            birdConfiguration.FlyUpAction,
            birdConfiguration.Acceleration, birdConfiguration.MaxVelocity, birdConfiguration.MinVelocity);
     }
 
@@ -49,7 +50,6 @@ public class LevelEcs
         birdFlyUpAction.Enable();
 
         _physicsSystems
-            .Add(new BirdInputSystem(_contexts.input.inputEntity, birdFlyUpAction))
             .Add(new BirdSystems(_contexts, _gameLoop.PhysicsDeltaTime))
 
             .Add(new TestSystem(_contexts))

@@ -15,6 +15,6 @@ public class LevelStartup : MonoBehaviour
 
         ecs.InitializeConfigurations(_birdConfiguration);
         ecs.InitializeEntities();
-        ecs.InitializeSystems(_birdFlyUpAction);
+        ecs.InitializeSystems(_birdConfiguration.FlyUpAction);
     }
 }

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    static readonly FlappyBird.Gameplay.Common.Collision.CollisionComponent collisionComponent = new FlappyBird.Gameplay.Common.Collision.CollisionComponent();
+    static readonly FlappyBird.Gameplay.Collision.CollisionComponent collisionComponent = new FlappyBird.Gameplay.Collision.CollisionComponent();
 
     public bool isCollision {
         get { return HasComponent(LevelComponentsLookup.Collision); }

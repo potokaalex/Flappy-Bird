@@ -12,22 +12,22 @@ public partial class ConfigsContext {
     public FlappyBird.Gameplay.Bird.BirdConfiguration birdConfiguration { get { return birdConfigurationEntity.birdConfiguration; } }
     public bool hasBirdConfiguration { get { return birdConfigurationEntity != null; } }
 
-    public ConfigsEntity SetBirdConfiguration(UnityEngine.Transform newSpawnPoint, UnityEngine.GameObject newPrefab, float newAcceleration, float newMaxVelocity, float newMinVelocity) {
+    public ConfigsEntity SetBirdConfiguration(UnityEngine.Transform newSpawnPoint, UnityEngine.GameObject newPrefab, UnityEngine.InputSystem.InputAction newFlyUpAction, float newAcceleration, float newMaxVelocity, float newMinVelocity) {
         if (hasBirdConfiguration) {
             throw new Entitas.EntitasException("Could not set BirdConfiguration!\n" + this + " already has an entity with FlappyBird.Gameplay.Bird.BirdConfiguration!",
                 "You should check if the context already has a birdConfigurationEntity before setting it or use context.ReplaceBirdConfiguration().");
         }
         var entity = CreateEntity();
-        entity.AddBirdConfiguration(newSpawnPoint, newPrefab, newAcceleration, newMaxVelocity, newMinVelocity);
+        entity.AddBirdConfiguration(newSpawnPoint, newPrefab, newFlyUpAction, newAcceleration, newMaxVelocity, newMinVelocity);
         return entity;
     }
 
-    public void ReplaceBirdConfiguration(UnityEngine.Transform newSpawnPoint, UnityEngine.GameObject newPrefab, float newAcceleration, float newMaxVelocity, float newMinVelocity) {
+    public void ReplaceBirdConfiguration(UnityEngine.Transform newSpawnPoint, UnityEngine.GameObject newPrefab, UnityEngine.InputSystem.InputAction newFlyUpAction, float newAcceleration, float newMaxVelocity, float newMinVelocity) {
         var entity = birdConfigurationEntity;
         if (entity == null) {
-            entity = SetBirdConfiguration(newSpawnPoint, newPrefab, newAcceleration, newMaxVelocity, newMinVelocity);
+            entity = SetBirdConfiguration(newSpawnPoint, newPrefab, newFlyUpAction, newAcceleration, newMaxVelocity, newMinVelocity);
         } else {
-            entity.ReplaceBirdConfiguration(newSpawnPoint, newPrefab, newAcceleration, newMaxVelocity, newMinVelocity);
+            entity.ReplaceBirdConfiguration(newSpawnPoint, newPrefab, newFlyUpAction, newAcceleration, newMaxVelocity, newMinVelocity);
         }
     }
 
@@ -49,22 +49,24 @@ public partial class ConfigsEntity {
     public FlappyBird.Gameplay.Bird.BirdConfiguration birdConfiguration { get { return (FlappyBird.Gameplay.Bird.BirdConfiguration)GetComponent(ConfigsComponentsLookup.BirdConfiguration); } }
     public bool hasBirdConfiguration { get { return HasComponent(ConfigsComponentsLookup.BirdConfiguration); } }
 
-    public void AddBirdConfiguration(UnityEngine.Transform newSpawnPoint, UnityEngine.GameObject newPrefab, float newAcceleration, float newMaxVelocity, float newMinVelocity) {
+    public void AddBirdConfiguration(UnityEngine.Transform newSpawnPoint, UnityEngine.GameObject newPrefab, UnityEngine.InputSystem.InputAction newFlyUpAction, float newAcceleration, float newMaxVelocity, float newMinVelocity) {
         var index = ConfigsComponentsLookup.BirdConfiguration;
         var component = (FlappyBird.Gameplay.Bird.BirdConfiguration)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.BirdConfiguration));
         component.SpawnPoint = newSpawnPoint;
         component.Prefab = newPrefab;
+        component.FlyUpAction = newFlyUpAction;
         component.Acceleration = newAcceleration;
         component.MaxVelocity = newMaxVelocity;
         component.MinVelocity = newMinVelocity;
         AddComponent(index, component);
     }
 
-    public void ReplaceBirdConfiguration(UnityEngine.Transform newSpawnPoint, UnityEngine.GameObject newPrefab, float newAcceleration, float newMaxVelocity, float newMinVelocity) {
+    public void ReplaceBirdConfiguration(UnityEngine.Transform newSpawnPoint, UnityEngine.GameObject newPrefab, UnityEngine.InputSystem.InputAction newFlyUpAction, float newAcceleration, float newMaxVelocity, float newMinVelocity) {
         var index = ConfigsComponentsLookup.BirdConfiguration;
         var component = (FlappyBird.Gameplay.Bird.BirdConfiguration)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.BirdConfiguration));
         component.SpawnPoint = newSpawnPoint;
         component.Prefab = newPrefab;
+        component.FlyUpAction = newFlyUpAction;
         component.Acceleration = newAcceleration;
         component.MaxVelocity = newMaxVelocity;
         component.MinVelocity = newMinVelocity;

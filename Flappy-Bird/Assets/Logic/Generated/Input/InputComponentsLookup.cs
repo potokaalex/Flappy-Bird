@@ -20,6 +20,6 @@ public static class InputComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(FlappyBird.Gameplay.Bird.FlyUpComponent),
-        typeof(FlappyBird.Gameplay.Common.Input.InputComponent)
+        typeof(FlappyBird.Gameplay.Input.InputComponent)
     };
 }

@@ -35,7 +35,7 @@ public partial class InputContext {
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    static readonly FlappyBird.Gameplay.Common.Input.InputComponent inputComponent = new FlappyBird.Gameplay.Common.Input.InputComponent();
+    static readonly FlappyBird.Gameplay.Input.InputComponent inputComponent = new FlappyBird.Gameplay.Input.InputComponent();
 
     public bool isInput {
         get { return HasComponent(InputComponentsLookup.Input); }

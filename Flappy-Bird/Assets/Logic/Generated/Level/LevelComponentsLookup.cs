@@ -8,30 +8,33 @@
 //------------------------------------------------------------------------------
 public static class LevelComponentsLookup {
 
-    public const int Bird = 0;
-    public const int Collision = 1;
-    public const int LinkToGameObject = 2;
-    public const int Position = 3;
-    public const int Rotation = 4;
-    public const int Velocity = 5;
+    public const int LinkToGameObject = 0;
+    public const int Bird = 1;
+    public const int Collision = 2;
+    public const int Gravity = 3;
+    public const int Position = 4;
+    public const int Rotation = 5;
+    public const int Velocity = 6;
 
-    public const int TotalComponents = 6;
+    public const int TotalComponents = 7;
 
     public static readonly string[] componentNames = {
+        "LinkToGameObject",
         "Bird",
         "Collision",
-        "LinkToGameObject",
+        "Gravity",
         "Position",
         "Rotation",
         "Velocity"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(FlappyBird.Extensions.LinkToGameObject),
         typeof(FlappyBird.Gameplay.Bird.BirdComponent),
-        typeof(FlappyBird.Gameplay.Common.Collision.CollisionComponent),
-        typeof(FlappyBird.Gameplay.Common.LinkToGameObject),
-        typeof(FlappyBird.Gameplay.Common.Transforms.PositionComponent),
-        typeof(FlappyBird.Gameplay.Common.Transforms.RotationComponent),
-        typeof(FlappyBird.Gameplay.Common.Transforms.VelocityComponent)
+        typeof(FlappyBird.Gameplay.Collision.CollisionComponent),
+        typeof(FlappyBird.Gameplay.Bird.GravityComponent),
+        typeof(FlappyBird.Gameplay.Transforms.PositionComponent),
+        typeof(FlappyBird.Gameplay.Transforms.RotationComponent),
+        typeof(FlappyBird.Gameplay.Transforms.VelocityComponent)
     };
 }

@@ -1,4 +1,4 @@
-﻿using FlappyBird.Gameplay.Common;
+﻿using FlappyBird.Extensions;
 using UnityEngine;
 using System;
 

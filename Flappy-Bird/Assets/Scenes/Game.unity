@@ -467,6 +467,23 @@ MonoBehaviour:
   _birdConfiguration:
     SpawnPoint: {fileID: 942942115}
     Prefab: {fileID: 3231904528508952564, guid: a22b63eef227bf54b83bcdffc264b15b, type: 3}
+    FlyUpAction:
+      m_Name: Fly Up
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 92ae2259-0654-4ced-b530-e7893389d715
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 847e59f4-5850-45bb-8f81-247b6239277c
+        m_Path: <Keyboard>/anyKey
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Fly Up
+        m_Flags: 0
+      m_Flags: 0
     Acceleration: 9.8
     MaxVelocity: 0
     MinVelocity: -1

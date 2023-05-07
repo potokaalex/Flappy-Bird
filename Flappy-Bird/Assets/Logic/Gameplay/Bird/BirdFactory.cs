@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlappyBird.Gameplay.Bird
 {
-    public class BirdFactory
+    public class BirdFactory// ?
     {
         private BirdConfiguration _config;
         private LevelContext _context;
@@ -25,6 +25,7 @@ namespace FlappyBird.Gameplay.Bird
             entity.AddPosition(_config.SpawnPoint.position);
             entity.AddRotation(0);
             entity.AddVelocity(Vector2.zero);
+            entity.AddGravity(_config.Acceleration, _config.MinVelocity);
             entity.isBird = true;
         }
     }
