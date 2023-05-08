@@ -2,39 +2,37 @@
 using UnityEngine;
 using System;
 
-public class GameLoop : MonoBehaviour
+namespace FlappyBird.Infrastructure
 {
-    public event Action OnPhysicsUpdate;
-    public event Action OnGraphicsUpdate;
-    public event Action OnDispose;
-
-    public DeltaTime PhysicsDeltaTime { get; private set; }
-
-    public DeltaTime GraphicsDeltaTime { get; private set; }
-
-    public bool IsPause { get; set; }
-
-    private void Awake()
+    public class GameLoop : MonoBehaviour
     {
-        PhysicsDeltaTime = new();
-        GraphicsDeltaTime = new();
-    }
+        public event Action OnFixedUpdate;
+        public event Action OnUpdate;
+        public event Action OnDispose;
 
-    private void FixedUpdate()
-    {
-        if (!IsPause)
+        public DeltaTime FixedDeltaTime { get; private set; }
+
+        public DeltaTime DeltaTime { get; private set; }
+
+        private void Awake()
         {
-            PhysicsDeltaTime.SetValue(Time.fixedDeltaTime);
-            OnPhysicsUpdate?.Invoke();
+            FixedDeltaTime = new();
+            DeltaTime = new();
         }
-    }
 
-    private void Update()
-    {
-        GraphicsDeltaTime.SetValue(Time.deltaTime);
-        OnGraphicsUpdate?.Invoke();
-    }
+        private void FixedUpdate()
+        {
+            FixedDeltaTime.SetValue(Time.fixedDeltaTime);
+            OnFixedUpdate?.Invoke();
+        }
 
-    private void OnDisable()
-        => OnDispose?.Invoke();
+        private void Update()
+        {
+            DeltaTime.SetValue(Time.deltaTime);
+            OnUpdate?.Invoke();
+        }
+
+        private void OnDisable()
+            => OnDispose?.Invoke();
+    }
 }

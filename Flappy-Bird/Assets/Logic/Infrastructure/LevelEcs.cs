@@ -1,83 +1,78 @@
-﻿using Entitas;
-using UnityEngine;
-using FlappyBird.Gameplay.Transforms;
-using FlappyBird.Gameplay.Bird;
-using FlappyBird.Gameplay.Input;
+﻿using FlappyBird.Gameplay.Transforms;
 using FlappyBird.Gameplay.Collision;
-using UnityEngine.InputSystem;
+using FlappyBird.Gameplay.Input;
+using FlappyBird.Gameplay.Bird;
+using Entitas;
+using FlappyBird.StateMachine;
+using FlappyBird.Gameplay.GameOver;
+using FlappyBird.Extensions;
 
-public class LevelEcs
+namespace FlappyBird.Infrastructure
 {
-    private GameLoop _gameLoop;
-    private Contexts _contexts;
-    private Systems _physicsSystems;
-    private Systems _graphicsSystems;
-
-    public LevelEcs(GameLoop gameLoop)//
+    public class LevelEcs
     {
-        _gameLoop = gameLoop;
-        _contexts = new Contexts();
-        _physicsSystems = new();
-        _graphicsSystems = new();
+        private GameLoop _gameLoop;
+        private Contexts _contexts;
+        private DataProvider _data;
+        private BreakableSystems _physicsSystems;
+        private Systems _graphicsSystems;
 
-        _gameLoop.OnPhysicsUpdate += PhysicsUpdate;
-        _gameLoop.OnGraphicsUpdate += GraphicsUpdate;
-        _gameLoop.OnDispose += Dispose;
-    }
+        public LevelEcs(GameLoop gameLoop, DataProvider dataProvider, IStateMachine stateMachine)
+        {
+            _gameLoop = gameLoop;
+            _contexts = new Contexts();
+            _data = dataProvider;
 
-    //public void InitializeEntities() { }
+            CreateUniqueEntities();
+            CreateSystems(stateMachine);
+        }
 
-    public void InitializeConfigurations(BirdConfiguration birdConfiguration)
-    {
-        var entity = _contexts.configs.CreateEntity();
+        public void Initialize()
+        {
+            _physicsSystems.Initialize();
+            _graphicsSystems.Initialize();
 
-        entity.AddBirdConfiguration(birdConfiguration.SpawnPoint, birdConfiguration.Prefab,
-            birdConfiguration.FlyUpAction,
-           birdConfiguration.Acceleration, birdConfiguration.MaxVelocity, birdConfiguration.MinVelocity);
-    }
+            _gameLoop.OnFixedUpdate += PhysicsUpdate;
+            _gameLoop.OnUpdate += GraphicsUpdate;
+        }
 
-    public void InitializeEntities()
-    {
-        var birdFactory = new BirdFactory(_contexts.level, _contexts.configs.birdConfiguration);
-        birdFactory.Create();
-    }
+        public void Cleanup()
+        {
+            _physicsSystems.Cleanup();
+            _graphicsSystems.Cleanup();
 
-    public void InitializeSystems(InputAction birdFlyUpAction)
-    {
-        var inputEntity = _contexts.input.CreateEntity();
-        inputEntity.isInput = true;
+            _gameLoop.OnFixedUpdate -= PhysicsUpdate;
+            _gameLoop.OnUpdate -= GraphicsUpdate;
+        }
 
-        birdFlyUpAction.Enable();
+        private void CreateUniqueEntities()
+        {
+            _contexts.level.isBird = true;
+            _contexts.input.isInput = true;
+        }
 
-        _physicsSystems
-            .Add(new BirdSystems(_contexts, _gameLoop.PhysicsDeltaTime))
+        private void CreateSystems(IStateMachine stateMachine)
+        {
+            _graphicsSystems = new();
+            _physicsSystems = new();
 
-            .Add(new TestSystem(_contexts))
+            _physicsSystems
+                .Add(new BirdSystems(_contexts, _data.BirdConfiguration, _gameLoop.FixedDeltaTime))
+                .Add(new GameOverSystem(_contexts.level, _physicsSystems,_data.LevelLoadingConfiguration, stateMachine))
+                //pipes
+                .Add(new TransformSystems(_contexts.level, _gameLoop.FixedDeltaTime))
+                .Add(new CollisionCleanupSystem(_contexts.level))
+                .Add(new InputCleanupSystem(_contexts.input.inputEntity));
+        }
 
-            .Add(new TransformSystems(_contexts.level, _gameLoop.PhysicsDeltaTime))
-            .Add(new CollisionCleanupSystem(_contexts.level))
-            .Add(new InputCleanupSystem(inputEntity));
+        private void PhysicsUpdate()
+        {
+            _physicsSystems.Execute();
+        }
 
-        _physicsSystems.Initialize();
-    }
+        private void GraphicsUpdate()
+        {
 
-    private void PhysicsUpdate()
-    {
-        _physicsSystems.Execute();
-    }
-
-    private void GraphicsUpdate()
-    {
-
-    }
-
-    private void Dispose()
-    {
-        _physicsSystems.Cleanup();
-        _graphicsSystems.Cleanup();
-
-        _gameLoop.OnPhysicsUpdate -= PhysicsUpdate;
-        _gameLoop.OnGraphicsUpdate -= GraphicsUpdate;
-        _gameLoop.OnDispose -= Dispose;
+        }
     }
 }

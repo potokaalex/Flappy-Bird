@@ -1,8 +1,9 @@
-﻿using Entitas;
+﻿using FlappyBird.Extensions;
+using Entitas;
 
 namespace FlappyBird.Gameplay.Input
 {
-    public class InputCleanupSystem : IExecuteSystem
+    public class InputCleanupSystem : IExecuteSystem, ICleanupSystem
     {
         private InputEntity _inputEntity;
 
@@ -10,14 +11,9 @@ namespace FlappyBird.Gameplay.Input
             => _inputEntity = inputEntity;
 
         public void Execute()
-        {
-            for (int i = 0; i < _inputEntity.totalComponents; i++)
-            {
-                if (i == InputComponentsLookup.Input)
-                    continue;
-
-                _inputEntity.ReplaceComponent(i, null);
-            }
-        }
+            => Cleanup();
+        
+        public void Cleanup()
+            => _inputEntity.RemoveAllComponentsExcept(InputComponentsLookup.Input);
     }
 }

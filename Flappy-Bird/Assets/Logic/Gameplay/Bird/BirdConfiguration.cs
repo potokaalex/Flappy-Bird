@@ -1,20 +1,32 @@
-﻿using Entitas.CodeGeneration.Attributes;
-using UnityEngine.InputSystem;
+﻿using UnityEngine.InputSystem;
 using UnityEngine;
-using Entitas;
-using System;
 
 namespace FlappyBird.Gameplay.Bird
 {
-    [Configs, Unique]
-    [Serializable]
-    public class BirdConfiguration : IComponent
+    [CreateAssetMenu(fileName = "New Bird Configuration", menuName = "Configurations/Bird")]
+    public class BirdConfiguration : ScriptableObject
     {
-        public Transform SpawnPoint;
-        public GameObject Prefab;
-        public InputAction FlyUpAction;
-        public float Acceleration;
-        public float MaxVelocity;
-        public float MinVelocity;
+        [SerializeField] private float _acceleration;
+        [SerializeField] private float _maxVelocity;
+        [SerializeField] private float _minVelocity;
+
+        public void Initialize(InputAction flyUpAction, GameObject boidPrefab, Vector2 spawnPoint)
+        {
+            FlyUpAction = flyUpAction;
+            Prefab = boidPrefab;
+            SpawnPoint = spawnPoint;
+        }
+
+        public GameObject Prefab { get; private set; }
+
+        public InputAction FlyUpAction { get; private set; }
+
+        public Vector2 SpawnPoint { get; private set; }
+
+        public float Acceleration => _acceleration;
+
+        public float MaxVelocity => _maxVelocity;
+        
+        public float MinVelocity => _minVelocity;
     }
 }

@@ -10,31 +10,34 @@ public static class LevelComponentsLookup {
 
     public const int LinkToGameObject = 0;
     public const int Bird = 1;
-    public const int Collision = 2;
-    public const int Gravity = 3;
+    public const int Gravity = 2;
+    public const int Collision = 3;
     public const int Position = 4;
     public const int Rotation = 5;
     public const int Velocity = 6;
+    public const int GameOver = 7;
 
-    public const int TotalComponents = 7;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
         "LinkToGameObject",
         "Bird",
-        "Collision",
         "Gravity",
+        "Collision",
         "Position",
         "Rotation",
-        "Velocity"
+        "Velocity",
+        "GameOver"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(FlappyBird.Extensions.LinkToGameObject),
         typeof(FlappyBird.Gameplay.Bird.BirdComponent),
-        typeof(FlappyBird.Gameplay.Collision.CollisionComponent),
         typeof(FlappyBird.Gameplay.Bird.GravityComponent),
+        typeof(FlappyBird.Gameplay.Collision.CollisionComponent),
         typeof(FlappyBird.Gameplay.Transforms.PositionComponent),
         typeof(FlappyBird.Gameplay.Transforms.RotationComponent),
-        typeof(FlappyBird.Gameplay.Transforms.VelocityComponent)
+        typeof(FlappyBird.Gameplay.Transforms.VelocityComponent),
+        typeof(FlappyBird.Gameplay.GameOver.GameOverComponent)
     };
 }
