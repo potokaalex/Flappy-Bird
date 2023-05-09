@@ -1,23 +1,23 @@
-﻿using UnityEngine.InputSystem;
-using Entitas;
+﻿using Entitas;
 
 namespace FlappyBird.Gameplay.Bird
 {
     public class InputSystem : IExecuteSystem
     {
-        private InputEntity _inputEntity;
-        private InputAction _flyUpAction;
+        private IGroup<InputEntity> _inputEntities;
+        private BirdConfiguration _config;
 
-        public InputSystem(InputEntity inputEntity, InputAction flyUpAction)
+        public InputSystem(InputContext context, BirdConfiguration config)
         {
-            _inputEntity = inputEntity;
-            _flyUpAction = flyUpAction;
+            _inputEntities = context.GetGroup(InputMatcher.Input);
+            _config = config;
         }
 
         public void Execute()
         {
-            if (_flyUpAction.WasPressedThisFrame())
-                _inputEntity.isFlyUp = true;
+            foreach (var entity in _inputEntities)
+                if (_config.FlyUpAction.WasPressedThisFrame())
+                    entity.isFlyUp = true;
         }
     }
 }

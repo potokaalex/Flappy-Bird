@@ -5,15 +5,18 @@ namespace FlappyBird.Gameplay.Input
 {
     public class InputCleanupSystem : IExecuteSystem, ICleanupSystem
     {
-        private InputEntity _inputEntity;
+        private IGroup<InputEntity> _inputEntities;
 
-        public InputCleanupSystem(InputEntity inputEntity)
-            => _inputEntity = inputEntity;
+        public InputCleanupSystem(InputContext context) 
+            => _inputEntities = context.GetGroup(InputMatcher.Input);
 
         public void Execute()
             => Cleanup();
-        
+
         public void Cleanup()
-            => _inputEntity.RemoveAllComponentsExcept(InputComponentsLookup.Input);
+        {
+            foreach (var entity in _inputEntities)
+                entity.RemoveAllComponentsExcept(InputComponentsLookup.Input);
+        }
     }
 }

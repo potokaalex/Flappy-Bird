@@ -5,23 +5,30 @@ namespace FlappyBird.Gameplay.Bird
 {
     public class GravitySystem : IExecuteSystem
     {
-        private LevelEntity _bird;
+        private IGroup<LevelEntity> _birdEntities;
         private DeltaTime _deltaTime;
 
-        public GravitySystem(LevelContext levelContext, DeltaTime deltaTime)
+        public GravitySystem(LevelContext context, DeltaTime deltaTime)
         {
-            _bird = levelContext.birdEntity;
+            _birdEntities = context.GetGroup(LevelMatcher.Bird);
             _deltaTime = deltaTime;
         }
 
         public void Execute()
         {
-            var velocity = _bird.velocity.Value.y - _bird.gravity.Acceleration * _deltaTime.Value;
+            foreach (var entity in _birdEntities)
+                ApplyGravity(entity);
+        }
 
-            if (velocity < _bird.gravity.MinVelocity)
-                _bird.velocity.Value.y = _bird.gravity.MinVelocity;
+        private void ApplyGravity(LevelEntity entity)
+        {
+            var velocity = entity.velocity.Value.y - 
+                entity.gravity.Acceleration * _deltaTime.Value;
+
+            if (velocity < entity.gravity.MinVelocity)
+                entity.velocity.Value.y = entity.gravity.MinVelocity;
             else
-                _bird.velocity.Value.y = velocity;
+                entity.velocity.Value.y = velocity;
         }
     }
 }

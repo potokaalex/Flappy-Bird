@@ -1,21 +1,17 @@
-﻿using UnityEngine.InputSystem;
-using FlappyBird.Extensions;
-using Entitas;
-using UnityEngine;
-using Entitas.Unity;
-
+﻿using FlappyBird.Extensions;
 
 namespace FlappyBird.Gameplay.Bird
 {
     public class BirdSystems : Feature
     {
-        public BirdSystems(Contexts contexts, BirdConfiguration birdConfig, DeltaTime deltaTime)
+        public BirdSystems(Contexts contexts, BirdConfiguration config, DeltaTime deltaTime)
         {
-            Add(new BirdInitializationSystem(contexts.level.birdEntity, birdConfig));
-            Add(new InputSystem(contexts.input.inputEntity, birdConfig.FlyUpAction));
+            Add(new BirdInitializationSystem(contexts.level, config));
+            Add(new InputSystem(contexts.input, config));
             Add(new DeathSystem(contexts.level));
             Add(new GravitySystem(contexts.level, deltaTime));
-            Add(new BirdCleanupSystem(contexts.level.birdEntity));
+            Add(new BirdCleanupSystem(contexts.level, config));
+
             //move
         }
     }

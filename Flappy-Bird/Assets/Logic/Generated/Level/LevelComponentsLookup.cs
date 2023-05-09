@@ -12,10 +12,10 @@ public static class LevelComponentsLookup {
     public const int Bird = 1;
     public const int Gravity = 2;
     public const int Collision = 3;
-    public const int Position = 4;
-    public const int Rotation = 5;
-    public const int Velocity = 6;
-    public const int GameOver = 7;
+    public const int GameOver = 4;
+    public const int Position = 5;
+    public const int Rotation = 6;
+    public const int Velocity = 7;
 
     public const int TotalComponents = 8;
 
@@ -24,10 +24,10 @@ public static class LevelComponentsLookup {
         "Bird",
         "Gravity",
         "Collision",
+        "GameOver",
         "Position",
         "Rotation",
-        "Velocity",
-        "GameOver"
+        "Velocity"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -35,9 +35,9 @@ public static class LevelComponentsLookup {
         typeof(FlappyBird.Gameplay.Bird.BirdComponent),
         typeof(FlappyBird.Gameplay.Bird.GravityComponent),
         typeof(FlappyBird.Gameplay.Collision.CollisionComponent),
+        typeof(FlappyBird.Gameplay.GameOver.GameOverComponent),
         typeof(FlappyBird.Gameplay.Transforms.PositionComponent),
         typeof(FlappyBird.Gameplay.Transforms.RotationComponent),
-        typeof(FlappyBird.Gameplay.Transforms.VelocityComponent),
-        typeof(FlappyBird.Gameplay.GameOver.GameOverComponent)
+        typeof(FlappyBird.Gameplay.Transforms.VelocityComponent)
     };
 }

@@ -6,26 +6,38 @@ namespace FlappyBird.Gameplay.Bird
 {
     public class BirdInitializationSystem : IInitializeSystem
     {
-        private LevelEntity _birdEntity;
+        private LevelContext _context;
         private BirdConfiguration _config;
 
-        public BirdInitializationSystem(LevelEntity birdEntity, BirdConfiguration config)
+        public BirdInitializationSystem(LevelContext context, BirdConfiguration config)
         {
-            _birdEntity = birdEntity;
+            _context = context;
             _config = config;
         }
 
         public void Initialize()
         {
-            var gameObject = Object.Instantiate(_config.Prefab, _config.SpawnPoint, Quaternion.identity);
-
-            gameObject.Link(_birdEntity);
-
-            _birdEntity.AddLinkToGameObject(gameObject);
-            _birdEntity.AddPosition(_config.SpawnPoint);
-            _birdEntity.AddRotation(0);
-            _birdEntity.AddVelocity(Vector2.zero);
-            _birdEntity.AddGravity(_config.Acceleration, _config.MinVelocity);
+            CreateBird();
+            EnableFlyUpAction();
         }
+
+        private void CreateBird()
+        {
+            var entity = _context.CreateEntity();
+            var gameObject = Object.Instantiate(_config.Prefab,
+                _config.SpawnPoint, Quaternion.identity);
+            
+            gameObject.Link(entity);
+
+            entity.AddLinkToGameObject(gameObject);
+            entity.AddPosition(_config.SpawnPoint);
+            entity.AddRotation(0);
+            entity.AddVelocity(Vector2.zero);
+            entity.AddGravity(_config.Acceleration, _config.MinVelocity);
+            entity.isBird = true;
+        }
+
+        private void EnableFlyUpAction()
+            => _config.FlyUpAction.Enable();
     }
 }

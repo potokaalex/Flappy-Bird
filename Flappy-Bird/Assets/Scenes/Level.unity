@@ -514,25 +514,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381a9677ea0be2b4fad8b3f15446c341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flyUpAction:
-    m_Name: Fly Up
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: a3ae5003-1d9e-471b-a723-38687c626b1a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: d98a2185-0cff-4274-a555-6bd85f38314e
-      m_Path: <Keyboard>/anyKey
-      m_Interactions: 
+  _configuration:
+    FlyUpAction:
+      m_Name: Fly Up
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8e64e05f-9167-452d-a86f-c6b38153a8a1
       m_Processors: 
-      m_Groups: 
-      m_Action: Fly Up
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 3fed47dd-b674-4d5e-b0a0-b8330d26ca46
+        m_Path: <Keyboard>/anyKey
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Fly Up
+        m_Flags: 0
       m_Flags: 0
-    m_Flags: 0
-  _birdPrefab: {fileID: 3231904528508952564, guid: a22b63eef227bf54b83bcdffc264b15b, type: 3}
-  _birdSpawnPoint: {fileID: 942942115}
+    BirdPrefab: {fileID: 3231904528508952564, guid: a22b63eef227bf54b83bcdffc264b15b, type: 3}
+    BirdSpawnPoint: {fileID: 942942115}
 --- !u!114 &1200257882
 MonoBehaviour:
   m_ObjectHideFlags: 0
