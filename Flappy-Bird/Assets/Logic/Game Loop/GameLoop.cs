@@ -1,14 +1,12 @@
-﻿using FlappyBird.Extensions;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
-namespace FlappyBird.Infrastructure
+namespace FlappyBird
 {
-    public class GameLoop : MonoBehaviour
+    public class GameLoop : MonoBehaviour, IGameLoop
     {
         public event Action OnFixedUpdate;
         public event Action OnUpdate;
-        public event Action OnDispose;
 
         public DeltaTime FixedDeltaTime { get; private set; }
 
@@ -31,8 +29,5 @@ namespace FlappyBird.Infrastructure
             DeltaTime.SetValue(Time.deltaTime);
             OnUpdate?.Invoke();
         }
-
-        private void OnDisable()
-            => OnDispose?.Invoke();
     }
 }

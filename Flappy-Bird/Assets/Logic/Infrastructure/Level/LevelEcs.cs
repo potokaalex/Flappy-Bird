@@ -3,7 +3,6 @@ using FlappyBird.Gameplay.Collision;
 using FlappyBird.Gameplay.GameOver;
 using FlappyBird.Gameplay.Input;
 using FlappyBird.Gameplay.Bird;
-using FlappyBird.StateMachine;
 using FlappyBird.Extensions;
 using Entitas;
 
@@ -11,21 +10,20 @@ namespace FlappyBird.Infrastructure
 {
     public class LevelEcs
     {
-        private GameLoop _gameLoop;
         private Contexts _contexts;
+        private BreakableSystems _physicsSystems;//fixedUpdatable
+        private Systems _graphicsSystems;//updatable
         private DataProvider _data;
         private IStateMachine _stateMachine;
-        private BreakableSystems _physicsSystems;
-        private Systems _graphicsSystems;
+        private IGameLoop _gameLoop;
 
-        public LevelEcs(GameLoop gameLoop, DataProvider dataProvider, IStateMachine stateMachine)
+        public LevelEcs(IStateMachine stateMachine, IGameLoop gameLoop, DataProvider dataProvider)
         {
-            _contexts = new Contexts();
-
+            _stateMachine = stateMachine;
             _gameLoop = gameLoop;
             _data = dataProvider;
-            _stateMachine = stateMachine;
 
+            _contexts = new();
             CreateSystems();
         }
 
@@ -69,8 +67,6 @@ namespace FlappyBird.Infrastructure
         private void PhysicsUpdate()
         {
             _physicsSystems.Execute();
-                
-            //UnityEngine.Debug.Log(_data.BirdConfiguration.FlyUpAction.enabled);
         }
 
         private void GraphicsUpdate()

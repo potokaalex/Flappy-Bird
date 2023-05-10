@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace FlappyBird.StateMachine
+namespace FlappyBird
 {
     public class StateFactory : IStateFactory
     {

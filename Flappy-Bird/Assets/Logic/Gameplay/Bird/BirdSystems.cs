@@ -1,6 +1,4 @@
-﻿using FlappyBird.Extensions;
-
-namespace FlappyBird.Gameplay.Bird
+﻿namespace FlappyBird.Gameplay.Bird
 {
     public class BirdSystems : Feature
     {

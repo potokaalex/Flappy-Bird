@@ -31,7 +31,7 @@ public static class LevelComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(FlappyBird.Extensions.LinkToGameObject),
+        typeof(FlappyBird.Gameplay.LinkToGameObjectComponent),
         typeof(FlappyBird.Gameplay.Bird.BirdComponent),
         typeof(FlappyBird.Gameplay.Bird.GravityComponent),
         typeof(FlappyBird.Gameplay.Collision.CollisionComponent),

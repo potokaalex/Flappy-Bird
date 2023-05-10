@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using Entitas;
 
-namespace FlappyBird.Extensions
+namespace FlappyBird.Gameplay
 {
     [Level]
-    public class LinkToGameObject : IComponent
+    public class LinkToGameObjectComponent : IComponent
     {
         public GameObject GameObject;
     }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 
-namespace FlappyBird.StateMachine
+namespace FlappyBird
 {
     public class StateMachine : IStateMachine
     {

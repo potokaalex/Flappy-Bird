@@ -1,5 +1,4 @@
-﻿using FlappyBird.Extensions;
-using Entitas;
+﻿using Entitas;
 
 namespace FlappyBird.Gameplay.Transforms
 {

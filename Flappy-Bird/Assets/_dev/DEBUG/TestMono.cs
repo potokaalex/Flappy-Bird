@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
-using System;
-using FlappyBird.StateMachine;
-using FlappyBird.Infrastructure;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class TestMono : MonoBehaviour
 {

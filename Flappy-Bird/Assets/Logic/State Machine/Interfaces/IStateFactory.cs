@@ -1,4 +1,4 @@
-﻿namespace FlappyBird.StateMachine
+﻿namespace FlappyBird
 {
     public interface IStateFactory
     {

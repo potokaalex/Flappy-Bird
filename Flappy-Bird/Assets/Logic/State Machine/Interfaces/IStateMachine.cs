@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FlappyBird.StateMachine
+namespace FlappyBird
 {
     public interface IStateMachine
     {

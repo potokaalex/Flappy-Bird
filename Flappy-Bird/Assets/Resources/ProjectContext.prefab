@@ -75,5 +75,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dataProvider:
-    BirdConfiguration: {fileID: 11400000, guid: aa662a993adc062408a00d075d3b5776, type: 2}
-    LevelLoadingConfiguration: {fileID: 11400000, guid: 78434e935203b6c488d5dbb9f3cbed3b, type: 2}
+    _levelLoadingConfiguration: {fileID: 11400000, guid: 78434e935203b6c488d5dbb9f3cbed3b, type: 2}
+    _birdConfiguration: {fileID: 11400000, guid: aa662a993adc062408a00d075d3b5776, type: 2}

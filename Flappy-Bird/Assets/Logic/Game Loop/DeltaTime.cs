@@ -1,4 +1,4 @@
-﻿namespace FlappyBird.Extensions
+﻿namespace FlappyBird
 {
     public class DeltaTime
     {

@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Entitas;
-using FlappyBird.Extensions;
 
 public class TestSystem : IExecuteSystem
 {

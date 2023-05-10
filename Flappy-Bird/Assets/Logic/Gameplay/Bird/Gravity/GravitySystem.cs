@@ -1,4 +1,3 @@
-using FlappyBird.Extensions;
 using Entitas;
 
 namespace FlappyBird.Gameplay.Bird
