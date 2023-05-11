@@ -6,7 +6,8 @@ namespace FlappyBird.Gameplay.Bird
     [CreateAssetMenu(fileName = "New Bird Configuration", menuName = "Configurations/Bird")]
     public class BirdConfiguration : ScriptableObject
     {
-        [SerializeField] private float _acceleration;
+        [SerializeField] private float _gravityAcceleration;
+        [SerializeField] private float _flyUpVelocity;
         [SerializeField] private float _maxVelocity;
         [SerializeField] private float _minVelocity;
 
@@ -23,7 +24,9 @@ namespace FlappyBird.Gameplay.Bird
 
         public Vector2 SpawnPoint { get; private set; }
 
-        public float Acceleration => _acceleration;
+        public float GravityAcceleration => _gravityAcceleration;
+
+        public float FlyUpVelocity => _flyUpVelocity;
 
         public float MaxVelocity => _maxVelocity;
         

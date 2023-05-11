@@ -5,5 +5,7 @@ namespace FlappyBird.Gameplay.Bird
 {
     [Input, Unique]
     public class FlyUpComponent : IComponent
-    { }
+    {
+        public float Velocity;
+    }
 }

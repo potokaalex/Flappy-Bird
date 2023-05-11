@@ -5,12 +5,15 @@
         public BirdSystems(Contexts contexts, BirdConfiguration config, DeltaTime deltaTime)
         {
             Add(new BirdInitializationSystem(contexts.level, config));
-            Add(new InputSystem(contexts.input, config));
             Add(new DeathSystem(contexts.level));
+            Add(new InputSystem(contexts.input, config));
             Add(new GravitySystem(contexts.level, deltaTime));
-            Add(new BirdCleanupSystem(contexts.level, config));
+            Add(new FlyUpSystem(contexts.level, contexts.input));
 
-            //move
+            //rotation
+
+            Add(new VerticalVelocitySystem(contexts.level, deltaTime));
+            Add(new BirdCleanupSystem(contexts.level, config));
         }
     }
 }

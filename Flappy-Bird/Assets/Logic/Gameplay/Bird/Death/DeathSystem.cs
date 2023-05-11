@@ -11,7 +11,7 @@ namespace FlappyBird.Gameplay.Bird
             => _context = context;
 
         protected override ICollector<LevelEntity> GetTrigger(IContext<LevelEntity> context)
-            => context.CreateCollector(LevelMatcher.AllOf(LevelMatcher.Collision).Added());
+            => context.CreateCollector(LevelMatcher.Collision.Added());
 
         protected override bool Filter(LevelEntity entity)
             => entity.isBird;

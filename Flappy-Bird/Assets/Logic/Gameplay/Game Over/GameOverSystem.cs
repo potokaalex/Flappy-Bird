@@ -23,7 +23,7 @@ namespace FlappyBird.Gameplay.GameOver
         }
 
         protected override ICollector<LevelEntity> GetTrigger(IContext<LevelEntity> context)
-            => context.CreateCollector(LevelMatcher.AllOf(LevelMatcher.GameOver).Added());
+            => context.CreateCollector(LevelMatcher.GameOver.Added());
 
         protected override bool Filter(LevelEntity entity)
             => true;

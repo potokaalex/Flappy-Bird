@@ -26,14 +26,17 @@ namespace FlappyBird.Gameplay.Bird
             var entity = _context.CreateEntity();
             var gameObject = Object.Instantiate(_config.Prefab,
                 _config.SpawnPoint, Quaternion.identity);
-            
+
             gameObject.Link(entity);
 
-            entity.AddLinkToGameObject(gameObject);
             entity.AddPosition(_config.SpawnPoint);
             entity.AddRotation(0);
             entity.AddVelocity(Vector2.zero);
-            entity.AddGravity(_config.Acceleration, _config.MinVelocity);
+
+            entity.AddLinkToGameObject(gameObject);
+            entity.AddVerticalVelocityClamp(_config.MinVelocity, _config.MaxVelocity);
+            entity.AddVerticalVelocity(0);
+            entity.AddGravity(_config.GravityAcceleration);
             entity.isBird = true;
         }
 

@@ -17,7 +17,7 @@ namespace FlappyBird.Gameplay.Bird
         {
             foreach (var entity in _inputEntities)
                 if (_config.FlyUpAction.WasPressedThisFrame())
-                    entity.isFlyUp = true;
+                    entity.AddFlyUp(_config.FlyUpVelocity);
         }
     }
 }

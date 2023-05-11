@@ -18,7 +18,8 @@ namespace FlappyBird.Gameplay.Transforms
         public void Execute()
         {
             foreach (var movable in _movables)
-                movable.position.Value += movable.velocity.Value * _deltaTime.Value;
+                movable.position.Value += 
+                    movable.velocity.Value * _deltaTime.Value;
         }
     }
 }

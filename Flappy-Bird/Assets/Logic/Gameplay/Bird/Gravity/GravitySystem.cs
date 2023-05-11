@@ -16,18 +16,13 @@ namespace FlappyBird.Gameplay.Bird
         public void Execute()
         {
             foreach (var entity in _birdEntities)
-                ApplyGravity(entity);
+                ApplyVelocity(entity);
         }
 
-        private void ApplyGravity(LevelEntity entity)
+        private void ApplyVelocity(LevelEntity entity)
         {
-            var velocity = entity.velocity.Value.y - 
+            entity.verticalVelocity.Value +=
                 entity.gravity.Acceleration * _deltaTime.Value;
-
-            if (velocity < entity.gravity.MinVelocity)
-                entity.velocity.Value.y = entity.gravity.MinVelocity;
-            else
-                entity.velocity.Value.y = velocity;
         }
     }
 }

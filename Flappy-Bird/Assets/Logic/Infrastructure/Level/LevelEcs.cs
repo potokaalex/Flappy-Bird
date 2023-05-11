@@ -56,7 +56,7 @@ namespace FlappyBird.Infrastructure
                 .Add(new GameOverSystem(_contexts.level, _physicsSystems,
                     _data.LevelLoadingConfiguration, _stateMachine))
 
-                .Add(new TestSystem(_contexts))
+                //.Add(new TestSystem(_contexts))
 
                 //pipes
 

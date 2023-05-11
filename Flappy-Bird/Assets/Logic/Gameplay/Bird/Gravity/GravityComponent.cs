@@ -6,6 +6,5 @@ namespace FlappyBird.Gameplay.Bird
     public class GravityComponent : IComponent
     {
         public float Acceleration;
-        public float MinVelocity;
     }
 }
