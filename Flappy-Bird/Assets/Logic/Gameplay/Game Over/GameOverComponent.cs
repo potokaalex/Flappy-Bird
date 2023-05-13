@@ -1,8 +1,10 @@
-﻿using Entitas;
+﻿using Entitas.CodeGeneration.Attributes;
+using Entitas;
 
 namespace FlappyBird.Gameplay.GameOver
 {
-    [Level]
+    [Input, Unique]
     public class GameOverComponent : IComponent
-    { }
+    {
+    }
 }

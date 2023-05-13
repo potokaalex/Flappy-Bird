@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    public FlappyBird.Gameplay.Bird.VerticalVelocityComponent verticalVelocity { get { return (FlappyBird.Gameplay.Bird.VerticalVelocityComponent)GetComponent(LevelComponentsLookup.VerticalVelocity); } }
+    public FlappyBird.Gameplay.Transforms.VerticalVelocityComponent verticalVelocity { get { return (FlappyBird.Gameplay.Transforms.VerticalVelocityComponent)GetComponent(LevelComponentsLookup.VerticalVelocity); } }
     public bool hasVerticalVelocity { get { return HasComponent(LevelComponentsLookup.VerticalVelocity); } }
 
     public void AddVerticalVelocity(float newValue) {
         var index = LevelComponentsLookup.VerticalVelocity;
-        var component = (FlappyBird.Gameplay.Bird.VerticalVelocityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.VerticalVelocityComponent));
+        var component = (FlappyBird.Gameplay.Transforms.VerticalVelocityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Transforms.VerticalVelocityComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceVerticalVelocity(float newValue) {
         var index = LevelComponentsLookup.VerticalVelocity;
-        var component = (FlappyBird.Gameplay.Bird.VerticalVelocityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.VerticalVelocityComponent));
+        var component = (FlappyBird.Gameplay.Transforms.VerticalVelocityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Transforms.VerticalVelocityComponent));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }

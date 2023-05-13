@@ -9,7 +9,7 @@ public class TestMono : MonoBehaviour
 
     public void FixedUpdate()
     {
-
+    
     }
 
     private void OnDestroy()

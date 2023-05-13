@@ -1,8 +1,9 @@
 ﻿using Entitas;
+using System;
 
 namespace FlappyBird.Gameplay.Bird
 {
-    [Level]
+    [Serializable, Level]
     public class GravityComponent : IComponent
     {
         public float Acceleration;

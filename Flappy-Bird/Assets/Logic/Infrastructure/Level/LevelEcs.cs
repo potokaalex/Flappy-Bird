@@ -5,6 +5,7 @@ using FlappyBird.Gameplay.Input;
 using FlappyBird.Gameplay.Bird;
 using FlappyBird.Extensions;
 using Entitas;
+using UnityEngine;
 
 namespace FlappyBird.Infrastructure
 {
@@ -51,9 +52,8 @@ namespace FlappyBird.Infrastructure
             _graphicsSystems = new();
 
             _physicsSystems
-                .Add(new InputSystems(_contexts.input))
                 .Add(new BirdSystems(_contexts, _data.BirdConfiguration, _gameLoop.FixedDeltaTime))
-                .Add(new GameOverSystem(_contexts.level, _physicsSystems,
+                .Add(new GameOverSystem(_contexts.input, _physicsSystems,
                     _data.LevelLoadingConfiguration, _stateMachine))
 
                 //.Add(new TestSystem(_contexts))
@@ -61,7 +61,8 @@ namespace FlappyBird.Infrastructure
                 //pipes
 
                 .Add(new TransformSystems(_contexts.level, _gameLoop.FixedDeltaTime))
-                .Add(new CollisionCleanupSystem(_contexts.level));
+                .Add(new CollisionCleanupSystem(_contexts.level))
+                .Add(new InputCleanupSystem(_contexts.input));
         }
 
         private void PhysicsUpdate()

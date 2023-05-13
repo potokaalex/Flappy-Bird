@@ -5,15 +5,11 @@ namespace FlappyBird.Gameplay.Bird
 {
     public class FlyUpSystem : ReactiveSystem<InputEntity>
     {
-        private IGroup<LevelEntity> _birdEntities;
-        private InputContext _inputContext;
+        private readonly IGroup<LevelEntity> _birdEntities;
 
         public FlyUpSystem(LevelContext levelContext, InputContext inputContext)
             : base(inputContext)
-        {
-            _birdEntities = levelContext.GetGroup(LevelMatcher.Bird);
-            _inputContext = inputContext;
-        }
+            => _birdEntities = levelContext.GetGroup(LevelMatcher.Bird);
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context)
             => context.CreateCollector(InputMatcher.FlyUp.Added());
@@ -28,6 +24,6 @@ namespace FlappyBird.Gameplay.Bird
         }
 
         private void SetVelocity(LevelEntity entity)
-            => entity.verticalVelocity.Value = _inputContext.flyUp.Velocity;
+            => entity.verticalVelocity.Value = entity.flyUpData.Velocity;
     }
 }

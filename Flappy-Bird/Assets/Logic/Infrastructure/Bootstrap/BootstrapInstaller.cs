@@ -9,6 +9,7 @@ namespace FlappyBird.Infrastructure
 
         public override void InstallBindings()
         {
+            BindStateMachineInitialize(); //
             BindDataProvider();
             BindStateMachine();
             BindStateFactory();
@@ -54,6 +55,13 @@ namespace FlappyBird.Infrastructure
                 .Bind<IGameLoop>()
                 .To<GameLoop>()
                 .FromNewComponentOnNewGameObject()
+                .AsSingle();
+        }
+
+        private void BindStateMachineInitialize()
+        {
+            Container
+                .BindInterfacesTo<StateMachineInitialize>()
                 .AsSingle();
         }
     }

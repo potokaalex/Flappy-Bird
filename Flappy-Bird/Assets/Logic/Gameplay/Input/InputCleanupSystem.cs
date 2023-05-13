@@ -1,22 +1,24 @@
-﻿using FlappyBird.Extensions;
-using Entitas;
+﻿using Entitas;
 
 namespace FlappyBird.Gameplay.Input
 {
     public class InputCleanupSystem : IExecuteSystem, ICleanupSystem
     {
-        private IGroup<InputEntity> _inputEntities;
+        private readonly InputContext _context;
 
-        public InputCleanupSystem(InputContext context) 
-            => _inputEntities = context.GetGroup(InputMatcher.Input);
+        public InputCleanupSystem(InputContext context)
+            => _context = context;
 
         public void Execute()
             => Cleanup();
 
         public void Cleanup()
         {
-            foreach (var entity in _inputEntities)
-                entity.RemoveAllComponentsExcept(InputComponentsLookup.Input);
+            if (_context.count > 0)
+            {
+                foreach (var entity in _context.GetEntities())
+                    entity.Destroy();
+            }
         }
     }
 }

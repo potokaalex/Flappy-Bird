@@ -4,20 +4,19 @@ namespace FlappyBird.Gameplay.Bird
 {
     public class InputSystem : IExecuteSystem
     {
-        private IGroup<InputEntity> _inputEntities;
-        private BirdConfiguration _config;
+        private readonly LevelContext _levelContext;
+        private readonly InputContext _inputContext;
 
-        public InputSystem(InputContext context, BirdConfiguration config)
+        public InputSystem(LevelContext levelContext, InputContext inputContext)
         {
-            _inputEntities = context.GetGroup(InputMatcher.Input);
-            _config = config;
+            _levelContext = levelContext;
+            _inputContext = inputContext;
         }
 
         public void Execute()
         {
-            foreach (var entity in _inputEntities)
-                if (_config.FlyUpAction.WasPressedThisFrame())
-                    entity.AddFlyUp(_config.FlyUpVelocity);
+            if (_levelContext.flyUpData.Action.WasPressedThisFrame())
+                _inputContext.isFlyUp = true;
         }
     }
 }

@@ -8,12 +8,12 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    public FlappyBird.Gameplay.Bird.VerticalVelocityClampComponent verticalVelocityClamp { get { return (FlappyBird.Gameplay.Bird.VerticalVelocityClampComponent)GetComponent(LevelComponentsLookup.VerticalVelocityClamp); } }
+    public FlappyBird.Gameplay.Transforms.VerticalVelocityClampComponent verticalVelocityClamp { get { return (FlappyBird.Gameplay.Transforms.VerticalVelocityClampComponent)GetComponent(LevelComponentsLookup.VerticalVelocityClamp); } }
     public bool hasVerticalVelocityClamp { get { return HasComponent(LevelComponentsLookup.VerticalVelocityClamp); } }
 
     public void AddVerticalVelocityClamp(float newMinValue, float newMaxValue) {
         var index = LevelComponentsLookup.VerticalVelocityClamp;
-        var component = (FlappyBird.Gameplay.Bird.VerticalVelocityClampComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.VerticalVelocityClampComponent));
+        var component = (FlappyBird.Gameplay.Transforms.VerticalVelocityClampComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Transforms.VerticalVelocityClampComponent));
         component.MinValue = newMinValue;
         component.MaxValue = newMaxValue;
         AddComponent(index, component);
@@ -21,7 +21,7 @@ public partial class LevelEntity {
 
     public void ReplaceVerticalVelocityClamp(float newMinValue, float newMaxValue) {
         var index = LevelComponentsLookup.VerticalVelocityClamp;
-        var component = (FlappyBird.Gameplay.Bird.VerticalVelocityClampComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.VerticalVelocityClampComponent));
+        var component = (FlappyBird.Gameplay.Transforms.VerticalVelocityClampComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Transforms.VerticalVelocityClampComponent));
         component.MinValue = newMinValue;
         component.MaxValue = newMaxValue;
         ReplaceComponent(index, component);

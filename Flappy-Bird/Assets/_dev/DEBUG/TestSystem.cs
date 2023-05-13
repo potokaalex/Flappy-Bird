@@ -12,7 +12,7 @@ public class TestSystem : IExecuteSystem
 
     public void Execute()
     {
-        if (_contexts.input.inputEntity.hasFlyUp)
-            Debug.Log("Fly!");
+        //if (_contexts.input.inputEntity.hasFlyUp)
+        //    Debug.Log("Fly!");
     }
 }

@@ -4,16 +4,16 @@ using Entitas;
 
 namespace FlappyBird.Gameplay.GameOver
 {
-    public class GameOverSystem : ReactiveSystem<LevelEntity>
+    public class GameOverSystem : ReactiveSystem<InputEntity>
     {
-        private BreakableSystems _systems;
-        private SceneLoadingConfiguration _loadingConfig;
-        private IStateMachine _stateMachine;
+        private readonly BreakableSystems _systems;
+        private readonly SceneLoadingConfiguration _loadingConfig;
+        private readonly IStateMachine _stateMachine;
 
         public GameOverSystem(
-            LevelContext context, 
-            BreakableSystems systems, 
-            SceneLoadingConfiguration loadingConfig, 
+            InputContext context,
+            BreakableSystems systems,
+            SceneLoadingConfiguration loadingConfig,
             IStateMachine stateMachine)
             : base(context)
         {
@@ -22,19 +22,15 @@ namespace FlappyBird.Gameplay.GameOver
             _stateMachine = stateMachine;
         }
 
-        protected override ICollector<LevelEntity> GetTrigger(IContext<LevelEntity> context)
-            => context.CreateCollector(LevelMatcher.GameOver.Added());
+        protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context)
+            => context.CreateCollector(InputMatcher.GameOver.Added());
 
-        protected override bool Filter(LevelEntity entity)
+        protected override bool Filter(InputEntity entity)
             => true;
 
-        protected override void Execute(List<LevelEntity> entities)
+        protected override void Execute(List<InputEntity> entities)
         {
-            foreach (var entity in entities)
-                entity.isGameOver = false;
-
             _systems.IsBreak = true;
-
             _stateMachine.SwitchTo(typeof(LoadingState), _loadingConfig);
         }
     }

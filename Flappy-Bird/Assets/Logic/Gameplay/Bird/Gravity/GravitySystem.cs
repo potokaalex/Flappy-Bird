@@ -4,8 +4,8 @@ namespace FlappyBird.Gameplay.Bird
 {
     public class GravitySystem : IExecuteSystem
     {
-        private IGroup<LevelEntity> _birdEntities;
-        private DeltaTime _deltaTime;
+        private readonly IGroup<LevelEntity> _birdEntities;
+        private readonly DeltaTime _deltaTime;
 
         public GravitySystem(LevelContext context, DeltaTime deltaTime)
         {

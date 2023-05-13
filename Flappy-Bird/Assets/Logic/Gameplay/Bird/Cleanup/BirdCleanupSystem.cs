@@ -6,33 +6,25 @@ namespace FlappyBird.Gameplay.Bird
 {
     public class BirdCleanupSystem : ICleanupSystem
     {
-        private IGroup<LevelEntity> _birdEntities;
-        private BirdConfiguration _config;
+        private readonly IGroup<LevelEntity> _birdEntities;
 
-        public BirdCleanupSystem(LevelContext context, BirdConfiguration config)
-        {
-            _birdEntities = context.GetGroup(LevelMatcher.Bird);
-            _config = config;
-        }
+        public BirdCleanupSystem(LevelContext context)
+            => _birdEntities = context.GetGroup(LevelMatcher.Bird);
 
         public void Cleanup()
         {
             foreach (var entity in _birdEntities.GetEntities())
-                DestroyBird(entity);
-
-            DisableFlyUpAction();
+                CleanupBird(entity);
         }
 
-        private void DestroyBird(LevelEntity entity)
+        private void CleanupBird(LevelEntity entity)
         {
             var gameObject = entity.linkToGameObject.GameObject;
-            
+
+            entity.flyUpData.Action.Disable();
             gameObject.Unlink();
             Object.Destroy(gameObject);
             entity.Destroy();
         }
-
-        private void DisableFlyUpAction()
-            => _config.FlyUpAction.Disable();
     }
 }

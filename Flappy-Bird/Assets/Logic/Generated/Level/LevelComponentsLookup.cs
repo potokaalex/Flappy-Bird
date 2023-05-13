@@ -9,41 +9,50 @@
 public static class LevelComponentsLookup {
 
     public const int Bird = 0;
-    public const int Gravity = 1;
-    public const int VerticalVelocityClamp = 2;
-    public const int VerticalVelocity = 3;
+    public const int FlyUpData = 1;
+    public const int Gravity = 2;
+    public const int RotationData = 3;
     public const int Collision = 4;
-    public const int GameOver = 5;
-    public const int LinkToGameObject = 6;
+    public const int LinkToGameObject = 5;
+    public const int HorizontalVelocity = 6;
     public const int Position = 7;
-    public const int Rotation = 8;
-    public const int Velocity = 9;
+    public const int RotationClamp = 8;
+    public const int Rotation = 9;
+    public const int RotationVelocity = 10;
+    public const int VerticalVelocityClamp = 11;
+    public const int VerticalVelocity = 12;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 13;
 
     public static readonly string[] componentNames = {
         "Bird",
+        "FlyUpData",
         "Gravity",
-        "VerticalVelocityClamp",
-        "VerticalVelocity",
+        "RotationData",
         "Collision",
-        "GameOver",
         "LinkToGameObject",
+        "HorizontalVelocity",
         "Position",
+        "RotationClamp",
         "Rotation",
-        "Velocity"
+        "RotationVelocity",
+        "VerticalVelocityClamp",
+        "VerticalVelocity"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(FlappyBird.Gameplay.Bird.BirdComponent),
+        typeof(FlappyBird.Gameplay.Bird.FlyUpDataComponent),
         typeof(FlappyBird.Gameplay.Bird.GravityComponent),
-        typeof(FlappyBird.Gameplay.Bird.VerticalVelocityClampComponent),
-        typeof(FlappyBird.Gameplay.Bird.VerticalVelocityComponent),
+        typeof(FlappyBird.Gameplay.Bird.RotationDataComponent),
         typeof(FlappyBird.Gameplay.Collision.CollisionComponent),
-        typeof(FlappyBird.Gameplay.GameOver.GameOverComponent),
         typeof(FlappyBird.Gameplay.LinkToGameObjectComponent),
+        typeof(FlappyBird.Gameplay.Transforms.HorizontalVelocityComponent),
         typeof(FlappyBird.Gameplay.Transforms.PositionComponent),
+        typeof(FlappyBird.Gameplay.Transforms.RotationClampComponent),
         typeof(FlappyBird.Gameplay.Transforms.RotationComponent),
-        typeof(FlappyBird.Gameplay.Transforms.VelocityComponent)
+        typeof(FlappyBird.Gameplay.Transforms.RotationVelocityComponent),
+        typeof(FlappyBird.Gameplay.Transforms.VerticalVelocityClampComponent),
+        typeof(FlappyBird.Gameplay.Transforms.VerticalVelocityComponent)
     };
 }

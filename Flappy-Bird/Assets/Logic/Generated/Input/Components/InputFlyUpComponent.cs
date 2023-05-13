@@ -9,30 +9,19 @@
 public partial class InputContext {
 
     public InputEntity flyUpEntity { get { return GetGroup(InputMatcher.FlyUp).GetSingleEntity(); } }
-    public FlappyBird.Gameplay.Bird.FlyUpComponent flyUp { get { return flyUpEntity.flyUp; } }
-    public bool hasFlyUp { get { return flyUpEntity != null; } }
 
-    public InputEntity SetFlyUp(float newVelocity) {
-        if (hasFlyUp) {
-            throw new Entitas.EntitasException("Could not set FlyUp!\n" + this + " already has an entity with FlappyBird.Gameplay.Bird.FlyUpComponent!",
-                "You should check if the context already has a flyUpEntity before setting it or use context.ReplaceFlyUp().");
+    public bool isFlyUp {
+        get { return flyUpEntity != null; }
+        set {
+            var entity = flyUpEntity;
+            if (value != (entity != null)) {
+                if (value) {
+                    CreateEntity().isFlyUp = true;
+                } else {
+                    entity.Destroy();
+                }
+            }
         }
-        var entity = CreateEntity();
-        entity.AddFlyUp(newVelocity);
-        return entity;
-    }
-
-    public void ReplaceFlyUp(float newVelocity) {
-        var entity = flyUpEntity;
-        if (entity == null) {
-            entity = SetFlyUp(newVelocity);
-        } else {
-            entity.ReplaceFlyUp(newVelocity);
-        }
-    }
-
-    public void RemoveFlyUp() {
-        flyUpEntity.Destroy();
     }
 }
 
@@ -46,25 +35,25 @@ public partial class InputContext {
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    public FlappyBird.Gameplay.Bird.FlyUpComponent flyUp { get { return (FlappyBird.Gameplay.Bird.FlyUpComponent)GetComponent(InputComponentsLookup.FlyUp); } }
-    public bool hasFlyUp { get { return HasComponent(InputComponentsLookup.FlyUp); } }
+    static readonly FlappyBird.Gameplay.Bird.FlyUpComponent flyUpComponent = new FlappyBird.Gameplay.Bird.FlyUpComponent();
 
-    public void AddFlyUp(float newVelocity) {
-        var index = InputComponentsLookup.FlyUp;
-        var component = (FlappyBird.Gameplay.Bird.FlyUpComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.FlyUpComponent));
-        component.Velocity = newVelocity;
-        AddComponent(index, component);
-    }
+    public bool isFlyUp {
+        get { return HasComponent(InputComponentsLookup.FlyUp); }
+        set {
+            if (value != isFlyUp) {
+                var index = InputComponentsLookup.FlyUp;
+                if (value) {
+                    var componentPool = GetComponentPool(index);
+                    var component = componentPool.Count > 0
+                            ? componentPool.Pop()
+                            : flyUpComponent;
 
-    public void ReplaceFlyUp(float newVelocity) {
-        var index = InputComponentsLookup.FlyUp;
-        var component = (FlappyBird.Gameplay.Bird.FlyUpComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.FlyUpComponent));
-        component.Velocity = newVelocity;
-        ReplaceComponent(index, component);
-    }
-
-    public void RemoveFlyUp() {
-        RemoveComponent(InputComponentsLookup.FlyUp);
+                    AddComponent(index, component);
+                } else {
+                    RemoveComponent(index);
+                }
+            }
+        }
     }
 }
 
