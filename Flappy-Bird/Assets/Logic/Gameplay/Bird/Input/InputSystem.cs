@@ -15,7 +15,7 @@ namespace FlappyBird.Gameplay.Bird
 
         public void Execute()
         {
-            if (_levelContext.flyUpData.Action.WasPressedThisFrame())
+            if (_levelContext.birdData.FlyUpAction.WasPressedThisFrame())
                 _inputContext.isFlyUp = true;
         }
     }

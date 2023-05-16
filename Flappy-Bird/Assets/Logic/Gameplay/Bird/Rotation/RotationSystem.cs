@@ -12,18 +12,22 @@ namespace FlappyBird.Gameplay.Bird
         public void Execute()
         {
             foreach (var entity in _birdEntities)
-            {
                 Rotate(entity);
-            }
         }
 
         private void Rotate(LevelEntity bird)
         {
-            if (bird.verticalVelocity.Value > 0) //FlyUp
-                bird.rotationVelocity.Value = bird.rotationData.ClockwiseVelocity;
-            else //fall
-                bird.rotationVelocity.Value = bird.rotationData.CounterClockwiseVelocity;
+            if (IsFly(bird))
+                bird.rotationVelocity.Value = bird.birdData.ClockwiseAngularVelocity;
+            else if (IsFall(bird))
+                bird.rotationVelocity.Value = bird.birdData.CounterClockwiseAngularVelocity;
         }
+
+        private bool IsFly(LevelEntity bird)
+            => bird.verticalVelocity.Value > 0;
+
+        private bool IsFall(LevelEntity bird)
+            => bird.verticalVelocity.Value < 0;
     }
 }
 

@@ -4,12 +4,13 @@ namespace FlappyBird.Gameplay.Transforms
 {
     public class PositionSystem : IExecuteSystem
     {
-        private IGroup<LevelEntity> _movables;
+        private readonly IGroup<LevelEntity> _movables;
 
         public PositionSystem(LevelContext context)
         {
             _movables = context.GetGroup(
-                LevelMatcher.AllOf(LevelMatcher.LinkToGameObject, LevelMatcher.Position));
+                LevelMatcher.AllOf(
+                    LevelMatcher.LinkToGameObject, LevelMatcher.Position));
         }
 
         public void Execute()

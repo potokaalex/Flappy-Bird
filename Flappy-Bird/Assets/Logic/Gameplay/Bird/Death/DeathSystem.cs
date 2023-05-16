@@ -16,7 +16,7 @@ namespace FlappyBird.Gameplay.Bird
         protected override bool Filter(LevelEntity entity)
             => entity.isBird;
 
-        protected override void Execute(List<LevelEntity> entities) 
+        protected override void Execute(List<LevelEntity> entities)
             => _inputContext.isGameOver = true;
     }
 }

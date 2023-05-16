@@ -12,13 +12,15 @@ public class Pipes : MonoBehaviour
 
     public GameObject pipePrefab;
 
-    public const float X_GAP = 49f / 25f;
-    public const float Y_GAP = 45f / 25f;
+    public const float X_GAP = 49f / 25f; //1.96 расстояние между трубами
+    public const float Y_GAP = 45f / 25f; //1.8
     public const int SKULL_WIDTH = 24;
     public const int SKULL_HEIGHT = 11;
 
-    public const float SCROLL_SPEED = -59f / 25f;
+    public const float SCROLL_SPEED = -59f / 25f;//2.36
 
+    //km/(km/sec) = sec => 1.96/2.36 = 0.831
+    
     private List<(GameObject, GameObject)> pipes;
     private Random r;
 

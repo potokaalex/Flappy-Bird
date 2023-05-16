@@ -77,3 +77,4 @@ MonoBehaviour:
   _dataProvider:
     _levelLoadingConfiguration: {fileID: 11400000, guid: 78434e935203b6c488d5dbb9f3cbed3b, type: 2}
     _birdConfiguration: {fileID: 11400000, guid: aa662a993adc062408a00d075d3b5776, type: 2}
+    _pipesConfiguration: {fileID: 11400000, guid: ef4d9f5660104a248acafffa5b292ab7, type: 2}

@@ -13,30 +13,36 @@ MonoBehaviour:
   m_Name: Standart Bird Config
   m_EditorClassIdentifier: 
   _prefab: {fileID: 3231904528508952564, guid: a22b63eef227bf54b83bcdffc264b15b, type: 3}
-  _gravityAcceleration: -9.8
-  _flyUp:
-    Action:
-      m_Name: Fly Up
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 8e64e05f-9167-452d-a86f-c6b38153a8a1
-      m_Processors: 
+  _flyUpAction:
+    m_Name: Fly Up
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a86f7d39-f428-4082-8a04-0c4991614c38
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: eb35bb6c-3ba0-4b84-ae4c-46185d6a83dc
+      m_Path: <Keyboard>/anyKey
       m_Interactions: 
-      m_SingletonActionBindings:
-      - m_Name: 
-        m_Id: 3fed47dd-b674-4d5e-b0a0-b8330d26ca46
-        m_Path: <Keyboard>/anyKey
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Fly Up
-        m_Flags: 0
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fly Up
       m_Flags: 0
-    Velocity: 5
-    MinVelocity: -10
-    MaxVelocity: 10
-  _rotation:
-    ClockwiseVelocity: 1000
-    CounterClockwiseVelocity: -500
-    MinAngle: -90
-    MaxAngle: 20
+    - m_Name: 
+      m_Id: 79a54f10-2433-49de-94a1-498678bc2cde
+      m_Path: <Mouse>/clickCount
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fly Up
+      m_Flags: 0
+    m_Flags: 1
+  _gravityAcceleration: -20
+  _flyUpVelocity: 5
+  _clockwiseAngularVelocity: 1000
+  _counterClockwiseAngularVelocity: -500
+  _minVelocity: -10
+  _maxVelocity: 10
+  _minAngle: -90
+  _maxAngle: 20

@@ -5,6 +5,7 @@ using FlappyBird.Gameplay.Input;
 using FlappyBird.Gameplay.Bird;
 using FlappyBird.Extensions;
 using Entitas;
+using FlappyBird.Gameplay.Pipes;
 using UnityEngine;
 
 namespace FlappyBird.Infrastructure
@@ -12,8 +13,8 @@ namespace FlappyBird.Infrastructure
     public class LevelEcs
     {
         private Contexts _contexts;
-        private BreakableSystems _physicsSystems;//fixedUpdatable
-        private Systems _graphicsSystems;//updatable
+        private BreakableSystems _physicsSystems; //fixedUpdatable
+        private Systems _graphicsSystems; //updatable
         private DataProvider _data;
         private IStateMachine _stateMachine;
         private IGameLoop _gameLoop;
@@ -57,9 +58,7 @@ namespace FlappyBird.Infrastructure
                     _data.LevelLoadingConfiguration, _stateMachine))
 
                 //.Add(new TestSystem(_contexts))
-
-                //pipes
-
+                .Add(new PipesSystems(_contexts.level, _data.PipesConfiguration, _gameLoop.FixedDeltaTime))
                 .Add(new TransformSystems(_contexts.level, _gameLoop.FixedDeltaTime))
                 .Add(new CollisionCleanupSystem(_contexts.level))
                 .Add(new InputCleanupSystem(_contexts.input));

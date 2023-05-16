@@ -4,12 +4,12 @@ using Entitas;
 
 namespace FlappyBird.Gameplay.Bird
 {
-    public class BirdInitializationSystem : IInitializeSystem
+    public class InitializationSystem : IInitializeSystem
     {
         private readonly LevelContext _context;
         private readonly BirdConfiguration _config;
 
-        public BirdInitializationSystem(LevelContext context, BirdConfiguration config)
+        public InitializationSystem(LevelContext context, BirdConfiguration config)
         {
             _context = context;
             _config = config;
@@ -19,7 +19,7 @@ namespace FlappyBird.Gameplay.Bird
         {
             var bird = CreateBird();
 
-            AddFlyComponents(bird);
+            AddVelocityComponents(bird);
             AddRotationComponents(bird);
             AddOtherComponents(bird);
             EnableFlyUpAction(bird);
@@ -33,27 +33,29 @@ namespace FlappyBird.Gameplay.Bird
 
             gameObject.Link(entity);
             entity.AddLinkToGameObject(gameObject);
-            entity.isBird = true;
+            entity.AddBirdData(
+                _config.FlyUpAction,
+                _config.FlyUpVelocity,
+                _config.ClockwiseAngularVelocity,
+                _config.CounterClockwiseAngularVelocity);
 
+            entity.isBird = true;
+            
             return entity;
         }
 
-        private void AddFlyComponents(LevelEntity bird)
+        private void AddVelocityComponents(LevelEntity bird)
         {
-            bird.AddFlyUpData(_config.FlyUp.Action, _config.FlyUp.Velocity);
             bird.AddVerticalVelocity(0);
             bird.AddVerticalVelocityClamp(
-                _config.FlyUp.MinVelocity, _config.FlyUp.MaxVelocity);
+                _config.MinVelocity, _config.MaxVelocity);
         }
 
         private void AddRotationComponents(LevelEntity bird)
         {
-            bird.AddRotationData(_config.Rotation.CounterClockwiseVelocity,
-                _config.Rotation.ClockwiseVelocity);
-            
             bird.AddRotation(0);
             bird.AddRotationVelocity(0);
-            bird.AddRotationClamp(_config.Rotation.MinAngle, _config.Rotation.MaxAngle);
+            bird.AddRotationClamp(_config.MinAngle, _config.MaxAngle);
         }
 
         private void AddOtherComponents(LevelEntity bird)
@@ -63,6 +65,6 @@ namespace FlappyBird.Gameplay.Bird
         }
 
         private void EnableFlyUpAction(LevelEntity entity)
-            => entity.flyUpData.Action.Enable();
+            => entity.birdData.FlyUpAction.Enable();
     }
 }

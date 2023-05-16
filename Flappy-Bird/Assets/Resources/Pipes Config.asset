@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3de0739d37b4406bf0c371fdaf82579, type: 3}
+  m_Name: Pipes Config
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 1163154790420497170, guid: 2cdf8afec1cb7a54daf34e262546a9f7, type: 3}
+  _velocity: -3
+  _spawnPositionX: 3.4
+  _spawnDelay: 2
+  _spawnRate: 1
+  _removeRate: 4
+  _minPositionY: -1.22
+  _maxPositionY: 3
+  _maxOffsetY: 5

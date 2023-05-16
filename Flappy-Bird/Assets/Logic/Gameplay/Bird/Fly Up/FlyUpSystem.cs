@@ -24,6 +24,6 @@ namespace FlappyBird.Gameplay.Bird
         }
 
         private void SetVelocity(LevelEntity entity)
-            => entity.verticalVelocity.Value = entity.flyUpData.Velocity;
+            => entity.verticalVelocity.Value = entity.birdData.FlyUpVelocity;
     }
 }
