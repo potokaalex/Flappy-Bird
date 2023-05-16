@@ -40,7 +40,7 @@ namespace FlappyBird.Gameplay.Pipes
             {
                 if (positionY <= _config.MinPositionY)
                     positionY -= offsetY;
-                
+
                 else if (positionY >= _config.MaxPositionY)
                     positionY -= offsetY;
             }

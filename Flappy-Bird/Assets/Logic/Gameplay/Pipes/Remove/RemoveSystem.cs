@@ -5,14 +5,13 @@ namespace FlappyBird.Gameplay.Pipes
     public class RemoveSystem : IExecuteSystem
     {
         private readonly IGroup<LevelEntity> _pipes;
-        private readonly DeltaTime _deltaTime;
+        private readonly LevelContext _context;
 
-        public RemoveSystem(LevelContext context, DeltaTime deltaTime)
+        public RemoveSystem(LevelContext context)
         {
+            _context = context;
             _pipes = context.GetGroup(
                 LevelMatcher.AllOf(LevelMatcher.Pipes, LevelMatcher.Active));
-
-            _deltaTime = deltaTime;
         }
 
         public void Execute()
@@ -30,7 +29,7 @@ namespace FlappyBird.Gameplay.Pipes
             => entity.lifetime.TimeToRemove <= 0;
 
         private void ReduceLifetime(LevelEntity entity)
-            => entity.lifetime.TimeToRemove -= _deltaTime.Value;
+            => entity.lifetime.TimeToRemove -= _context.time.DeltaTime;
 
         private void Disactive(LevelEntity entity)
             => entity.isActive = false;

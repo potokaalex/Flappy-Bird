@@ -6,14 +6,13 @@ namespace FlappyBird.Gameplay.Transforms
     public class VerticalVelocitySystem : IExecuteSystem
     {
         private readonly IGroup<LevelEntity> _movables;
-        private readonly DeltaTime _deltaTime;
+        private readonly LevelContext _context;
 
-        public VerticalVelocitySystem(LevelContext context, DeltaTime deltaTime)
+        public VerticalVelocitySystem(LevelContext context)
         {
+            _context = context;
             _movables = context.GetGroup(LevelMatcher.AllOf(
                 LevelMatcher.Position, LevelMatcher.VerticalVelocity));
-
-            _deltaTime = deltaTime;
         }
 
         public void Execute()
@@ -23,7 +22,7 @@ namespace FlappyBird.Gameplay.Transforms
                 movable.position.Value.y += Math.Clamp(
                     movable.verticalVelocity.Value,
                     movable.verticalVelocityClamp.MinValue,
-                    movable.verticalVelocityClamp.MaxValue) * _deltaTime.Value;
+                    movable.verticalVelocityClamp.MaxValue) * _context.time.DeltaTime;
             }
         }
     }

@@ -4,16 +4,13 @@ namespace FlappyBird.Gameplay.Pipes
 {
     public class SpawnSystem : IExecuteSystem
     {
-        private readonly LevelContext _levelContext;
-        private readonly DeltaTime _deltaTime;
+        private readonly LevelContext _context;
         private readonly IGroup<LevelEntity> _pipes;
 
-        public SpawnSystem(LevelContext levelContext, DeltaTime deltaTime)
+        public SpawnSystem(LevelContext context)
         {
-            _levelContext = levelContext;
-            _deltaTime = deltaTime;
-
-            _pipes = levelContext.GetGroup(
+            _context = context;
+            _pipes = context.GetGroup(
                 LevelMatcher.AllOf(LevelMatcher.Pipes).NoneOf(LevelMatcher.Active));
         }
 
@@ -29,27 +26,27 @@ namespace FlappyBird.Gameplay.Pipes
         }
 
         private bool IsSpawnCondition()
-            => _levelContext.pipesData.TimeToSpawn <= 0;
+            => _context.pipesData.TimeToSpawn <= 0;
 
         private void SetTimeToSpawn()
-            => _levelContext.pipesData.TimeToSpawn = _levelContext.pipesData.SpawnRate;
+            => _context.pipesData.TimeToSpawn = _context.pipesData.SpawnRate;
 
         private void ReduceTimeToSpawn()
-            => _levelContext.pipesData.TimeToSpawn -= _deltaTime.Value;
+            => _context.pipesData.TimeToSpawn -= _context.time.DeltaTime;
 
         private void Spawn()
         {
             if (_pipes.count > 0)
                 Active(_pipes.GetEntities()[0]);
             else
-                _levelContext.pipesData.Factory.Create();
+                _context.pipesData.Factory.Create();
         }
 
         private void Active(LevelEntity entity)
         {
-            _levelContext.pipesData.Factory.ResetPosition(entity);
+            _context.pipesData.Factory.ResetPosition(entity);
 
-            entity.lifetime.TimeToRemove = _levelContext.pipesData.RemoveRate;
+            entity.lifetime.TimeToRemove = _context.pipesData.RemoveRate;
             entity.isActive = true;
         }
     }

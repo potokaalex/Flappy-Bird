@@ -16,16 +16,17 @@ public static class LevelComponentsLookup {
     public const int LinkToGameObject = 5;
     public const int Lifetime = 6;
     public const int PipesData = 7;
-    public const int HorizontalVelocity = 8;
-    public const int Position = 9;
-    public const int RotationClamp = 10;
-    public const int Rotation = 11;
-    public const int RotationVelocity = 12;
-    public const int VerticalVelocityClamp = 13;
-    public const int VerticalVelocity = 14;
-    public const int Pipes = 15;
+    public const int Time = 8;
+    public const int HorizontalVelocity = 9;
+    public const int Position = 10;
+    public const int RotationClamp = 11;
+    public const int Rotation = 12;
+    public const int RotationVelocity = 13;
+    public const int VerticalVelocityClamp = 14;
+    public const int VerticalVelocity = 15;
+    public const int Pipes = 16;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -36,6 +37,7 @@ public static class LevelComponentsLookup {
         "LinkToGameObject",
         "Lifetime",
         "PipesData",
+        "Time",
         "HorizontalVelocity",
         "Position",
         "RotationClamp",
@@ -55,6 +57,7 @@ public static class LevelComponentsLookup {
         typeof(FlappyBird.Gameplay.LinkToGameObjectComponent),
         typeof(FlappyBird.Gameplay.Pipes.LifetimeComponent),
         typeof(FlappyBird.Gameplay.Pipes.PipesDataComponent),
+        typeof(FlappyBird.Gameplay.Time.TimeComponent),
         typeof(FlappyBird.Gameplay.Transforms.HorizontalVelocityComponent),
         typeof(FlappyBird.Gameplay.Transforms.PositionComponent),
         typeof(FlappyBird.Gameplay.Transforms.RotationClampComponent),

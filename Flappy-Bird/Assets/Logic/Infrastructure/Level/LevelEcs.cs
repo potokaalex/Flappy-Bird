@@ -2,22 +2,20 @@
 using FlappyBird.Gameplay.Collision;
 using FlappyBird.Gameplay.GameOver;
 using FlappyBird.Gameplay.Input;
-using FlappyBird.Gameplay.Bird;
-using FlappyBird.Extensions;
-using Entitas;
 using FlappyBird.Gameplay.Pipes;
-using UnityEngine;
+using FlappyBird.Gameplay.Bird;
+using FlappyBird.Gameplay.Time;
+using FlappyBird.Extensions;
 
 namespace FlappyBird.Infrastructure
 {
     public class LevelEcs
     {
-        private Contexts _contexts;
-        private BreakableSystems _physicsSystems; //fixedUpdatable
-        private Systems _graphicsSystems; //updatable
-        private DataProvider _data;
-        private IStateMachine _stateMachine;
-        private IGameLoop _gameLoop;
+        private readonly BreakableSystems _systems;
+        private readonly DataProvider _data;
+        private readonly Contexts _contexts;
+        private readonly IStateMachine _stateMachine;
+        private readonly IGameLoop _gameLoop;
 
         public LevelEcs(IStateMachine stateMachine, IGameLoop gameLoop, DataProvider dataProvider)
         {
@@ -26,52 +24,41 @@ namespace FlappyBird.Infrastructure
             _data = dataProvider;
 
             _contexts = new();
-            CreateSystems();
+            _systems = new();
+
+            FillSystems();
         }
 
         public void Initialize()
         {
-            _physicsSystems.Initialize();
-            _graphicsSystems.Initialize();
+            _systems.Initialize();
 
-            _gameLoop.OnFixedUpdate += PhysicsUpdate;
-            _gameLoop.OnUpdate += GraphicsUpdate;
+            _gameLoop.OnFixedUpdate += SystemsUpdate;
         }
 
         public void Cleanup()
         {
-            _physicsSystems.Cleanup();
-            _graphicsSystems.Cleanup();
+            _systems.Cleanup();
 
-            _gameLoop.OnFixedUpdate -= PhysicsUpdate;
-            _gameLoop.OnUpdate -= GraphicsUpdate;
+            _gameLoop.OnFixedUpdate -= SystemsUpdate;
         }
 
-        private void CreateSystems()
+        private void FillSystems()
         {
-            _physicsSystems = new();
-            _graphicsSystems = new();
-
-            _physicsSystems
-                .Add(new BirdSystems(_contexts, _data.BirdConfiguration, _gameLoop.FixedDeltaTime))
-                .Add(new GameOverSystem(_contexts.input, _physicsSystems,
+            _systems
+                .Add(new TimeSystems(_contexts.level, _gameLoop.FixedDeltaTime))
+                .Add(new BirdSystems(_contexts, _data.BirdConfiguration))
+                .Add(new GameOverSystem(_contexts.input, _systems,
                     _data.LevelLoadingConfiguration, _stateMachine))
 
                 //.Add(new TestSystem(_contexts))
-                .Add(new PipesSystems(_contexts.level, _data.PipesConfiguration, _gameLoop.FixedDeltaTime))
-                .Add(new TransformSystems(_contexts.level, _gameLoop.FixedDeltaTime))
+                .Add(new PipesSystems(_contexts.level, _data.PipesConfiguration))
+                .Add(new TransformSystems(_contexts.level))
                 .Add(new CollisionCleanupSystem(_contexts.level))
                 .Add(new InputCleanupSystem(_contexts.input));
         }
 
-        private void PhysicsUpdate()
-        {
-            _physicsSystems.Execute();
-        }
-
-        private void GraphicsUpdate()
-        {
-            _graphicsSystems.Execute();
-        }
+        private void SystemsUpdate() 
+            => _systems.Execute();
     }
 }

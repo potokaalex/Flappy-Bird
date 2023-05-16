@@ -4,13 +4,13 @@ namespace FlappyBird.Gameplay.Transforms
 {
     public class TransformSystems : Systems
     {
-        public TransformSystems(LevelContext context, DeltaTime deltaTime)
+        public TransformSystems(LevelContext context)
         {
-            Add(new PositionSystem(context));
-            Add(new HorizontalVelocitySystem(context, deltaTime));
-            Add(new VerticalVelocitySystem(context, deltaTime));
-            Add(new RotationVelocitySystem(context, deltaTime));
-            Add(new RotationSystem(context));
+            base.Add(new PositionSystem(context));
+            base.Add(new HorizontalVelocitySystem(context));
+            base.Add(new VerticalVelocitySystem(context));
+            base.Add(new RotationVelocitySystem(context));
+            base.Add(new RotationSystem(context));
         }
     }
 }
