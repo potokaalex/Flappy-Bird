@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
 
-using FlappyBird.Infrastructure;//
-
 namespace FlappyBird
 {
     public class StateMachine : IStateMachine
@@ -18,18 +16,12 @@ namespace FlappyBird
                 _states.Add(state.GetType(), state);
         }
 
-        public void SwitchTo<StateType>() where StateType : IState
-        {
-            _currentState?.Exit();
-            _currentState = _states[typeof(StateType)];
-            _currentState.Enter();
-        }
-
-        public void SwitchTo<ParameterType>(Type stateType, ParameterType parameter)
+        public void SwitchTo<StateType, ParameterType>(ParameterType parameter)
+            where StateType : IState<ParameterType>
             where ParameterType : IStateParameter
         {
             _currentState?.Exit();
-            _currentState = _states[stateType];
+            _currentState = _states[typeof(StateType)];
             (_currentState as IState<ParameterType>).Enter(parameter);
         }
     }

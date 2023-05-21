@@ -35,7 +35,7 @@ public partial class InputContext {
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    static readonly FlappyBird.Gameplay.GameOver.GameOverComponent gameOverComponent = new FlappyBird.Gameplay.GameOver.GameOverComponent();
+    static readonly FlappyBird.Ecs.Basic.GameOver.GameOverComponent gameOverComponent = new FlappyBird.Ecs.Basic.GameOver.GameOverComponent();
 
     public bool isGameOver {
         get { return HasComponent(InputComponentsLookup.GameOver); }

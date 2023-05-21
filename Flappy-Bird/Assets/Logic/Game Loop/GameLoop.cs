@@ -6,6 +6,8 @@ namespace FlappyBird
     public class GameLoop : MonoBehaviour, IGameLoop
     {
         public event Action OnFixedUpdate;
+        public event Action OnLateFixedUpdate;
+        public event Action OnDispose;
 
         public DeltaTime FixedDeltaTime { get; private set; }
 
@@ -14,8 +16,12 @@ namespace FlappyBird
 
         private void FixedUpdate()
         {
-            FixedDeltaTime.SetValue(Time.fixedDeltaTime);
+            FixedDeltaTime.Value = Time.fixedDeltaTime;
             OnFixedUpdate?.Invoke();
+            OnLateFixedUpdate?.Invoke();
         }
+
+        private void OnDisable()
+            => OnDispose?.Invoke();
     }
 }

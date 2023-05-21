@@ -1,5 +1,5 @@
-﻿using FlappyBird.Gameplay.Pipes;
-using FlappyBird.Gameplay.Bird;
+﻿using FlappyBird.Ecs.Gameplay.Pipes;
+using FlappyBird.Ecs.Gameplay.Bird;
 using UnityEngine;
 using System;
 
@@ -20,5 +20,12 @@ namespace FlappyBird
 
         public PipesConfiguration PipesConfiguration
             => _pipesConfiguration;
+
+        public EcsBase Ecs { get; private set; }
+
+        public void Initialize(EcsBase ecs)
+        {
+            Ecs = ecs;
+        }
     }
 }

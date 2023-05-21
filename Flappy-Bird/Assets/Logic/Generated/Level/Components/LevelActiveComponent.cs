@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    static readonly FlappyBird.Gameplay.ActiveComponent activeComponent = new FlappyBird.Gameplay.ActiveComponent();
+    static readonly FlappyBird.Ecs.Basic.ActiveComponent activeComponent = new FlappyBird.Ecs.Basic.ActiveComponent();
 
     public bool isActive {
         get { return HasComponent(LevelComponentsLookup.Active); }

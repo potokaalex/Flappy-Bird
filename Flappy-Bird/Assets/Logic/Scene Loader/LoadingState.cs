@@ -2,7 +2,7 @@
 {
     public class LoadingState : IState<SceneLoadingConfiguration>
     {
-        private ISceneLoader _sceneLoader;
+        private readonly ISceneLoader _sceneLoader;
 
         public LoadingState(ISceneLoader sceneLoader)
             => _sceneLoader = sceneLoader;

@@ -6,7 +6,6 @@ namespace FlappyBird
     [CreateAssetMenu(
         fileName = "New Scene Loading Configuration",
         menuName = "Configurations/Scene Loading")]
-
     public class SceneLoadingConfiguration : ScriptableObject, IStateParameter
     {
         public LoadSceneMode LoadSceneMode;

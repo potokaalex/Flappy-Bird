@@ -8,12 +8,12 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    public FlappyBird.Gameplay.Transforms.RotationClampComponent rotationClamp { get { return (FlappyBird.Gameplay.Transforms.RotationClampComponent)GetComponent(LevelComponentsLookup.RotationClamp); } }
+    public FlappyBird.Ecs.Basic.Transforms.RotationClampComponent rotationClamp { get { return (FlappyBird.Ecs.Basic.Transforms.RotationClampComponent)GetComponent(LevelComponentsLookup.RotationClamp); } }
     public bool hasRotationClamp { get { return HasComponent(LevelComponentsLookup.RotationClamp); } }
 
     public void AddRotationClamp(float newMinValue, float newMaxValue) {
         var index = LevelComponentsLookup.RotationClamp;
-        var component = (FlappyBird.Gameplay.Transforms.RotationClampComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Transforms.RotationClampComponent));
+        var component = (FlappyBird.Ecs.Basic.Transforms.RotationClampComponent)CreateComponent(index, typeof(FlappyBird.Ecs.Basic.Transforms.RotationClampComponent));
         component.MinValue = newMinValue;
         component.MaxValue = newMaxValue;
         AddComponent(index, component);
@@ -21,7 +21,7 @@ public partial class LevelEntity {
 
     public void ReplaceRotationClamp(float newMinValue, float newMaxValue) {
         var index = LevelComponentsLookup.RotationClamp;
-        var component = (FlappyBird.Gameplay.Transforms.RotationClampComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Transforms.RotationClampComponent));
+        var component = (FlappyBird.Ecs.Basic.Transforms.RotationClampComponent)CreateComponent(index, typeof(FlappyBird.Ecs.Basic.Transforms.RotationClampComponent));
         component.MinValue = newMinValue;
         component.MaxValue = newMaxValue;
         ReplaceComponent(index, component);

@@ -8,18 +8,24 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int FlyUp = 0;
+    public const int Collision = 0;
     public const int GameOver = 1;
+    public const int Time = 2;
+    public const int FlyUp = 3;
 
-    public const int TotalComponents = 2;
+    public const int TotalComponents = 4;
 
     public static readonly string[] componentNames = {
-        "FlyUp",
-        "GameOver"
+        "Collision",
+        "GameOver",
+        "Time",
+        "FlyUp"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(FlappyBird.Gameplay.Bird.FlyUpComponent),
-        typeof(FlappyBird.Gameplay.GameOver.GameOverComponent)
+        typeof(FlappyBird.Ecs.Basic.Collision.CollisionComponent),
+        typeof(FlappyBird.Ecs.Basic.GameOver.GameOverComponent),
+        typeof(FlappyBird.Ecs.Basic.Time.TimeComponent),
+        typeof(FlappyBird.Ecs.Gameplay.Bird.FlyUpComponent)
     };
 }

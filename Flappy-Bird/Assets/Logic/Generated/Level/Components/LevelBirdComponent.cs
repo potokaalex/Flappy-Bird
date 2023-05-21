@@ -35,7 +35,7 @@ public partial class LevelContext {
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    static readonly FlappyBird.Gameplay.Bird.BirdComponent birdComponent = new FlappyBird.Gameplay.Bird.BirdComponent();
+    static readonly FlappyBird.Ecs.Gameplay.Bird.BirdComponent birdComponent = new FlappyBird.Ecs.Gameplay.Bird.BirdComponent();
 
     public bool isBird {
         get { return HasComponent(LevelComponentsLookup.Bird); }

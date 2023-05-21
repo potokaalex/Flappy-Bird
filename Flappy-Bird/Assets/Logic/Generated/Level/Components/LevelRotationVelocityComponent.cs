@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    public FlappyBird.Gameplay.Transforms.RotationVelocityComponent rotationVelocity { get { return (FlappyBird.Gameplay.Transforms.RotationVelocityComponent)GetComponent(LevelComponentsLookup.RotationVelocity); } }
+    public FlappyBird.Ecs.Basic.Transforms.RotationVelocityComponent rotationVelocity { get { return (FlappyBird.Ecs.Basic.Transforms.RotationVelocityComponent)GetComponent(LevelComponentsLookup.RotationVelocity); } }
     public bool hasRotationVelocity { get { return HasComponent(LevelComponentsLookup.RotationVelocity); } }
 
     public void AddRotationVelocity(float newValue) {
         var index = LevelComponentsLookup.RotationVelocity;
-        var component = (FlappyBird.Gameplay.Transforms.RotationVelocityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Transforms.RotationVelocityComponent));
+        var component = (FlappyBird.Ecs.Basic.Transforms.RotationVelocityComponent)CreateComponent(index, typeof(FlappyBird.Ecs.Basic.Transforms.RotationVelocityComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceRotationVelocity(float newValue) {
         var index = LevelComponentsLookup.RotationVelocity;
-        var component = (FlappyBird.Gameplay.Transforms.RotationVelocityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Transforms.RotationVelocityComponent));
+        var component = (FlappyBird.Ecs.Basic.Transforms.RotationVelocityComponent)CreateComponent(index, typeof(FlappyBird.Ecs.Basic.Transforms.RotationVelocityComponent));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }

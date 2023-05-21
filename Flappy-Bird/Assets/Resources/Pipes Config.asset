@@ -15,7 +15,7 @@ MonoBehaviour:
   _prefab: {fileID: 1163154790420497170, guid: 2cdf8afec1cb7a54daf34e262546a9f7, type: 3}
   _velocity: -3
   _spawnPositionX: 3.4
-  _spawnDelay: 2
+  _spawnDelay: 0.5
   _spawnRate: 1
   _removeRate: 4
   _minPositionY: -1.22

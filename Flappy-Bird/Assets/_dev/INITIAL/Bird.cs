@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
 
-public class Bird : MonoBehaviour
+public class Bird_OLD : MonoBehaviour
 {
     private Vector2 velocity;
     private Vector2 acceleration;

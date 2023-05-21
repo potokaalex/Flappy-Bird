@@ -9,7 +9,7 @@ namespace FlappyBird.Infrastructure
 
         public override void InstallBindings()
         {
-            BindStateMachineInitialize(); //
+            BindGlobalInitialization(); //
             BindDataProvider();
             BindStateMachine();
             BindStateFactory();
@@ -58,10 +58,10 @@ namespace FlappyBird.Infrastructure
                 .AsSingle();
         }
 
-        private void BindStateMachineInitialize()
+        private void BindGlobalInitialization()
         {
             Container
-                .BindInterfacesTo<StateMachineInitialize>()
+                .BindInterfacesTo<GlobalInitialization>()
                 .AsSingle();
         }
     }

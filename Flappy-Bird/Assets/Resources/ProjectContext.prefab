@@ -78,3 +78,4 @@ MonoBehaviour:
     _levelLoadingConfiguration: {fileID: 11400000, guid: 78434e935203b6c488d5dbb9f3cbed3b, type: 2}
     _birdConfiguration: {fileID: 11400000, guid: aa662a993adc062408a00d075d3b5776, type: 2}
     _pipesConfiguration: {fileID: 11400000, guid: ef4d9f5660104a248acafffa5b292ab7, type: 2}
+    DefeatStateConfiguration: {fileID: 11400000, guid: a9e2c0f65f3d27143b1e6172fcac13b1, type: 2}

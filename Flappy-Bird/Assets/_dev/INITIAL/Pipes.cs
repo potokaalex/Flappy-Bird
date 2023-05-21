@@ -3,7 +3,7 @@ using Random = Unity.Mathematics.Random;
 using System.Collections.Generic;
 using System;
 
-public class Pipes : MonoBehaviour
+public class Pipes_OLD : MonoBehaviour
 {
     public float initialTimeSec;
 

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3631624636823952253}
   - component: {fileID: 2542213790899979520}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Daytime Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
