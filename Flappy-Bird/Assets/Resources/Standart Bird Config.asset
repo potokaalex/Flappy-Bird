@@ -54,3 +54,5 @@ MonoBehaviour:
   _maxVelocity: 20
   _minAngle: -90
   _maxAngle: 20
+  VelocityToFlyRotation: 0
+  VelocityToFallRotation: -3.3

@@ -53,7 +53,9 @@ namespace FlappyBird
                 config.FlyUpAction,
                 config.FlyUpVelocity,
                 config.ClockwiseAngularVelocity,
-                config.CounterClockwiseAngularVelocity);
+                config.CounterClockwiseAngularVelocity,
+                config.VelocityToFlyRotation,
+                config.VelocityToFallRotation);
 
             new BirdFactory(_contexts.level, _contexts.input, config).Create();
         }

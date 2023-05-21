@@ -17,6 +17,12 @@ namespace FlappyBird.Ecs.Gameplay.Bird
         [SerializeField] private float _minAngle;
         [SerializeField] private float _maxAngle;
 
+        //
+        public float VelocityToFlyRotation;
+
+        public float VelocityToFallRotation;
+        //
+
         private Vector2 _spawnPoint;
 
         public void Initialize(Vector2 spawnPoint)

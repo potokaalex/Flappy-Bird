@@ -4,7 +4,7 @@ namespace FlappyBird.Ecs.Gameplay
 {
     using Bird;
     using Pipes;
-    
+
     public class GameplaySystems
     {
         private readonly IGameLoop _gameLoop;
@@ -31,6 +31,7 @@ namespace FlappyBird.Ecs.Gameplay
         private Systems CreateSystems(Contexts contexts)
         {
             return new Systems()
+                //.Add(new TestSystem(contexts))
                 .Add(new BirdSystems(contexts))
                 .Add(new PipesSystems(contexts));
         }

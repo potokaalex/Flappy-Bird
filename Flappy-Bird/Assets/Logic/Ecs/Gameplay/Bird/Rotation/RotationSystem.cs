@@ -28,9 +28,9 @@ namespace FlappyBird.Ecs.Gameplay.Bird
         }
 
         private bool IsFly(LevelEntity bird)
-            => bird.verticalVelocity.Value > 0;
+            => bird.verticalVelocity.Value > _context.birdData.VelocityToFlyRotation;
 
         private bool IsFall(LevelEntity bird)
-            => bird.verticalVelocity.Value < 0;
+            => bird.verticalVelocity.Value < _context.birdData.VelocityToFallRotation;
     }
 }

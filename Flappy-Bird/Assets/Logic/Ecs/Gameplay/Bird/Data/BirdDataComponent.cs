@@ -11,5 +11,7 @@ namespace FlappyBird.Ecs.Gameplay.Bird
         public float FlyUpVelocity;
         public float ClockwiseAngularVelocity;
         public float CounterClockwiseAngularVelocity;
+        public float VelocityToFlyRotation;
+        public float VelocityToFallRotation;
     }
 }
