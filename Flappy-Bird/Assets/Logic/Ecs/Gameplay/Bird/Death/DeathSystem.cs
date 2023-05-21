@@ -7,7 +7,7 @@ namespace FlappyBird.Ecs.Gameplay.Bird
     {
         private readonly InputContext _inputContext;
 
-        public DeathSystem(LevelContext levelContext, InputContext inputContext) : base(inputContext)
+        public DeathSystem(InputContext inputContext) : base(inputContext)
             => _inputContext = inputContext;
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context)

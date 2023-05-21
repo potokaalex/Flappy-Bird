@@ -47,7 +47,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 1
   _gravityAcceleration: -20
-  _flyUpVelocity: 5.5
+  _flyUpVelocity: 5.3
   _clockwiseAngularVelocity: 1000
   _counterClockwiseAngularVelocity: -500
   _minVelocity: -20

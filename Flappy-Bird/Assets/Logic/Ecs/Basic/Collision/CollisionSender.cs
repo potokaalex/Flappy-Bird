@@ -10,6 +10,6 @@ namespace FlappyBird.Ecs.Basic.Collision
             => _context = context;
 
         private void OnCollisionEnter2D(Collision2D collision)
-            => _context.SetCollision(collision);
+            => _context.CreateEntity().AddCollision(collision);
     }
 }

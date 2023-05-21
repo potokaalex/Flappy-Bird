@@ -5,7 +5,7 @@
         public BirdSystems(Contexts contexts)
         {
             base.Add(new InitializationSystem(contexts.level));
-            base.Add(new DeathSystem(contexts.level, contexts.input));
+            base.Add(new DeathSystem(contexts.input));
             base.Add(new InputSystem(contexts.level, contexts.input));
             base.Add(new GravitySystem(contexts.level, contexts.input));
             base.Add(new FlyUpSystem(contexts.level, contexts.input));
