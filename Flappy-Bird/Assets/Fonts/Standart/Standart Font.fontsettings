@@ -6,11 +6,11 @@ Font:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StandartFont
+  m_Name: Standart Font
   serializedVersion: 5
   m_LineSpacing: 0.1
   m_DefaultMaterial: {fileID: 2100000, guid: e59e6c574e805ca44802c5755a2d5df0, type: 2}
-  m_FontSize: 1
+  m_FontSize: 3
   m_Texture: {fileID: 0}
   m_AsciiStartOffset: 0
   m_Tracking: 1
