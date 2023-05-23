@@ -33,7 +33,8 @@ namespace FlappyBird
             _stateMachine.Initialize(
                 _stateFactory.Create<GameplayState>(),
                 _stateFactory.Create<LoadingState>(),
-                _stateFactory.Create<DefeatState>());
+                _stateFactory.Create<DefeatState>(),
+                _stateFactory.Create<PauseState>());
         }
     }
 }

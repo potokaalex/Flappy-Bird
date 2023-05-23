@@ -49,7 +49,7 @@ MonoBehaviour:
   _gravityAcceleration: -20
   _flyUpVelocity: 5.3
   _clockwiseAngularVelocity: 1000
-  _counterClockwiseAngularVelocity: -500
+  _counterClockwiseAngularVelocity: -600
   _minVelocity: -20
   _maxVelocity: 20
   _minAngle: -90

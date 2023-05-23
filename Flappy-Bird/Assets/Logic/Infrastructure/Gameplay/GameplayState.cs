@@ -1,17 +1,14 @@
 ﻿namespace FlappyBird.Infrastructure
 {
-    public class GameplayState : IState<GameplayStateConfiguration>
+    public class GameplayState : IState
     {
         private readonly DataProvider _data;
 
         public GameplayState(DataProvider data)
             => _data = data;
 
-        public void Enter(GameplayStateConfiguration config)
+        public void Enter()
         {
-            _data.BirdConfiguration.Initialize(config.BirdSpawnPoint.position);
-
-            _data.Ecs.CreateEntities();
             _data.Ecs.GameplaySystems.Initialize();
         }
 
