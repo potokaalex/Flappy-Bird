@@ -1,33 +1,25 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
+using FlappyBird;
 
-public class TestSystem : IExecuteSystem, ICleanupSystem
+public class TestSystem : IExecuteSystem
 {
-    private Contexts _contexts;
-    private List<Vector2> _positions;
+    private readonly Contexts _contexts;
+    //private readonly DataProvider _data;
 
-    public TestSystem(Contexts contexts)
+    public TestSystem(Contexts contexts, DataProvider data)
     {
         _contexts = contexts;
-        _positions = new(100);
+        //_data = data;
+
+        data.PlayerProgress.Score.OnCurrentScoreChanged += DisplayScore;
     }
 
     public void Execute()
     {
-        _positions.Add(_contexts.level.birdEntity.position.Value);
     }
 
-    public void Cleanup()
-    {
-        var highestY = float.MinValue;
-
-        foreach (var position in _positions)
-        {
-            if (position.y > highestY)
-                highestY = position.y;
-        }
-
-        Debug.Log(highestY);
-    }
+    private void DisplayScore(float score)
+        => Debug.Log(score);
 }

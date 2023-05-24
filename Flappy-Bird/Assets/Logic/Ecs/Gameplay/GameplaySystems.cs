@@ -31,7 +31,6 @@ namespace FlappyBird.Ecs.Gameplay
         private Systems CreateSystems(Contexts contexts)
         {
             return new Systems()
-                //.Add(new TestSystem(contexts))
                 .Add(new BirdSystems(contexts))
                 .Add(new PipesSystems(contexts));
         }

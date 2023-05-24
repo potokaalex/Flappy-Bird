@@ -1,6 +1,5 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
-using Zenject;
 
 namespace FlappyBird.Infrastructure
 {
@@ -12,8 +11,7 @@ namespace FlappyBird.Infrastructure
         private IStateMachine _stateMachine;
         private bool _isPause;
 
-        [Inject]
-        private void Constructor(IStateMachine stateMachine)
+        public void Initialize(IStateMachine stateMachine)
             => _stateMachine = stateMachine;
 
         private protected override void OnClick()

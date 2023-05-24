@@ -4,7 +4,7 @@ using UnityEngine;
 namespace FlappyBird.Ecs.Gameplay.Bird
 {
     [CreateAssetMenu(fileName = "New Bird Configuration", menuName = "Configurations/Bird")]
-    public class BirdConfiguration : ScriptableObject //BirdsConfiguration?
+    public class BirdConfiguration : ScriptableObject
     {
         [SerializeField] private GameObject _prefab;
         [SerializeField] private InputAction _flyUpAction;
@@ -19,24 +19,14 @@ namespace FlappyBird.Ecs.Gameplay.Bird
 
         //
         public float VelocityToFlyRotation;
-
         public float VelocityToFallRotation;
         //
-
-        private Vector2 _spawnPoint;
-
-        public void Initialize(Vector2 spawnPoint)
-        {
-            _spawnPoint = spawnPoint;
-        }
 
         public GameObject Prefab => _prefab;
 
         public InputAction FlyUpAction => _flyUpAction;
 
         public float GravityAcceleration => _gravityAcceleration;
-
-        public Vector2 SpawnPoint => _spawnPoint;
 
         public float FlyUpVelocity => _flyUpVelocity;
 

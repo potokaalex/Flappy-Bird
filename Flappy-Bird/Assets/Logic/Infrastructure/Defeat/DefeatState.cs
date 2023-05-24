@@ -1,6 +1,6 @@
 namespace FlappyBird.Infrastructure
 {
-    public class DefeatState : IState<DefeatStateConfiguration>
+    public class DefeatState : IState
     {
         private readonly DataProvider _data;
         private readonly IStateMachine _stateMachine;
@@ -11,12 +11,12 @@ namespace FlappyBird.Infrastructure
             _data = data;
         }
 
-        public void Enter(DefeatStateConfiguration parameter)
+        public void Enter()
         {
             _data.Ecs.DefeatSystems.Initialize();
             //animations
 
-            _stateMachine.SwitchTo<LoadingState, SceneLoadingConfiguration>(_data.LevelLoadingConfiguration);
+            _stateMachine.SwitchTo<LoadingState, SceneLoadingConfiguration>(_data.LevelLoadingConfig);
         }
 
         public void Exit()

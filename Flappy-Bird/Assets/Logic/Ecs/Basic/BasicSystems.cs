@@ -4,6 +4,7 @@ namespace FlappyBird.Ecs.Basic
 {
     using Transforms;
     using GameOver;
+    using Score;
     using Input;
     using Time;
 
@@ -12,10 +13,11 @@ namespace FlappyBird.Ecs.Basic
         private readonly IGameLoop _gameLoop;
         private readonly Systems _systems;
 
-        public BasicSystems(Contexts contexts, IStateMachine stateMachine, IGameLoop gameLoop)
+        public BasicSystems(Contexts contexts, DataProvider data,
+            IStateMachine stateMachine, IGameLoop gameLoop)
         {
             _gameLoop = gameLoop;
-            _systems = CreateSystems(contexts, stateMachine);
+            _systems = CreateSystems(contexts, data, stateMachine);
         }
 
         public void Initialize()
@@ -30,10 +32,12 @@ namespace FlappyBird.Ecs.Basic
             _gameLoop.OnLateFixedUpdate -= _systems.Execute;
         }
 
-        private Systems CreateSystems(Contexts contexts, IStateMachine stateMachine)
+        private Systems CreateSystems(Contexts contexts, DataProvider data, IStateMachine stateMachine)
         {
             return new Systems()
-                .Add(new GameOverSystem(contexts.input, default, stateMachine)) // !
+                //.Add(new TestSystem(contexts, data))
+                .Add(new GameOverSystem(contexts.input, stateMachine))
+                .Add(new ScoreSystem(contexts.input, data.PlayerProgress.Score))
                 .Add(new TransformSystems(contexts))
                 .Add(new InputCleanupSystem(contexts.input))
                 .Add(new TimeSystems(contexts.input, _gameLoop.FixedDeltaTime));

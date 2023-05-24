@@ -1,15 +1,11 @@
-﻿using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
 namespace FlappyBird.Infrastructure
 {
     public class BootstrapInstaller : MonoInstaller
     {
-        [SerializeField] private DataProvider _dataProvider;
-
         public override void InstallBindings()
         {
-            BindGlobalInitialization(); //
             BindDataProvider();
             BindStateMachine();
             BindStateFactory();
@@ -21,7 +17,6 @@ namespace FlappyBird.Infrastructure
         {
             Container
                 .Bind<DataProvider>()
-                .FromInstance(_dataProvider)
                 .AsSingle();
         }
 
@@ -55,13 +50,6 @@ namespace FlappyBird.Infrastructure
                 .Bind<IGameLoop>()
                 .To<GameLoop>()
                 .FromNewComponentOnNewGameObject()
-                .AsSingle();
-        }
-
-        private void BindGlobalInitialization()
-        {
-            Container
-                .BindInterfacesTo<GlobalInitialization>()
                 .AsSingle();
         }
     }

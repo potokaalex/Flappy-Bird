@@ -7,20 +7,17 @@ namespace FlappyBird.Ecs.Defeat
         private readonly IGameLoop _gameLoop;
         private readonly Systems _systems;
 
-        public DefeatSystems(Contexts contexts, DataProvider dataProvider,
-            IStateMachine stateMachine, IGameLoop gameLoop)
+        public DefeatSystems()
         {
             _systems = CreateSystems();
         }
 
         public void Initialize()
         {
-
         }
 
         public void Dispose()
         {
-
         }
 
         private Systems CreateSystems()

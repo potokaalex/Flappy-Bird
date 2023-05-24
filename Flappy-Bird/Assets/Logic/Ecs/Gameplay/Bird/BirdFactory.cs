@@ -8,13 +8,13 @@ namespace FlappyBird.Ecs.Gameplay.Bird
     {
         private readonly LevelContext _levelContext;
         private readonly InputContext _inputContext;
-        private readonly BirdConfiguration _config;
+        private readonly DataProvider _data;
 
-        public BirdFactory(LevelContext levelContext, InputContext inputContext, BirdConfiguration config)
+        public BirdFactory(LevelContext levelContext, InputContext inputContext, DataProvider data)
         {
             _levelContext = levelContext;
             _inputContext = inputContext;
-            _config = config;
+            _data = data;
         }
 
         public void Create()
@@ -28,8 +28,8 @@ namespace FlappyBird.Ecs.Gameplay.Bird
         private (GameObject, LevelEntity) CreateBird()
         {
             var entity = _levelContext.CreateEntity();
-            var gameObject = Object.Instantiate(_config.Prefab,
-                _config.SpawnPoint, Quaternion.identity);
+            var gameObject = Object.Instantiate(_data.BirdConfig.Prefab,
+                _data.PlayerProgress.BirdSpawnPoint, Quaternion.identity);
 
             gameObject.Link(entity);
             entity.AddLinkToGameObject(gameObject);
@@ -42,14 +42,14 @@ namespace FlappyBird.Ecs.Gameplay.Bird
         {
             bird.AddVerticalVelocity(0);
             bird.AddVerticalVelocityClamp(
-                _config.MinVelocity, _config.MaxVelocity);
+                _data.BirdConfig.MinVelocity, _data.BirdConfig.MaxVelocity);
 
             bird.AddRotation(0);
             bird.AddRotationVelocity(0);
-            bird.AddRotationClamp(_config.MinAngle, _config.MaxAngle);
+            bird.AddRotationClamp(_data.BirdConfig.MinAngle, _data.BirdConfig.MaxAngle);
 
-            bird.AddGravity(_config.GravityAcceleration);
-            bird.AddPosition(_config.SpawnPoint);
+            bird.AddGravity(_data.BirdConfig.GravityAcceleration);
+            bird.AddPosition(_data.PlayerProgress.BirdSpawnPoint);
         }
 
         private void InitializeCollisionSender(GameObject bird)

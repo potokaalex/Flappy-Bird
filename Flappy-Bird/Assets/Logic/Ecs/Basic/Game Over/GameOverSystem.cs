@@ -6,15 +6,10 @@ namespace FlappyBird.Ecs.Basic.GameOver
 {
     public class GameOverSystem : ReactiveSystem<InputEntity>
     {
-        private readonly DefeatStateConfiguration _stateConfig;
         private readonly IStateMachine _stateMachine;
 
-        public GameOverSystem(InputContext context, DefeatStateConfiguration stateConfig,
-            IStateMachine stateMachine) : base(context)
-        {
-            _stateConfig = stateConfig;
-            _stateMachine = stateMachine;
-        }
+        public GameOverSystem(InputContext context, IStateMachine stateMachine) : base(context)
+            => _stateMachine = stateMachine;
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context)
             => context.CreateCollector(InputMatcher.GameOver.Added());
@@ -23,6 +18,6 @@ namespace FlappyBird.Ecs.Basic.GameOver
             => true;
 
         protected override void Execute(List<InputEntity> entities)
-            => _stateMachine.SwitchTo<DefeatState, DefeatStateConfiguration>(_stateConfig);
+            => _stateMachine.SwitchTo<DefeatState>();
     }
 }

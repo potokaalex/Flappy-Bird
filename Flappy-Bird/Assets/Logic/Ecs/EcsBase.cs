@@ -12,14 +12,14 @@ namespace FlappyBird
         private readonly DataProvider _data;
         private readonly Contexts _contexts;
 
-        public EcsBase(DataProvider dataProvider, IStateMachine stateMachine, IGameLoop gameLoop)
+        public EcsBase(DataProvider data, IStateMachine stateMachine, IGameLoop gameLoop)
         {
-            _data = dataProvider;
+            _data = data;
             _contexts = Contexts.sharedInstance = new();
 
-            BasicSystems = new(_contexts, stateMachine, gameLoop);
+            BasicSystems = new(_contexts, data, stateMachine, gameLoop);
             GameplaySystems = new(_contexts, gameLoop);
-            DefeatSystems = new(_contexts, dataProvider, stateMachine, gameLoop);
+            DefeatSystems = new();
         }
 
         public BasicSystems BasicSystems { get; }
@@ -32,8 +32,8 @@ namespace FlappyBird
 
         public void CreateEntities()
         {
-            CreateBird(_data.BirdConfiguration);
-            CreatePipes(_data.PipesConfiguration);
+            CreateBird(_data.BirdConfig);
+            CreatePipes(_data.PipesConfig);
         }
 
         public void Reset()
@@ -57,7 +57,7 @@ namespace FlappyBird
                 config.VelocityToFlyRotation,
                 config.VelocityToFallRotation);
 
-            new BirdFactory(_contexts.level, _contexts.input, config).Create();
+            new BirdFactory(_contexts.level, _contexts.input, _data).Create();
         }
 
         private void CreatePipes(PipesConfiguration config)

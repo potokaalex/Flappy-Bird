@@ -1,6 +1,5 @@
 ﻿using FlappyBird.Ecs.Gameplay.Pipes;
 using FlappyBird.Ecs.Gameplay.Bird;
-using UnityEngine;
 using System;
 
 namespace FlappyBird
@@ -8,24 +7,24 @@ namespace FlappyBird
     [Serializable]
     public class DataProvider
     {
-        [SerializeField] private SceneLoadingConfiguration _levelLoadingConfiguration;
-        [SerializeField] private BirdConfiguration _birdConfiguration;
-        [SerializeField] private PipesConfiguration _pipesConfiguration;
+        private DataProviderConfiguration _config;
 
-        public SceneLoadingConfiguration LevelLoadingConfiguration
-            => _levelLoadingConfiguration;
+        public SceneLoadingConfiguration LevelLoadingConfig
+            => _config.LevelLoadingConfig;
 
-        public BirdConfiguration BirdConfiguration
-            => _birdConfiguration;
+        public BirdConfiguration BirdConfig
+            => _config.BirdConfiguration;
 
-        public PipesConfiguration PipesConfiguration
-            => _pipesConfiguration;
+        public PipesConfiguration PipesConfig
+            => _config.PipesConfiguration;
 
-        public EcsBase Ecs { get; private set; }
+        public PlayerProgress PlayerProgress
+            => _config.PlayerProgress;
 
-        public void Initialize(EcsBase ecs)
-        {
-            Ecs = ecs;
-        }
+        public EcsBase Ecs
+            => _config.Ecs;
+
+        public void Initialize(DataProviderConfiguration config) 
+            => _config = config;
     }
 }
