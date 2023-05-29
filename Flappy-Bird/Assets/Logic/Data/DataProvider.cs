@@ -1,33 +1,14 @@
-﻿using FlappyBird.Ecs.Gameplay.Pipes;
-using FlappyBird.Ecs.Gameplay.Bird;
-using System;
-using FlappyBird.Infrastructure;
-
-namespace FlappyBird
+﻿namespace FlappyBird
 {
-    [Serializable]
     public class DataProvider
     {
-        private DataProviderConfiguration _config;
+        public SceneLoadingConfiguration LevelLoadingConfig { get; private set; }
+        public PlayerProgress PlayerProgress { get; private set; }
 
-        public SceneLoadingConfiguration LevelLoadingConfig
-            => _config.LevelLoadingConfig;
-
-        public BirdConfiguration BirdConfig
-            => _config.BirdConfiguration;
-
-        public PipesConfiguration PipesConfig
-            => _config.PipesConfiguration;
-
-        public PlayerProgress PlayerProgress
-            => _config.PlayerProgress;
-
-        public GameplayEcs Ecs
-            => _config.Ecs;
-
-        public void Initialize(DataProviderConfiguration config) 
-            => _config = config;
-
-        public GameOverStateConfiguration GameOverStateConfiguration;
+        public void Initialize(DataProviderConfiguration config)
+        {
+            LevelLoadingConfig = config.LevelLoadingConfig;
+            PlayerProgress = new();
+        }
     }
 }

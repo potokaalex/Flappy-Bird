@@ -1,46 +1,62 @@
-﻿using Entitas;
-using FlappyBird.Ecs.Basic.Score;
+﻿using FlappyBird.Ecs.Basic.Score;
+using Entitas.Unity;
+using Entitas;
 
 namespace FlappyBird.Ecs.Gameplay.Bird
 {
     public class BirdSystems : Feature
     {
         private readonly Contexts _contexts;
-        private readonly DataProvider _data;
-        private readonly IGameLoop _gameLoop;
 
-        public BirdSystems(Contexts contexts, DataProvider data, IGameLoop gameLoop)
+        public BirdSystems(Contexts contexts, DataProvider data, BirdConfiguration birdConfig)
         {
-            _data = data;
-            base.Add(CreateSystems(contexts));
             _contexts = contexts;
 
-            _gameLoop = gameLoop;
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
-            _gameLoop.OnFixedUpdate += base.Execute;
+            CreateEntities(contexts, data, birdConfig);
+            CreateSystems(contexts, data);
         }
 
         public override void Cleanup()
         {
             base.Cleanup();
-            _gameLoop.OnFixedUpdate -= base.Execute;
+            RemoveEntities();
         }
 
-        private Systems CreateSystems(Contexts contexts)
+        private void CreateEntities(Contexts contexts, DataProvider data, BirdConfiguration birdConfig)
         {
-            return new Systems()
-                .Add(new InitializationSystem(contexts.level))
-                .Add(new InputSystem(contexts.level, contexts.input))
-                .Add(new FlyUpSystem(contexts.level, contexts.input))
-                .Add(new RotationSystem(contexts.level))
-                .Add(new CollisionSystem(contexts.input))
-                //.Add(new GameOverSystem(contexts.level,contexts.input, this))
-                .Add(new ScoreSystem(contexts.input, _data.PlayerProgress.Score))
-                .Add(new CleanupSystem(contexts.level));
+            contexts.level.SetBirdData(
+                birdConfig.FlyUpAction,
+                birdConfig.FlyUpVelocity,
+                birdConfig.ClockwiseAngularVelocity,
+                birdConfig.CounterClockwiseAngularVelocity,
+                birdConfig.VelocityToFlyRotation,
+                birdConfig.VelocityToFallRotation);
+
+            new BirdFactory(contexts.level, contexts.input, birdConfig,
+                data.PlayerProgress.BirdSpawnPoint).Create();
+        }
+
+        private void RemoveEntities()
+        {
+            _contexts.level.RemoveBirdData();
+
+            foreach (var bird in _contexts.level.GetEntities(LevelMatcher.Bird))
+            {
+                bird.linkToGameObject.GameObject.Unlink();
+                bird.Destroy();
+            }
+        }
+
+        private void CreateSystems(Contexts contexts, DataProvider data)
+        {
+            base.Add(new InitializationSystem(contexts.level));
+            base.Add(new InputSystem(contexts.level, contexts.input));
+            base.Add(new FlyUpSystem(contexts.level, contexts.input));
+            base.Add(new RotationSystem(contexts.level));
+            base.Add(new CollisionSystem(contexts.input));
+            //base.Add(new GameOverSystem(contexts.level,contexts.input, this))
+            base.Add(new ScoreSystem(contexts.input, data.PlayerProgress.Score));
+            base.Add(new CleanupSystem(contexts.level));
         }
     }
 }

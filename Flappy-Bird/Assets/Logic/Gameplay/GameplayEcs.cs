@@ -7,86 +7,51 @@ using Entitas;
 
 namespace FlappyBird
 {
-    public class GameplayEcs //start stop systems!
+    public class GameplayEcs
     {
-        private readonly Systems _systems;
         private readonly Contexts _contexts;
         private readonly IGameLoop _gameLoop;
         private readonly DataProvider _data;
+        private readonly IStateMachine _stateMachine;
+        private Systems _systems;
 
         public GameplayEcs(DataProvider data, IStateMachine stateMachine, IGameLoop gameLoop)
         {
-            _contexts = Contexts.sharedInstance;
-            _systems = CreateSystems(data, stateMachine, gameLoop);
+            _contexts = Contexts.sharedInstance = new();
+            _stateMachine = stateMachine;
             _gameLoop = gameLoop;
             _data = data;
         }
 
-        public void InitializeSystems()
+        public void Initialize(GameplayEcsConfiguration config)
         {
+            _systems = CreateSystems(config);
             _systems.Initialize();
-            //_gameLoop.OnFixedUpdate += _devSystems.Execute;
         }
 
-        public void DisposeSystems()
+        public void Dispose()
         {
             _systems.Cleanup();
-            //_gameLoop.OnFixedUpdate -= _devSystems.Execute;
-        }
-
-        public void CreateEntities()
-        {
-            CreateBird(_data.BirdConfig);
-            CreatePipes(_data.PipesConfig);
-            CreateTime();
-        }
-
-        public void DestroyAllEntities()
-        {
-            foreach (var entity in _contexts.level.GetEntities())
-            {
-                if (entity.hasLinkToGameObject)
-                    if (entity.linkToGameObject.GameObject != null)
-                        entity.linkToGameObject.GameObject.Unlink();
-            }
-            
             _contexts.Reset();
         }
 
-        private void CreateBird(BirdConfiguration config)
+        public void StartSystems()
+            => _gameLoop.OnFixedUpdate += _systems.Execute;
+
+        public void StopSystems()
+            => _gameLoop.OnFixedUpdate -= _systems.Execute;
+
+        private Systems CreateSystems(GameplayEcsConfiguration gameplayConfig)
         {
-            _contexts.level.SetBirdData(
-                config.FlyUpAction,
-                config.FlyUpVelocity,
-                config.ClockwiseAngularVelocity,
-                config.CounterClockwiseAngularVelocity,
-                config.VelocityToFlyRotation,
-                config.VelocityToFallRotation);
+            var systems = new Systems();
 
-            new BirdFactory(_contexts.level, _contexts.input, _data.BirdConfig,
-                _data.PlayerProgress.BirdSpawnPoint).Create();
-        }
+            systems.Add(new BirdSystems(_contexts, _data, gameplayConfig.BirdConfiguration));
+            systems.Add(new PipesSystems(_contexts, gameplayConfig.PipesConfiguration));
+            systems.Add(new DevSystems(_contexts, _data, _stateMachine, _gameLoop));
+            systems.Add(new GameOverSystems(_contexts, _stateMachine, _gameLoop));
+            systems.Add(new BasicSystems(_contexts, _gameLoop));
 
-        private void CreatePipes(PipesConfiguration config)
-        {
-            _contexts.level.SetPipesData(new(_contexts.level, config),
-                config.SpawnDelay, config.SpawnRate, config.RemoveRate);
-        }
-
-        private void CreateTime()
-            => _contexts.input.SetTime(0);
-
-        private Systems CreateSystems(DataProvider data, IStateMachine stateMachine, IGameLoop gameLoop)
-        {
-            var birdSystems = new BirdSystems(_contexts, data, gameLoop);
-            var pipesSystems = new PipesSystems(_contexts, data, gameLoop);
-
-            return new Systems()
-                .Add(birdSystems)
-                .Add(pipesSystems)
-                .Add(new DevSystems(_contexts, data, stateMachine, gameLoop))
-                .Add(new GameOverSystems(_contexts, birdSystems, pipesSystems, stateMachine, gameLoop))
-                .Add(new BasicSystems(_contexts, gameLoop));
+            return systems;
         }
     }
 }

@@ -1,36 +1,35 @@
-using Entitas;
-
 namespace FlappyBird.Gameplay.Basic
 {
     public class BasicSystems : Feature
     {
-        private readonly IGameLoop _gameLoop;
+        private readonly Contexts _contexts;
 
         public BasicSystems(Contexts contexts, IGameLoop gameLoop)
         {
-            _gameLoop = gameLoop;
-            base.Add(CreateSystems(contexts));
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
-            _gameLoop.OnFixedUpdate += base.Execute;
+            _contexts = contexts;
+            
+            CreateEntities(contexts);
+            CreateSystems(contexts, gameLoop);
         }
 
         public override void Cleanup()
         {
             base.Cleanup();
-            _gameLoop.OnFixedUpdate -= base.Execute;
+            RemoveEntities();
         }
+        
+        private void CreateEntities(Contexts contexts)
+            => contexts.input.SetTime(0);
 
-        private Systems CreateSystems(Contexts contexts)
+        private void RemoveEntities()
+            => _contexts.input.RemoveTime();
+
+        private void CreateSystems(Contexts contexts, IGameLoop gameLoop)
         {
-            return new Systems()
-                .Add(new GravitySystem(contexts.level, contexts.input))
-                .Add(new TransformSystems(contexts))
-                .Add(new EventCleanupSystem(contexts.input))
-                .Add(new TimeUpdateSystem(contexts.input, _gameLoop.FixedDeltaTime));
+            base.Add(new GravitySystem(contexts.level, contexts.input));
+            base.Add(new TransformSystems(contexts));
+            base.Add(new EventCleanupSystem(contexts.input));
+            base.Add(new TimeUpdateSystem(contexts.input, gameLoop.FixedDeltaTime));
         }
     }
 }

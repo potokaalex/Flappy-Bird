@@ -18,6 +18,9 @@ namespace FlappyBird.Ecs.Gameplay.Pipes
 
         public void Execute()
         {
+            if (_inputContext.isGameOver)
+                return;
+            
             if (IsSpawnCondition())
             {
                 Spawn();

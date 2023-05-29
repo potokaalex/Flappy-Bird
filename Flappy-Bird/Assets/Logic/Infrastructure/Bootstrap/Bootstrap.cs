@@ -42,9 +42,6 @@ namespace FlappyBird.Infrastructure
         private void InitializeData()
         {
             _data.Initialize(_dataProviderConfiguration);
-
-            _dataProviderConfiguration.PlayerProgress = new();
-            _dataProviderConfiguration.Ecs = new(_data, _stateMachine, _gameLoop);
         }
     }
 }

@@ -1,5 +1,4 @@
 using FlappyBird.Ecs.Gameplay;
-using Entitas;
 
 namespace FlappyBird
 {
@@ -10,27 +9,14 @@ namespace FlappyBird
 
         public DevSystems(Contexts contexts, DataProvider data, IStateMachine stateMachine, IGameLoop gameLoop)
         {
-            base.Add(CreateSystems(contexts, data, stateMachine));
+            CreateSystems(contexts, data, stateMachine);
             _gameLoop = gameLoop;
         }
 
-        public override void Initialize()
+        private void CreateSystems(Contexts contexts, DataProvider data, IStateMachine stateMachine)
         {
-            base.Initialize();
-            _gameLoop.OnFixedUpdate += base.Execute;
-        }
-
-        public override void Cleanup()
-        {
-            base.Cleanup();
-            _gameLoop.OnFixedUpdate -= base.Execute;
-        }
-
-        private Systems CreateSystems(Contexts contexts, DataProvider data, IStateMachine stateMachine)
-        {
-            return new Systems()
-                .Add(new TestSystem(contexts, data, stateMachine, _gameLoop))
-                .Add(new RotationVelocitySystem(contexts.level, contexts.input));
+            base.Add(new TestSystem(contexts, data, stateMachine, _gameLoop));
+            base.Add(new RotationVelocitySystem(contexts.level, contexts.input));
         }
     }
 }

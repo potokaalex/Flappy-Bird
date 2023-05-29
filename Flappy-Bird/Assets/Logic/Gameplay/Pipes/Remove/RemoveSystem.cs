@@ -16,6 +16,9 @@ namespace FlappyBird.Ecs.Gameplay.Pipes
 
         public void Execute()
         {
+            if (_inputContext.isGameOver)
+                return;
+
             foreach (var entity in _pipes.GetEntities())
             {
                 if (IsRemoveCondition(entity))

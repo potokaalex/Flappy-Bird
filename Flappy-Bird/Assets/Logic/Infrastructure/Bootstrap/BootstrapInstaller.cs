@@ -10,6 +10,7 @@ namespace FlappyBird.Infrastructure
             BindStateMachine();
             BindStateFactory();
             BindSceneLoader();
+            BindGameplayEcs();
             BindGameLoop();
         }
 
@@ -41,6 +42,13 @@ namespace FlappyBird.Infrastructure
             Container
                 .Bind<ISceneLoader>()
                 .To<SceneLoader>()
+                .AsSingle();
+        }
+
+        private void BindGameplayEcs()
+        {
+            Container
+                .Bind<GameplayEcs>()
                 .AsSingle();
         }
 

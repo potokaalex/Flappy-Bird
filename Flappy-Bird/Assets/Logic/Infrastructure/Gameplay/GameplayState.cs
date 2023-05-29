@@ -3,19 +3,23 @@
     public class GameplayState : IState
     {
         private readonly DataProvider _data;
+        private readonly GameplayEcs _ecs;
 
-        public GameplayState(DataProvider data)
-            => _data = data;
+        public GameplayState(DataProvider data, GameplayEcs ecs)
+        {
+            _data = data;
+            _ecs = ecs;
+        }
 
         public void Enter()
         {
-            _data.Ecs.InitializeSystems();
+            _ecs.StartSystems();
             //start grass anim
         }
 
         public void Exit()
         {
-            _data.Ecs.DisposeSystems();
+            _ecs.StopSystems();
             //stop anims
         }
     }

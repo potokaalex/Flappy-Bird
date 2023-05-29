@@ -7,25 +7,24 @@ namespace FlappyBird.Infrastructure
     {
         [SerializeField] private PlayerProgressConfiguration _progressConfiguration;
         [SerializeField] private GameOverStateConfiguration _gameOverConfiguration;
-
+        [SerializeField] private GameplayEcsConfiguration _gameplayEcsConfiguration;
+        
         private IStateMachine _stateMachine;
         private DataProvider _data;
+        private GameplayEcs _ecs;
 
         [Inject]
-        private void Constructor(IStateMachine stateMachine, DataProvider dataProvider)
+        private void Constructor(DataProvider dataProvider,GameplayEcs ecs,IStateMachine stateMachine)
         {
             _stateMachine = stateMachine;
             _data = dataProvider;
+            _ecs = ecs;
         }
 
         private void Start()
         {
-            _data.GameOverStateConfiguration = _gameOverConfiguration;
-            
             _data.PlayerProgress.Initialize(_progressConfiguration);
-            
-            _data.Ecs.CreateEntities();
-            
+            _ecs.Initialize(_gameplayEcsConfiguration);
             _stateMachine.SwitchTo<GameplayState>();
         }
     }
