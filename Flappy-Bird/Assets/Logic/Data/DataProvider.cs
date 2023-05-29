@@ -1,6 +1,7 @@
 ﻿using FlappyBird.Ecs.Gameplay.Pipes;
 using FlappyBird.Ecs.Gameplay.Bird;
 using System;
+using FlappyBird.Infrastructure;
 
 namespace FlappyBird
 {
@@ -21,10 +22,12 @@ namespace FlappyBird
         public PlayerProgress PlayerProgress
             => _config.PlayerProgress;
 
-        public EcsBase Ecs
+        public GameplayEcs Ecs
             => _config.Ecs;
 
         public void Initialize(DataProviderConfiguration config) 
             => _config = config;
+
+        public GameOverStateConfiguration GameOverStateConfiguration;
     }
 }

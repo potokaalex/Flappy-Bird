@@ -5,8 +5,8 @@ namespace FlappyBird.Infrastructure
 {
     public class LevelStartup : MonoBehaviour
     {
-        //[SerializeField] private GameplayStateConfiguration _configuration;
         [SerializeField] private PlayerProgressConfiguration _progressConfiguration;
+        [SerializeField] private GameOverStateConfiguration _gameOverConfiguration;
 
         private IStateMachine _stateMachine;
         private DataProvider _data;
@@ -20,10 +20,12 @@ namespace FlappyBird.Infrastructure
 
         private void Start()
         {
+            _data.GameOverStateConfiguration = _gameOverConfiguration;
+            
             _data.PlayerProgress.Initialize(_progressConfiguration);
-
+            
             _data.Ecs.CreateEntities();
-
+            
             _stateMachine.SwitchTo<GameplayState>();
         }
     }

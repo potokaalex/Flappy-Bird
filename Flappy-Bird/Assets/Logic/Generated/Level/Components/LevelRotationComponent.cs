@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    public FlappyBird.Ecs.Basic.Transforms.RotationComponent rotation { get { return (FlappyBird.Ecs.Basic.Transforms.RotationComponent)GetComponent(LevelComponentsLookup.Rotation); } }
+    public FlappyBird.Gameplay.Basic.RotationComponent rotation { get { return (FlappyBird.Gameplay.Basic.RotationComponent)GetComponent(LevelComponentsLookup.Rotation); } }
     public bool hasRotation { get { return HasComponent(LevelComponentsLookup.Rotation); } }
 
     public void AddRotation(float newValue) {
         var index = LevelComponentsLookup.Rotation;
-        var component = (FlappyBird.Ecs.Basic.Transforms.RotationComponent)CreateComponent(index, typeof(FlappyBird.Ecs.Basic.Transforms.RotationComponent));
+        var component = (FlappyBird.Gameplay.Basic.RotationComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Basic.RotationComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceRotation(float newValue) {
         var index = LevelComponentsLookup.Rotation;
-        var component = (FlappyBird.Ecs.Basic.Transforms.RotationComponent)CreateComponent(index, typeof(FlappyBird.Ecs.Basic.Transforms.RotationComponent));
+        var component = (FlappyBird.Gameplay.Basic.RotationComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Basic.RotationComponent));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }

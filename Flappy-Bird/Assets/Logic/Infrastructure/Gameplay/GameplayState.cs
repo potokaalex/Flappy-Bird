@@ -9,12 +9,14 @@
 
         public void Enter()
         {
-            _data.Ecs.GameplaySystems.Initialize();
+            _data.Ecs.InitializeSystems();
+            //start grass anim
         }
 
         public void Exit()
         {
-            _data.Ecs.GameplaySystems.Dispose();
+            _data.Ecs.DisposeSystems();
+            //stop anims
         }
     }
 }

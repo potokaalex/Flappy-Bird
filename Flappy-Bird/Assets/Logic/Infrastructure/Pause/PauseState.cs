@@ -7,10 +7,12 @@ namespace FlappyBird.Infrastructure
         public PauseState(DataProvider data)
             => _data = data;
 
-        public void Enter() 
-            => _data.Ecs.BasicSystems.Dispose();
+        public void Enter()
+        {
+        }
 
-        public void Exit() 
-            => _data.Ecs.BasicSystems.Initialize();
+        public void Exit()
+        {
+        }
     }
 }

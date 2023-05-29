@@ -21,26 +21,25 @@ namespace FlappyBird.Infrastructure
             _gameLoop = gameLoop;
             _data = dataProvider;
 
-            Initialize(); //
+            Initialize(); //move to start in bootstrap scene.
         }
 
         private void Initialize()
         {
             InitializeData();
             InitializeStateMachine();
-            _data.Ecs.BasicSystems.Initialize();
         }
 
         private void InitializeStateMachine()
         {
             _stateMachine.Initialize(
                 _stateFactory.Create<GameplayState>(),
-                _stateFactory.Create<LoadingState>(),
-                _stateFactory.Create<DefeatState>(),
+                _stateFactory.Create<SceneLoadingState>(),
+                _stateFactory.Create<GameOverState>(),
                 _stateFactory.Create<PauseState>());
         }
 
-        private void InitializeData()//
+        private void InitializeData()
         {
             _data.Initialize(_dataProviderConfiguration);
 

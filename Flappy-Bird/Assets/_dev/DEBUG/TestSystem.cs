@@ -6,20 +6,16 @@ using FlappyBird;
 public class TestSystem : IExecuteSystem
 {
     private readonly Contexts _contexts;
-    //private readonly DataProvider _data;
+    private readonly DataProvider _data;
 
-    public TestSystem(Contexts contexts, DataProvider data)
+    public TestSystem(Contexts contexts, DataProvider data,
+        IStateMachine stateMachine, IGameLoop gameLoop)
     {
         _contexts = contexts;
-        //_data = data;
-
-        data.PlayerProgress.Score.OnCurrentScoreChanged += DisplayScore;
+        _data = data;
     }
 
     public void Execute()
     {
     }
-
-    private void DisplayScore(float score)
-        => Debug.Log(score);
 }

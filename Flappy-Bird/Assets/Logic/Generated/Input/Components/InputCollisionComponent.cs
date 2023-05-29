@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    public FlappyBird.Ecs.Basic.Collision.CollisionComponent collision { get { return (FlappyBird.Ecs.Basic.Collision.CollisionComponent)GetComponent(InputComponentsLookup.Collision); } }
+    public FlappyBird.Gameplay.Basic.CollisionComponent collision { get { return (FlappyBird.Gameplay.Basic.CollisionComponent)GetComponent(InputComponentsLookup.Collision); } }
     public bool hasCollision { get { return HasComponent(InputComponentsLookup.Collision); } }
 
     public void AddCollision(UnityEngine.Collision2D newInfo) {
         var index = InputComponentsLookup.Collision;
-        var component = (FlappyBird.Ecs.Basic.Collision.CollisionComponent)CreateComponent(index, typeof(FlappyBird.Ecs.Basic.Collision.CollisionComponent));
+        var component = (FlappyBird.Gameplay.Basic.CollisionComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Basic.CollisionComponent));
         component.Info = newInfo;
         AddComponent(index, component);
     }
 
     public void ReplaceCollision(UnityEngine.Collision2D newInfo) {
         var index = InputComponentsLookup.Collision;
-        var component = (FlappyBird.Ecs.Basic.Collision.CollisionComponent)CreateComponent(index, typeof(FlappyBird.Ecs.Basic.Collision.CollisionComponent));
+        var component = (FlappyBird.Gameplay.Basic.CollisionComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Basic.CollisionComponent));
         component.Info = newInfo;
         ReplaceComponent(index, component);
     }

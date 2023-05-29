@@ -11,6 +11,6 @@ namespace FlappyBird
         public PipesConfiguration PipesConfiguration;
         public SceneLoadingConfiguration LevelLoadingConfig;
         public PlayerProgress PlayerProgress;
-        public EcsBase Ecs;
+        public GameplayEcs Ecs;
     }
 }
