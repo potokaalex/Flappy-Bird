@@ -1,16 +1,17 @@
 ﻿using Entitas;
 
-namespace FlappyBird.Ecs.Gameplay.Bird
+namespace FlappyBird.Gameplay.Bird
 {
     public class RotationSystem : IExecuteSystem
     {
-        private readonly LevelContext _context;
         private readonly IGroup<LevelEntity> _birdEntities;
+        private readonly InputContext _inputContext;
 
-        public RotationSystem(LevelContext context)
+        public RotationSystem(LevelContext levelContext, InputContext inputContext)
         {
-            _context = context;
-            _birdEntities = context.GetGroup(LevelMatcher.Bird);
+            _inputContext = inputContext;
+
+            _birdEntities = levelContext.GetGroup(LevelMatcher.Bird);
         }
 
         public void Execute()
@@ -22,15 +23,15 @@ namespace FlappyBird.Ecs.Gameplay.Bird
         private void Rotate(LevelEntity bird)
         {
             if (IsFly(bird))
-                bird.rotationVelocity.Value = _context.birdData.ClockwiseAngularVelocity;
+                bird.rotationVelocity.Value = _inputContext.birdData.ClockwiseAngularVelocity;
             else if (IsFall(bird))
-                bird.rotationVelocity.Value = _context.birdData.CounterClockwiseAngularVelocity;
+                bird.rotationVelocity.Value = _inputContext.birdData.CounterClockwiseAngularVelocity;
         }
 
         private bool IsFly(LevelEntity bird)
-            => bird.velocity.Value.y > _context.birdData.VelocityToFlyRotation;
+            => bird.velocity.Value.y > _inputContext.birdData.VelocityToFlyRotation;
 
         private bool IsFall(LevelEntity bird)
-            => bird.velocity.Value.y < _context.birdData.VelocityToFallRotation;
+            => bird.velocity.Value.y < _inputContext.birdData.VelocityToFallRotation;
     }
 }

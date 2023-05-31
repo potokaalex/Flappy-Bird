@@ -8,30 +8,36 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int GameOver = 0;
-    public const int ScoreAdd = 1;
-    public const int FlyUp = 2;
-    public const int Collision = 3;
-    public const int Event = 4;
-    public const int Time = 5;
+    public const int Collision = 0;
+    public const int Event = 1;
+    public const int GameOver = 2;
+    public const int GameOverState = 3;
+    public const int Time = 4;
+    public const int BirdData = 5;
+    public const int FlyUp = 6;
+    public const int PipesData = 7;
 
-    public const int TotalComponents = 6;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
-        "GameOver",
-        "ScoreAdd",
-        "FlyUp",
         "Collision",
         "Event",
-        "Time"
+        "GameOver",
+        "GameOverState",
+        "Time",
+        "BirdData",
+        "FlyUp",
+        "PipesData"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(FlappyBird.Ecs.Basic.GameOver.GameOverComponent),
-        typeof(FlappyBird.Ecs.Basic.GameOver.ScoreAddComponent),
-        typeof(FlappyBird.Ecs.Gameplay.Bird.FlyUpComponent),
         typeof(FlappyBird.Gameplay.Basic.CollisionComponent),
         typeof(FlappyBird.Gameplay.Basic.EventComponent),
-        typeof(FlappyBird.Gameplay.Basic.TimeComponent)
+        typeof(FlappyBird.Gameplay.Basic.GameOverComponent),
+        typeof(FlappyBird.Gameplay.Basic.GameOverStateComponent),
+        typeof(FlappyBird.Gameplay.Basic.TimeComponent),
+        typeof(FlappyBird.Gameplay.Bird.BirdDataComponent),
+        typeof(FlappyBird.Gameplay.Bird.FlyUpComponent),
+        typeof(FlappyBird.Gameplay.Pipes.PipesDataComponent)
     };
 }

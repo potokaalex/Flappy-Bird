@@ -2,9 +2,9 @@
 using UnityEngine.InputSystem;
 using Entitas;
 
-namespace FlappyBird.Ecs.Gameplay.Bird
+namespace FlappyBird.Gameplay.Bird
 {
-    [Level, Unique]
+    [Input, Unique]
     public class BirdDataComponent : IComponent
     {
         public InputAction FlyUpAction;

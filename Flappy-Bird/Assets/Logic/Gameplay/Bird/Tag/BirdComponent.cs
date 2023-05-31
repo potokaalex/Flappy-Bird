@@ -1,7 +1,7 @@
 using Entitas.CodeGeneration.Attributes;
 using Entitas;
 
-namespace FlappyBird.Ecs.Gameplay.Bird
+namespace FlappyBird.Gameplay.Bird
 {
     [Level, Unique]
     public class BirdComponent : IComponent

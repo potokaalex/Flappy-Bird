@@ -2,13 +2,14 @@ namespace FlappyBird.Infrastructure
 {
     public class PauseState : IState
     {
-        private readonly DataProvider _data;
+        private readonly GameplayEcs _ecs;
 
-        public PauseState(DataProvider data)
-            => _data = data;
+        public PauseState(GameplayEcs ecs)
+            => _ecs = ecs;
 
         public void Enter()
         {
+            _ecs.StopSystems();
         }
 
         public void Exit()

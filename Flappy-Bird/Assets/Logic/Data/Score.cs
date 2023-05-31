@@ -9,6 +9,11 @@ namespace FlappyBird
         private float _currentScore;
         //private float _maxScore;
 
+        public void Initialize()
+        {
+            _currentScore = 0;
+        }
+        
         public void IncreaseScore()
         {
             _currentScore += 1;

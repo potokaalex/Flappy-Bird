@@ -1,5 +1,5 @@
-using FlappyBird.Ecs.Gameplay.Bird;
-using FlappyBird.Ecs.Gameplay.Pipes;
+using FlappyBird.Gameplay.Pipes;
+using FlappyBird.Gameplay.Bird;
 using System;
 
 namespace FlappyBird

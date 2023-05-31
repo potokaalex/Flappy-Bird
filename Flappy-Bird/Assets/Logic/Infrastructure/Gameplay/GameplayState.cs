@@ -19,7 +19,7 @@
 
         public void Exit()
         {
-            _ecs.StopSystems();
+            //_ecs.StopSystems();
             //stop anims
         }
     }

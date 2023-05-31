@@ -1,6 +1,6 @@
 using Entitas;
 
-namespace FlappyBird.Ecs.Gameplay.Pipes
+namespace FlappyBird.Gameplay.Pipes
 {
     public class RemoveSystem : IExecuteSystem
     {

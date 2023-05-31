@@ -8,29 +8,23 @@
 //------------------------------------------------------------------------------
 public static class LevelComponentsLookup {
 
-    public const int Bird = 0;
-    public const int BirdData = 1;
-    public const int Lifetime = 2;
-    public const int PipesData = 3;
-    public const int RotationVelocity = 4;
-    public const int Active = 5;
-    public const int Gravity = 6;
-    public const int LinkToGameObject = 7;
-    public const int PositionClamp = 8;
-    public const int Position = 9;
-    public const int RotationClamp = 10;
-    public const int Rotation = 11;
-    public const int VelocityClamp = 12;
-    public const int Velocity = 13;
-    public const int Pipes = 14;
+    public const int RotationVelocity = 0;
+    public const int Active = 1;
+    public const int Gravity = 2;
+    public const int LinkToGameObject = 3;
+    public const int PositionClamp = 4;
+    public const int Position = 5;
+    public const int RotationClamp = 6;
+    public const int Rotation = 7;
+    public const int VelocityClamp = 8;
+    public const int Velocity = 9;
+    public const int Bird = 10;
+    public const int Lifetime = 11;
+    public const int Pipes = 12;
 
-    public const int TotalComponents = 15;
+    public const int TotalComponents = 13;
 
     public static readonly string[] componentNames = {
-        "Bird",
-        "BirdData",
-        "Lifetime",
-        "PipesData",
         "RotationVelocity",
         "Active",
         "Gravity",
@@ -41,14 +35,12 @@ public static class LevelComponentsLookup {
         "Rotation",
         "VelocityClamp",
         "Velocity",
+        "Bird",
+        "Lifetime",
         "Pipes"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(FlappyBird.Ecs.Gameplay.Bird.BirdComponent),
-        typeof(FlappyBird.Ecs.Gameplay.Bird.BirdDataComponent),
-        typeof(FlappyBird.Ecs.Gameplay.Pipes.LifetimeComponent),
-        typeof(FlappyBird.Ecs.Gameplay.Pipes.PipesDataComponent),
         typeof(FlappyBird.Ecs.Gameplay.RotationVelocityComponent),
         typeof(FlappyBird.Gameplay.Basic.ActiveComponent),
         typeof(FlappyBird.Gameplay.Basic.GravityComponent),
@@ -59,6 +51,8 @@ public static class LevelComponentsLookup {
         typeof(FlappyBird.Gameplay.Basic.RotationComponent),
         typeof(FlappyBird.Gameplay.Basic.VelocityClampComponent),
         typeof(FlappyBird.Gameplay.Basic.VelocityComponent),
+        typeof(FlappyBird.Gameplay.Bird.BirdComponent),
+        typeof(FlappyBird.Gameplay.Pipes.LifetimeComponent),
         typeof(FlappyBird.Gameplay.Pipes.PipesComponent)
     };
 }

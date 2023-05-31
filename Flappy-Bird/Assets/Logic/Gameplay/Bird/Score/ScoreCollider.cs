@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlappyBird.Gameplay.Bird
 {
-    public class BirdCollider : MonoBehaviour
+    public class ScoreCollider : MonoBehaviour
     {
     }
 }

@@ -1,17 +1,17 @@
 using Entitas.Unity;
 using Entitas;
 
-namespace FlappyBird.Ecs.Gameplay.Pipes
+namespace FlappyBird.Gameplay.Pipes
 {
     public class PipesSystems : Feature
     {
         private readonly Contexts _contexts;
 
-        public PipesSystems(Contexts contexts, PipesConfiguration pipesConfig)
+        public PipesSystems(Contexts contexts, PlayerProgress progress, PipesConfiguration pipesConfig)
         {
             _contexts = contexts;
 
-            CreateEntities(contexts, pipesConfig);
+            CreateEntities(contexts, progress, pipesConfig);
             CreateSystems(contexts);
         }
 
@@ -23,7 +23,7 @@ namespace FlappyBird.Ecs.Gameplay.Pipes
 
         private void RemoveEntities()
         {
-            _contexts.level.RemovePipesData();
+            _contexts.input.RemovePipesData();
 
             foreach (var pipes in _contexts.level.GetEntities(LevelMatcher.Pipes))
             {
@@ -32,16 +32,17 @@ namespace FlappyBird.Ecs.Gameplay.Pipes
             }
         }
 
-        private void CreateEntities(Contexts contexts, PipesConfiguration pipesConfig)
+        private void CreateEntities(Contexts contexts, PlayerProgress progress, PipesConfiguration pipesConfig)
         {
-            var pipesFactory = new PipesFactory(contexts.level, pipesConfig);
+            var pipesFactory = new PipesFactory(contexts.level, progress, pipesConfig);
 
-            contexts.level.SetPipesData(pipesFactory, pipesConfig.SpawnDelay,
+            contexts.input.SetPipesData(pipesFactory, pipesConfig.SpawnDelay,
                 pipesConfig.SpawnRate, pipesConfig.RemoveRate);
         }
 
         private void CreateSystems(Contexts contexts)
         {
+            base.Add(new GameOverSystem(contexts.level, contexts.input));
             base.Add(new RemoveSystem(contexts.level, contexts.input));
             base.Add(new SpawnSystem(contexts.level, contexts.input));
         }

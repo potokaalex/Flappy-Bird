@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using Entitas;
 
-namespace FlappyBird.Ecs.Gameplay.Bird
+namespace FlappyBird.Gameplay.Bird
 {
     public class FlyUpSystem : ReactiveSystem<InputEntity>
     {
-        private readonly LevelContext _levelContext;
+        private readonly InputContext _inputContext;
         private readonly IGroup<LevelEntity> _birdEntities;
 
         public FlyUpSystem(LevelContext levelContext, InputContext inputContext)
             : base(inputContext)
         {
-            _levelContext = levelContext;
+            _inputContext = inputContext;
             _birdEntities = levelContext.GetGroup(LevelMatcher.Bird);
         }
 
@@ -28,6 +28,6 @@ namespace FlappyBird.Ecs.Gameplay.Bird
         }
 
         private void SetVelocity(LevelEntity entity)
-            => entity.velocity.Value = new(0, _levelContext.birdData.FlyUpVelocity);
+            => entity.velocity.Value = new(0, _inputContext.birdData.FlyUpVelocity);
     }
 }

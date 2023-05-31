@@ -6,15 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class LevelContext {
+public partial class InputContext {
 
-    public LevelEntity pipesDataEntity { get { return GetGroup(LevelMatcher.PipesData).GetSingleEntity(); } }
-    public FlappyBird.Ecs.Gameplay.Pipes.PipesDataComponent pipesData { get { return pipesDataEntity.pipesData; } }
+    public InputEntity pipesDataEntity { get { return GetGroup(InputMatcher.PipesData).GetSingleEntity(); } }
+    public FlappyBird.Gameplay.Pipes.PipesDataComponent pipesData { get { return pipesDataEntity.pipesData; } }
     public bool hasPipesData { get { return pipesDataEntity != null; } }
 
-    public LevelEntity SetPipesData(FlappyBird.Ecs.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
+    public InputEntity SetPipesData(FlappyBird.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
         if (hasPipesData) {
-            throw new Entitas.EntitasException("Could not set PipesData!\n" + this + " already has an entity with FlappyBird.Ecs.Gameplay.Pipes.PipesDataComponent!",
+            throw new Entitas.EntitasException("Could not set PipesData!\n" + this + " already has an entity with FlappyBird.Gameplay.Pipes.PipesDataComponent!",
                 "You should check if the context already has a pipesDataEntity before setting it or use context.ReplacePipesData().");
         }
         var entity = CreateEntity();
@@ -22,7 +22,7 @@ public partial class LevelContext {
         return entity;
     }
 
-    public void ReplacePipesData(FlappyBird.Ecs.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
+    public void ReplacePipesData(FlappyBird.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
         var entity = pipesDataEntity;
         if (entity == null) {
             entity = SetPipesData(newFactory, newTimeToSpawn, newSpawnRate, newRemoveRate);
@@ -44,14 +44,14 @@ public partial class LevelContext {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class LevelEntity {
+public partial class InputEntity {
 
-    public FlappyBird.Ecs.Gameplay.Pipes.PipesDataComponent pipesData { get { return (FlappyBird.Ecs.Gameplay.Pipes.PipesDataComponent)GetComponent(LevelComponentsLookup.PipesData); } }
-    public bool hasPipesData { get { return HasComponent(LevelComponentsLookup.PipesData); } }
+    public FlappyBird.Gameplay.Pipes.PipesDataComponent pipesData { get { return (FlappyBird.Gameplay.Pipes.PipesDataComponent)GetComponent(InputComponentsLookup.PipesData); } }
+    public bool hasPipesData { get { return HasComponent(InputComponentsLookup.PipesData); } }
 
-    public void AddPipesData(FlappyBird.Ecs.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
-        var index = LevelComponentsLookup.PipesData;
-        var component = (FlappyBird.Ecs.Gameplay.Pipes.PipesDataComponent)CreateComponent(index, typeof(FlappyBird.Ecs.Gameplay.Pipes.PipesDataComponent));
+    public void AddPipesData(FlappyBird.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
+        var index = InputComponentsLookup.PipesData;
+        var component = (FlappyBird.Gameplay.Pipes.PipesDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Pipes.PipesDataComponent));
         component.Factory = newFactory;
         component.TimeToSpawn = newTimeToSpawn;
         component.SpawnRate = newSpawnRate;
@@ -59,9 +59,9 @@ public partial class LevelEntity {
         AddComponent(index, component);
     }
 
-    public void ReplacePipesData(FlappyBird.Ecs.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
-        var index = LevelComponentsLookup.PipesData;
-        var component = (FlappyBird.Ecs.Gameplay.Pipes.PipesDataComponent)CreateComponent(index, typeof(FlappyBird.Ecs.Gameplay.Pipes.PipesDataComponent));
+    public void ReplacePipesData(FlappyBird.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
+        var index = InputComponentsLookup.PipesData;
+        var component = (FlappyBird.Gameplay.Pipes.PipesDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Pipes.PipesDataComponent));
         component.Factory = newFactory;
         component.TimeToSpawn = newTimeToSpawn;
         component.SpawnRate = newSpawnRate;
@@ -70,7 +70,7 @@ public partial class LevelEntity {
     }
 
     public void RemovePipesData() {
-        RemoveComponent(LevelComponentsLookup.PipesData);
+        RemoveComponent(InputComponentsLookup.PipesData);
     }
 }
 
@@ -82,15 +82,15 @@ public partial class LevelEntity {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class LevelMatcher {
+public sealed partial class InputMatcher {
 
-    static Entitas.IMatcher<LevelEntity> _matcherPipesData;
+    static Entitas.IMatcher<InputEntity> _matcherPipesData;
 
-    public static Entitas.IMatcher<LevelEntity> PipesData {
+    public static Entitas.IMatcher<InputEntity> PipesData {
         get {
             if (_matcherPipesData == null) {
-                var matcher = (Entitas.Matcher<LevelEntity>)Entitas.Matcher<LevelEntity>.AllOf(LevelComponentsLookup.PipesData);
-                matcher.componentNames = LevelComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.PipesData);
+                matcher.componentNames = InputComponentsLookup.componentNames;
                 _matcherPipesData = matcher;
             }
 

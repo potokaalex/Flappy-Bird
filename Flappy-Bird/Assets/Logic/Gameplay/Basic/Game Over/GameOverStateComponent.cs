@@ -1,10 +1,10 @@
 ﻿using Entitas.CodeGeneration.Attributes;
 using Entitas;
 
-namespace FlappyBird.Ecs.Basic.GameOver
+namespace FlappyBird.Gameplay.Basic
 {
     [Input, Unique]
-    public class GameOverComponent : IComponent
+    public class GameOverStateComponent : IComponent
     {
     }
 }

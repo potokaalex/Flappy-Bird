@@ -1,9 +1,9 @@
 using Entitas.CodeGeneration.Attributes;
 using Entitas;
 
-namespace FlappyBird.Ecs.Gameplay.Pipes
+namespace FlappyBird.Gameplay.Pipes
 {
-    [Level, Unique]
+    [Input, Unique]
     public class PipesDataComponent : IComponent
     {
         public PipesFactory Factory;

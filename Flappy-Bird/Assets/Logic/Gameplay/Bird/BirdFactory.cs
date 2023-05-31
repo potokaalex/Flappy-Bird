@@ -1,63 +1,68 @@
-using Entitas.Unity;
 using FlappyBird.Gameplay.Basic;
+using Entitas.Unity;
 using UnityEngine;
 
-namespace FlappyBird.Ecs.Gameplay.Bird
+namespace FlappyBird.Gameplay.Bird
 {
     public class BirdFactory
     {
         private readonly LevelContext _levelContext;
         private readonly InputContext _inputContext;
         private readonly BirdConfiguration _config;
-        private readonly Vector2 _spawnPoint;
+        private readonly PlayerProgress _progress;
 
         public BirdFactory(LevelContext levelContext, InputContext inputContext,
-            BirdConfiguration config, Vector2 spawnPoint)
+            PlayerProgress progress, BirdConfiguration config)
         {
             _levelContext = levelContext;
             _inputContext = inputContext;
+            _progress = progress;
             _config = config;
-            _spawnPoint = spawnPoint;
         }
 
         public void Create()
         {
-            var bird = CreateBird();
+            var entity = _levelContext.CreateEntity();
+            var gameObject = CreateBirdGameObject(entity);
 
-            AddComponents(bird.Item2);
-            InitializeCollisionSender(bird.Item1);
+            AddComponents(entity, gameObject);
+            InitializeCollisionSender(gameObject);
         }
 
-        private (GameObject, LevelEntity) CreateBird()
+
+        private GameObject CreateBirdGameObject(LevelEntity entity)
         {
-            var entity = _levelContext.CreateEntity();
-            var gameObject = Object.Instantiate(_config.Prefab,
-                _spawnPoint, Quaternion.identity);
+            var gameObject = Object.Instantiate(_progress.BirdPrefab,
+                _progress.BirdSpawnPoint, Quaternion.identity);
 
             gameObject.Link(entity);
-            entity.AddLinkToGameObject(gameObject);
-            entity.isBird = true;
 
-            return (gameObject, entity);
+            return gameObject;
         }
 
-        private void AddComponents(LevelEntity bird)
+        private void AddComponents(LevelEntity entity, GameObject gameObject)
         {
-            bird.AddVelocity(Vector2.zero);
-            bird.AddVelocityClamp(
+            //
+            entity.AddRotationVelocity(0);
+            entity.AddRotationClamp(_config.MinAngle, _config.MaxAngle);
+            //
+
+            entity.AddRotation(0);
+            entity.AddPositionClamp(
+                new(float.MinValue, _config.MinPositionY),
+                new(float.MaxValue, _config.MaxPositionY));
+
+            entity.AddPosition(_progress.BirdSpawnPoint);
+
+            entity.AddVelocity(Vector2.zero);
+            entity.AddVelocityClamp(
                 new(float.MinValue, _config.MinVelocity),
                 new(float.MaxValue, _config.MaxVelocity));
 
-            //bird.AddVerticalVelocity(0);
-            //bird.AddVerticalVelocityClamp(
-            //    _config.MinVelocity, _config.MaxVelocity);
+            entity.AddGravity(_config.GravityAcceleration);
 
-            bird.AddRotation(0);
-            bird.AddRotationVelocity(0);
-            bird.AddRotationClamp(_config.MinAngle, _config.MaxAngle);
-
-            bird.AddGravity(_config.GravityAcceleration);
-            bird.AddPosition(_spawnPoint);
+            entity.AddLinkToGameObject(gameObject);
+            entity.isBird = true;
         }
 
         private void InitializeCollisionSender(GameObject bird)

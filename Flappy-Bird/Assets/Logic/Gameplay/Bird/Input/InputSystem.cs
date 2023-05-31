@@ -1,7 +1,7 @@
 ﻿using UnityEngine.EventSystems;
 using Entitas;
 
-namespace FlappyBird.Ecs.Gameplay.Bird
+namespace FlappyBird.Gameplay.Bird
 {
     public class InputSystem : IExecuteSystem
     {
@@ -16,10 +16,7 @@ namespace FlappyBird.Ecs.Gameplay.Bird
 
         public void Execute()
         {
-            if (_inputContext.isGameOver)
-                return;
-
-            if (_levelContext.birdData.FlyUpAction.WasPressedThisFrame() &&
+            if (_inputContext.birdData.FlyUpAction.WasPressedThisFrame() &&
                 EventSystem.current.IsPointerOverGameObject() == false)
                 SendFlyUpEvent();
         }

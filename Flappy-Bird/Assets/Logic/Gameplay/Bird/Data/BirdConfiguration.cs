@@ -1,13 +1,10 @@
-﻿using UnityEngine.InputSystem;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace FlappyBird.Ecs.Gameplay.Bird
+namespace FlappyBird.Gameplay.Bird
 {
     [CreateAssetMenu(fileName = "New Bird Configuration", menuName = "Configurations/Bird")]
     public class BirdConfiguration : ScriptableObject
     {
-        [SerializeField] private GameObject _prefab;
-        [SerializeField] private InputAction _flyUpAction;
         [SerializeField] private float _gravityAcceleration;
         [SerializeField] private float _flyUpVelocity;
         [SerializeField] private float _clockwiseAngularVelocity;
@@ -20,11 +17,10 @@ namespace FlappyBird.Ecs.Gameplay.Bird
         //
         public float VelocityToFlyRotation;
         public float VelocityToFallRotation;
+
+        public float MinPositionY;
+        public float MaxPositionY;
         //
-
-        public GameObject Prefab => _prefab;
-
-        public InputAction FlyUpAction => _flyUpAction;
 
         public float GravityAcceleration => _gravityAcceleration;
 

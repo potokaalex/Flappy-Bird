@@ -1,19 +1,18 @@
-﻿using FlappyBird.Ecs.Basic.Score;
-using Entitas.Unity;
+﻿using Entitas.Unity;
 using Entitas;
 
-namespace FlappyBird.Ecs.Gameplay.Bird
+namespace FlappyBird.Gameplay.Bird
 {
     public class BirdSystems : Feature
     {
         private readonly Contexts _contexts;
 
-        public BirdSystems(Contexts contexts, DataProvider data, BirdConfiguration birdConfig)
+        public BirdSystems(Contexts contexts, PlayerProgress progress, BirdConfiguration birdConfig)
         {
             _contexts = contexts;
 
-            CreateEntities(contexts, data, birdConfig);
-            CreateSystems(contexts, data);
+            CreateEntities(contexts, progress, birdConfig);
+            CreateSystems(contexts, progress);
         }
 
         public override void Cleanup()
@@ -22,23 +21,27 @@ namespace FlappyBird.Ecs.Gameplay.Bird
             RemoveEntities();
         }
 
-        private void CreateEntities(Contexts contexts, DataProvider data, BirdConfiguration birdConfig)
+        private void CreateEntities(Contexts contexts, PlayerProgress progress, BirdConfiguration birdConfig)
         {
-            contexts.level.SetBirdData(
-                birdConfig.FlyUpAction,
+            contexts.input.SetBirdData(
+                progress.BirdFlyUpAction,
                 birdConfig.FlyUpVelocity,
                 birdConfig.ClockwiseAngularVelocity,
                 birdConfig.CounterClockwiseAngularVelocity,
                 birdConfig.VelocityToFlyRotation,
                 birdConfig.VelocityToFallRotation);
 
-            new BirdFactory(contexts.level, contexts.input, birdConfig,
-                data.PlayerProgress.BirdSpawnPoint).Create();
+            new BirdFactory(contexts.level, contexts.input, progress,
+                birdConfig).Create();
+
+            contexts.input.birdData.FlyUpAction.Enable();
         }
 
         private void RemoveEntities()
         {
-            _contexts.level.RemoveBirdData();
+            _contexts.input.birdData.FlyUpAction.Disable();
+
+            _contexts.input.RemoveBirdData();
 
             foreach (var bird in _contexts.level.GetEntities(LevelMatcher.Bird))
             {
@@ -47,16 +50,13 @@ namespace FlappyBird.Ecs.Gameplay.Bird
             }
         }
 
-        private void CreateSystems(Contexts contexts, DataProvider data)
+        private void CreateSystems(Contexts contexts, PlayerProgress progress)
         {
-            base.Add(new InitializationSystem(contexts.level));
+            base.Add(new DeathSystem(contexts.input));
             base.Add(new InputSystem(contexts.level, contexts.input));
             base.Add(new FlyUpSystem(contexts.level, contexts.input));
-            base.Add(new RotationSystem(contexts.level));
-            base.Add(new CollisionSystem(contexts.input));
-            //base.Add(new GameOverSystem(contexts.level,contexts.input, this))
-            base.Add(new ScoreSystem(contexts.input, data.PlayerProgress.Score));
-            base.Add(new CleanupSystem(contexts.level));
+            base.Add(new RotationSystem(contexts.level, contexts.input));
+            base.Add(new ScoreSystem(contexts.input, progress.Score));
         }
     }
 }

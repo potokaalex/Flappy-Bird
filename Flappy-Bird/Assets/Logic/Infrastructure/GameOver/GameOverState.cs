@@ -17,16 +17,15 @@ namespace FlappyBird.Infrastructure
 
         public void Enter()
         {
-            //_data.GameOverStateConfiguration.GameplayUI.Hide();
-            //_data.GameOverStateConfiguration.GameOverUI.Show();
-
-            _ecs.Dispose();
+            var config = _data.PlayerProgress.GameOverStateConfiguration;
+            
+            config.GameplayUI.Hide();
+            config.GameOverUI.Show();
         }
 
         public void Exit()
         {
-            //_data.Ecs.DefeatSystems.Dispose();
-            //_data.Ecs.DestroyEntities();
+            _ecs.Dispose();
         }
     }
 }

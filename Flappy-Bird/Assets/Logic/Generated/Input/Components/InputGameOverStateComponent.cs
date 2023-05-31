@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 public partial class InputContext {
 
-    public InputEntity scoreAddEntity { get { return GetGroup(InputMatcher.ScoreAdd).GetSingleEntity(); } }
+    public InputEntity gameOverStateEntity { get { return GetGroup(InputMatcher.GameOverState).GetSingleEntity(); } }
 
-    public bool isScoreAdd {
-        get { return scoreAddEntity != null; }
+    public bool isGameOverState {
+        get { return gameOverStateEntity != null; }
         set {
-            var entity = scoreAddEntity;
+            var entity = gameOverStateEntity;
             if (value != (entity != null)) {
                 if (value) {
-                    CreateEntity().isScoreAdd = true;
+                    CreateEntity().isGameOverState = true;
                 } else {
                     entity.Destroy();
                 }
@@ -35,18 +35,18 @@ public partial class InputContext {
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    static readonly FlappyBird.Ecs.Basic.GameOver.ScoreAddComponent scoreAddComponent = new FlappyBird.Ecs.Basic.GameOver.ScoreAddComponent();
+    static readonly FlappyBird.Gameplay.Basic.GameOverStateComponent gameOverStateComponent = new FlappyBird.Gameplay.Basic.GameOverStateComponent();
 
-    public bool isScoreAdd {
-        get { return HasComponent(InputComponentsLookup.ScoreAdd); }
+    public bool isGameOverState {
+        get { return HasComponent(InputComponentsLookup.GameOverState); }
         set {
-            if (value != isScoreAdd) {
-                var index = InputComponentsLookup.ScoreAdd;
+            if (value != isGameOverState) {
+                var index = InputComponentsLookup.GameOverState;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : scoreAddComponent;
+                            : gameOverStateComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -67,17 +67,17 @@ public partial class InputEntity {
 //------------------------------------------------------------------------------
 public sealed partial class InputMatcher {
 
-    static Entitas.IMatcher<InputEntity> _matcherScoreAdd;
+    static Entitas.IMatcher<InputEntity> _matcherGameOverState;
 
-    public static Entitas.IMatcher<InputEntity> ScoreAdd {
+    public static Entitas.IMatcher<InputEntity> GameOverState {
         get {
-            if (_matcherScoreAdd == null) {
-                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.ScoreAdd);
+            if (_matcherGameOverState == null) {
+                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.GameOverState);
                 matcher.componentNames = InputComponentsLookup.componentNames;
-                _matcherScoreAdd = matcher;
+                _matcherGameOverState = matcher;
             }
 
-            return _matcherScoreAdd;
+            return _matcherGameOverState;
         }
     }
 }
