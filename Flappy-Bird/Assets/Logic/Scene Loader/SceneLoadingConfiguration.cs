@@ -1,12 +1,10 @@
 ﻿using UnityEngine.SceneManagement;
-using UnityEngine;
+using System;
 
 namespace FlappyBird
 {
-    [CreateAssetMenu(
-        fileName = "New Scene Loading Configuration",
-        menuName = "Configurations/Scene Loading")]
-    public class SceneLoadingConfiguration : ScriptableObject, IStateParameter
+    [Serializable]
+    public struct SceneLoadingConfiguration : IStateParameter
     {
         public LoadSceneMode LoadSceneMode;
         public string SceneName;

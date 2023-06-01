@@ -1,5 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
+using Zenject;
 
 namespace FlappyBird.Infrastructure
 {
@@ -8,7 +9,8 @@ namespace FlappyBird.Infrastructure
         [SerializeField] private Text _scoreText;
         private DataProvider _data;
 
-        public void Initialize(DataProvider data)
+        [Inject]
+        private void Constructor(DataProvider data)
         {
             data.PlayerProgress.Score.OnCurrentScoreChanged += UpdateScore;
             

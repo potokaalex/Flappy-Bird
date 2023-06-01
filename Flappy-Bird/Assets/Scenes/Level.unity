@@ -639,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646223ec902e47b09f4af3790191ad36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _retryButton: {fileID: 1715572135}
+  _retryButton: {fileID: 0}
 --- !u!1001 &1126605471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -762,6 +762,7 @@ MonoBehaviour:
   _gameplayEcsConfiguration:
     BirdConfiguration: {fileID: 11400000, guid: aa662a993adc062408a00d075d3b5776, type: 2}
     PipesConfiguration: {fileID: 11400000, guid: ef4d9f5660104a248acafffa5b292ab7, type: 2}
+  PipesSpawnPoint: {fileID: 1269402345}
   BirdPrefab: {fileID: 5582752118161707237, guid: a22b63eef227bf54b83bcdffc264b15b, type: 3}
   PipesPrefab: {fileID: 1163154790420497170, guid: 2cdf8afec1cb7a54daf34e262546a9f7, type: 3}
   BirdFlyUpAction:
@@ -797,7 +798,6 @@ MonoBehaviour:
       m_Action: Bird Fly Up
       m_Flags: 0
     m_Flags: 1
-  PipesSpawnPoint: {fileID: 1269402345}
 --- !u!114 &1200257882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1211,6 +1211,38 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8104292046704052611, guid: 8e6e9cd1292e2ee45927dba8f2bef097, type: 3}
   m_PrefabInstance: {fileID: 1600830689}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1600830691 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8104292048220130704, guid: 8e6e9cd1292e2ee45927dba8f2bef097, type: 3}
+  m_PrefabInstance: {fileID: 1600830689}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1600830692 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8104292046704052610, guid: 8e6e9cd1292e2ee45927dba8f2bef097, type: 3}
+  m_PrefabInstance: {fileID: 1600830689}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1600830693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600830692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7504808aaa4286a4ec9d92bdeac374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectableButton: {fileID: 1600830691}
+  _configuration:
+    LoadSceneMode: 0
+    SceneName: Menu
 --- !u!1 &1641250271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,7 +1396,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8104292046704052611, guid: 8e6e9cd1292e2ee45927dba8f2bef097, type: 3}
   m_PrefabInstance: {fileID: 1715572132}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1715572135
+--- !u!114 &1715572134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1373,10 +1405,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 810808599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cb772fc54e489e9d5bc69a7bf05043, type: 3}
+  m_Script: {fileID: 11500000, guid: ca7504808aaa4286a4ec9d92bdeac374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _selectableButton: {fileID: 1271499718}
+  _configuration:
+    LoadSceneMode: 0
+    SceneName: Level
 --- !u!1 &1731371819
 GameObject:
   m_ObjectHideFlags: 0
