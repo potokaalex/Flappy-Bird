@@ -1,4 +1,4 @@
-﻿namespace FlappyBird
+namespace FlappyBird
 {
     public class SceneLoadingState : IState<SceneLoadingConfiguration>
     {

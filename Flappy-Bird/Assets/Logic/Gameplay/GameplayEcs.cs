@@ -3,7 +3,7 @@ using FlappyBird.Gameplay.Pipes;
 using FlappyBird.Gameplay.Bird;
 using Entitas;
 
-namespace FlappyBird
+namespace FlappyBird.Gameplay
 {
     public class GameplayEcs
     {

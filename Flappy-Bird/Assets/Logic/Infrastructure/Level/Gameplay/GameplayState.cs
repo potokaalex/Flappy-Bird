@@ -1,4 +1,6 @@
-﻿namespace FlappyBird.Infrastructure
+﻿using FlappyBird.Gameplay;
+
+namespace FlappyBird.Infrastructure
 {
     public class GameplayState : IState
     {

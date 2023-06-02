@@ -1,8 +1,8 @@
 using System;
 
-namespace FlappyBird
+namespace FlappyBird.Gameplay.Bird
 {
-    public class Score
+    public class Score//score data?
     {
         public event Action<float> OnCurrentScoreChanged;
 

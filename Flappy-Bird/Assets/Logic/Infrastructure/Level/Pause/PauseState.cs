@@ -1,3 +1,5 @@
+using FlappyBird.Gameplay;
+
 namespace FlappyBird.Infrastructure
 {
     public class PauseState : IState

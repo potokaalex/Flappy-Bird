@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using FlappyBird.Gameplay;
+using Zenject;
 
 namespace FlappyBird.Infrastructure
 {

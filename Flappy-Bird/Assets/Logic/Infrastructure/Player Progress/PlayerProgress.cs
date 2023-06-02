@@ -1,6 +1,7 @@
+using FlappyBird.Gameplay.Bird;
 using FlappyBird.Infrastructure;
-using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine;
 
 namespace FlappyBird
 {
