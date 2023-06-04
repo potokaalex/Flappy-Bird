@@ -25,12 +25,8 @@ namespace FlappyBird.Gameplay.Bird
         {
             contexts.input.SetBirdData(
                 progress.BirdFlyUpAction,
-                birdConfig.FlyUpVelocity,
-                birdConfig.ClockwiseAngularVelocity,
-                birdConfig.CounterClockwiseAngularVelocity,
-                birdConfig.VelocityToFlyRotation,
-                birdConfig.VelocityToFallRotation);
-
+                birdConfig.FlyUpVelocity);
+            
             new BirdFactory(contexts.level, contexts.input, progress,
                 birdConfig).Create();
 
@@ -52,10 +48,10 @@ namespace FlappyBird.Gameplay.Bird
 
         private void CreateSystems(Contexts contexts, PlayerProgress progress)
         {
-            base.Add(new DeathSystem(contexts.input));
+            //base.Add(new DeathSystem(contexts.input));
             base.Add(new InputSystem(contexts.level, contexts.input));
             base.Add(new FlyUpSystem(contexts.level, contexts.input));
-            base.Add(new RotationSystem(contexts.level, contexts.input));
+            base.Add(new AnimationSystem(contexts.level));
             base.Add(new ScoreSystem(contexts.input, progress.Score));
         }
     }

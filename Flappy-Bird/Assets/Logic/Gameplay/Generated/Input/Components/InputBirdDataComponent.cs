@@ -12,22 +12,22 @@ public partial class InputContext {
     public FlappyBird.Gameplay.Bird.BirdDataComponent birdData { get { return birdDataEntity.birdData; } }
     public bool hasBirdData { get { return birdDataEntity != null; } }
 
-    public InputEntity SetBirdData(UnityEngine.InputSystem.InputAction newFlyUpAction, float newFlyUpVelocity, float newClockwiseAngularVelocity, float newCounterClockwiseAngularVelocity, float newVelocityToFlyRotation, float newVelocityToFallRotation) {
+    public InputEntity SetBirdData(UnityEngine.InputSystem.InputAction newFlyUpAction, float newFlyUpVelocity) {
         if (hasBirdData) {
             throw new Entitas.EntitasException("Could not set BirdData!\n" + this + " already has an entity with FlappyBird.Gameplay.Bird.BirdDataComponent!",
                 "You should check if the context already has a birdDataEntity before setting it or use context.ReplaceBirdData().");
         }
         var entity = CreateEntity();
-        entity.AddBirdData(newFlyUpAction, newFlyUpVelocity, newClockwiseAngularVelocity, newCounterClockwiseAngularVelocity, newVelocityToFlyRotation, newVelocityToFallRotation);
+        entity.AddBirdData(newFlyUpAction, newFlyUpVelocity);
         return entity;
     }
 
-    public void ReplaceBirdData(UnityEngine.InputSystem.InputAction newFlyUpAction, float newFlyUpVelocity, float newClockwiseAngularVelocity, float newCounterClockwiseAngularVelocity, float newVelocityToFlyRotation, float newVelocityToFallRotation) {
+    public void ReplaceBirdData(UnityEngine.InputSystem.InputAction newFlyUpAction, float newFlyUpVelocity) {
         var entity = birdDataEntity;
         if (entity == null) {
-            entity = SetBirdData(newFlyUpAction, newFlyUpVelocity, newClockwiseAngularVelocity, newCounterClockwiseAngularVelocity, newVelocityToFlyRotation, newVelocityToFallRotation);
+            entity = SetBirdData(newFlyUpAction, newFlyUpVelocity);
         } else {
-            entity.ReplaceBirdData(newFlyUpAction, newFlyUpVelocity, newClockwiseAngularVelocity, newCounterClockwiseAngularVelocity, newVelocityToFlyRotation, newVelocityToFallRotation);
+            entity.ReplaceBirdData(newFlyUpAction, newFlyUpVelocity);
         }
     }
 
@@ -49,27 +49,19 @@ public partial class InputEntity {
     public FlappyBird.Gameplay.Bird.BirdDataComponent birdData { get { return (FlappyBird.Gameplay.Bird.BirdDataComponent)GetComponent(InputComponentsLookup.BirdData); } }
     public bool hasBirdData { get { return HasComponent(InputComponentsLookup.BirdData); } }
 
-    public void AddBirdData(UnityEngine.InputSystem.InputAction newFlyUpAction, float newFlyUpVelocity, float newClockwiseAngularVelocity, float newCounterClockwiseAngularVelocity, float newVelocityToFlyRotation, float newVelocityToFallRotation) {
+    public void AddBirdData(UnityEngine.InputSystem.InputAction newFlyUpAction, float newFlyUpVelocity) {
         var index = InputComponentsLookup.BirdData;
         var component = (FlappyBird.Gameplay.Bird.BirdDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.BirdDataComponent));
         component.FlyUpAction = newFlyUpAction;
         component.FlyUpVelocity = newFlyUpVelocity;
-        component.ClockwiseAngularVelocity = newClockwiseAngularVelocity;
-        component.CounterClockwiseAngularVelocity = newCounterClockwiseAngularVelocity;
-        component.VelocityToFlyRotation = newVelocityToFlyRotation;
-        component.VelocityToFallRotation = newVelocityToFallRotation;
         AddComponent(index, component);
     }
 
-    public void ReplaceBirdData(UnityEngine.InputSystem.InputAction newFlyUpAction, float newFlyUpVelocity, float newClockwiseAngularVelocity, float newCounterClockwiseAngularVelocity, float newVelocityToFlyRotation, float newVelocityToFallRotation) {
+    public void ReplaceBirdData(UnityEngine.InputSystem.InputAction newFlyUpAction, float newFlyUpVelocity) {
         var index = InputComponentsLookup.BirdData;
         var component = (FlappyBird.Gameplay.Bird.BirdDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.BirdDataComponent));
         component.FlyUpAction = newFlyUpAction;
         component.FlyUpVelocity = newFlyUpVelocity;
-        component.ClockwiseAngularVelocity = newClockwiseAngularVelocity;
-        component.CounterClockwiseAngularVelocity = newCounterClockwiseAngularVelocity;
-        component.VelocityToFlyRotation = newVelocityToFlyRotation;
-        component.VelocityToFallRotation = newVelocityToFallRotation;
         ReplaceComponent(index, component);
     }
 

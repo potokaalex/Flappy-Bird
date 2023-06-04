@@ -18,11 +18,12 @@ public static class LevelComponentsLookup {
     public const int Rotation = 7;
     public const int VelocityClamp = 8;
     public const int Velocity = 9;
-    public const int Bird = 10;
-    public const int Lifetime = 11;
-    public const int Pipes = 12;
+    public const int BirdAnimations = 10;
+    public const int Bird = 11;
+    public const int Lifetime = 12;
+    public const int Pipes = 13;
 
-    public const int TotalComponents = 13;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
         "RotationVelocity",
@@ -35,6 +36,7 @@ public static class LevelComponentsLookup {
         "Rotation",
         "VelocityClamp",
         "Velocity",
+        "BirdAnimations",
         "Bird",
         "Lifetime",
         "Pipes"
@@ -51,6 +53,7 @@ public static class LevelComponentsLookup {
         typeof(FlappyBird.Gameplay.Basic.RotationComponent),
         typeof(FlappyBird.Gameplay.Basic.VelocityClampComponent),
         typeof(FlappyBird.Gameplay.Basic.VelocityComponent),
+        typeof(FlappyBird.Gameplay.Bird.BirdAnimationsComponent),
         typeof(FlappyBird.Gameplay.Bird.BirdComponent),
         typeof(FlappyBird.Gameplay.Pipes.LifetimeComponent),
         typeof(FlappyBird.Gameplay.Pipes.PipesComponent)

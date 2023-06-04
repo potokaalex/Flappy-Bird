@@ -29,7 +29,6 @@ namespace FlappyBird.Gameplay.Bird
             InitializeCollisionSender(gameObject);
         }
 
-
         private GameObject CreateBirdGameObject(LevelEntity entity)
         {
             var gameObject = Object.Instantiate(_progress.BirdPrefab,
@@ -42,12 +41,6 @@ namespace FlappyBird.Gameplay.Bird
 
         private void AddComponents(LevelEntity entity, GameObject gameObject)
         {
-            //
-            entity.AddRotationVelocity(0);
-            entity.AddRotationClamp(_config.MinAngle, _config.MaxAngle);
-            //
-
-            entity.AddRotation(0);
             entity.AddPositionClamp(
                 new(float.MinValue, _config.MinPositionY),
                 new(float.MaxValue, _config.MaxPositionY));
@@ -60,6 +53,9 @@ namespace FlappyBird.Gameplay.Bird
                 new(float.MaxValue, _config.MaxVelocity));
 
             entity.AddGravity(_config.GravityAcceleration);
+            entity.AddBirdAnimations(
+                new(gameObject.GetComponent<Animator>()),
+                _config.VelocityToFallAnimation);
 
             entity.AddLinkToGameObject(gameObject);
             entity.isBird = true;

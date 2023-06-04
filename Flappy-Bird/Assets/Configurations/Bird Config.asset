@@ -14,13 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gravityAcceleration: -20
   _flyUpVelocity: 5.3
-  _clockwiseAngularVelocity: 1000
-  _counterClockwiseAngularVelocity: -600
   _minVelocity: -20
   _maxVelocity: 20
   _minAngle: -90
   _maxAngle: 20
-  VelocityToFlyRotation: 0
-  VelocityToFallRotation: -3.3
+  VelocityToFallAnimation: -3.3
   MinPositionY: -2.7
   MaxPositionY: 6

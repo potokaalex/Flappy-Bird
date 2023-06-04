@@ -47,7 +47,7 @@ namespace FlappyBird.Gameplay
             var systems = new Systems();
 
             systems.Add(new BirdSystems(_contexts, _data.PlayerProgress, gameplayConfig.BirdConfiguration));
-            systems.Add(new PipesSystems(_contexts, _data.PlayerProgress, gameplayConfig.PipesConfiguration));
+            //systems.Add(new PipesSystems(_contexts, _data.PlayerProgress, gameplayConfig.PipesConfiguration));
             systems.Add(new DevSystems(_contexts, _data, _stateMachine, _gameLoop));
             systems.Add(new BasicSystems(_contexts, _stateMachine, _gameLoop));
 

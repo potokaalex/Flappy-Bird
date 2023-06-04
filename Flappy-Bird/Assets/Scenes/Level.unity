@@ -639,7 +639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646223ec902e47b09f4af3790191ad36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _retryButton: {fileID: 0}
 --- !u!1001 &1126605471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1087,8 +1086,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7594841150e594593da8b9e9dfb7b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pauseToggle: {fileID: 469662780}
-  _scoreUI: {fileID: 154616095}
 --- !u!1001 &1600830689
 PrefabInstance:
   m_ObjectHideFlags: 0
