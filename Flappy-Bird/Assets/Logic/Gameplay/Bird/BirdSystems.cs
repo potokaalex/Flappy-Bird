@@ -48,10 +48,10 @@ namespace FlappyBird.Gameplay.Bird
 
         private void CreateSystems(Contexts contexts, PlayerProgress progress)
         {
-            //base.Add(new DeathSystem(contexts.input));
-            base.Add(new InputSystem(contexts.level, contexts.input));
+            base.Add(new DeathSystem(contexts.input));
+            base.Add(new InputSystem(contexts.input));
             base.Add(new FlyUpSystem(contexts.level, contexts.input));
-            base.Add(new AnimationSystem(contexts.level));
+            base.Add(new AnimationSystem(contexts.level,contexts.input));
             base.Add(new ScoreSystem(contexts.input, progress.Score));
         }
     }

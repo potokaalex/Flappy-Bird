@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d069142b9e6b0b34f8797e716770c6dc, type: 3}
   m_Name: Bird Config
   m_EditorClassIdentifier: 
-  _gravityAcceleration: -20
-  _flyUpVelocity: 5.3
+  _gravityAcceleration: -22
+  _flyUpVelocity: 6.3
   _minVelocity: -20
   _maxVelocity: 20
-  _minAngle: -90
-  _maxAngle: 20
-  VelocityToFallAnimation: -3.3
-  MinPositionY: -2.7
-  MaxPositionY: 6
+  _minPositionY: -2.7
+  _maxPositionY: 6
+  _velocityToFallAnimation: -3.5
