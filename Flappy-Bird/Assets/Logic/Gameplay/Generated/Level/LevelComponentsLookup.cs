@@ -8,32 +8,26 @@
 //------------------------------------------------------------------------------
 public static class LevelComponentsLookup {
 
-    public const int RotationVelocity = 0;
-    public const int Active = 1;
-    public const int Gravity = 2;
-    public const int LinkToGameObject = 3;
-    public const int PositionClamp = 4;
-    public const int Position = 5;
-    public const int RotationClamp = 6;
-    public const int Rotation = 7;
-    public const int VelocityClamp = 8;
-    public const int Velocity = 9;
-    public const int BirdAnimations = 10;
-    public const int Bird = 11;
-    public const int Lifetime = 12;
-    public const int Pipes = 13;
+    public const int Active = 0;
+    public const int Gravity = 1;
+    public const int LinkToGameObject = 2;
+    public const int PositionClamp = 3;
+    public const int Position = 4;
+    public const int VelocityClamp = 5;
+    public const int Velocity = 6;
+    public const int BirdAnimations = 7;
+    public const int Bird = 8;
+    public const int Lifetime = 9;
+    public const int Pipes = 10;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
-        "RotationVelocity",
         "Active",
         "Gravity",
         "LinkToGameObject",
         "PositionClamp",
         "Position",
-        "RotationClamp",
-        "Rotation",
         "VelocityClamp",
         "Velocity",
         "BirdAnimations",
@@ -43,14 +37,11 @@ public static class LevelComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(FlappyBird.Ecs.Gameplay.RotationVelocityComponent),
         typeof(FlappyBird.Gameplay.Basic.ActiveComponent),
         typeof(FlappyBird.Gameplay.Basic.GravityComponent),
         typeof(FlappyBird.Gameplay.Basic.LinkToGameObjectComponent),
         typeof(FlappyBird.Gameplay.Basic.PositionClampComponent),
         typeof(FlappyBird.Gameplay.Basic.PositionComponent),
-        typeof(FlappyBird.Gameplay.Basic.RotationClampComponent),
-        typeof(FlappyBird.Gameplay.Basic.RotationComponent),
         typeof(FlappyBird.Gameplay.Basic.VelocityClampComponent),
         typeof(FlappyBird.Gameplay.Basic.VelocityComponent),
         typeof(FlappyBird.Gameplay.Bird.BirdAnimationsComponent),

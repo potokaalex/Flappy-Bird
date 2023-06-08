@@ -8,7 +8,6 @@ namespace FlappyBird.Gameplay.Basic
         {
             base.Add(new VelocitySystem(contexts.level, contexts.input));
             base.Add(new PositionSystem(contexts.level));
-            base.Add(new RotationSystem(contexts.level));
         }
     }
 }

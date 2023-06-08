@@ -21,6 +21,9 @@ namespace FlappyBird.Gameplay
             _data = data;
         }
 
+        public Contexts Contexts 
+            => _contexts;
+        
         public void Initialize(GameplayEcsConfiguration config)
         {
             _systems = CreateSystems(config);

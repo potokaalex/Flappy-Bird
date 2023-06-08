@@ -7,7 +7,7 @@ namespace FlappyBird
 {
     public class PlayerProgress
     {
-        public GameOverStateConfiguration GameOverStateConfiguration;
+    public GameOverStateConfiguration GameOverStateConfiguration;
         public GameObject BirdPrefab;
         public GameObject PipesPrefab;
         public InputAction BirdFlyUpAction;

@@ -1,4 +1,4 @@
-using FlappyBird.Ecs.Gameplay;
+using FlappyBird.Gameplay;
 
 namespace FlappyBird
 {
@@ -16,7 +16,7 @@ namespace FlappyBird
         private void CreateSystems(Contexts contexts, DataProvider data, IStateMachine stateMachine)
         {
             base.Add(new TestSystem(contexts, data, stateMachine, _gameLoop));
-            base.Add(new RotationVelocitySystem(contexts.level, contexts.input));
+            //base.Add(new RotationVelocitySystem(contexts.level, contexts.input));
         }
     }
 }
