@@ -1,12 +1,12 @@
-﻿namespace FlappyBird
+﻿using FlappyBird.Gameplay;
+using FlappyBird.Infrastructure;
+
+namespace FlappyBird
 {
     public class DataProvider
     {
-        public PlayerProgress PlayerProgress { get; private set; }
+        public GameOverStateConfiguration GameOverStateConfiguration;
 
-        public void Initialize(DataProviderConfiguration config)
-        {
-            PlayerProgress = new();
-        }
+        public PlayerProgress Progress { get; } = new();
     }
 }

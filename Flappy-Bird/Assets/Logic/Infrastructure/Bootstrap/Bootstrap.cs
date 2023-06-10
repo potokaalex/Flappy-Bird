@@ -5,8 +5,6 @@ namespace FlappyBird.Infrastructure
 {
     public class Bootstrap : MonoBehaviour
     {
-        [SerializeField] private DataProviderConfiguration _dataProviderConfiguration;
-
         private IStateMachine _stateMachine;
         private IStateFactory _stateFactory;
         private IGameLoop _gameLoop;
@@ -26,22 +24,17 @@ namespace FlappyBird.Infrastructure
 
         private void Initialize()
         {
-            InitializeData();
             InitializeStateMachine();
         }
 
         private void InitializeStateMachine()
         {
             _stateMachine.Initialize(
-                _stateFactory.Create<GameplayState>(),
                 _stateFactory.Create<SceneLoadingState>(),
-                _stateFactory.Create<GameOverState>(),
-                _stateFactory.Create<PauseState>());
-        }
-
-        private void InitializeData()
-        {
-            _data.Initialize(_dataProviderConfiguration);
+                _stateFactory.Create<PreGameplayState>(),
+                _stateFactory.Create<GameplayState>(),
+                _stateFactory.Create<PauseState>(),
+                _stateFactory.Create<GameOverState>());
         }
     }
 }

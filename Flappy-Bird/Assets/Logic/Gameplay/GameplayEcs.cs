@@ -1,58 +1,73 @@
-﻿using FlappyBird.Gameplay.Basic;
+﻿using FlappyBird.Gameplay.PreGameplay;
+using FlappyBird.Gameplay.GameOver;
+using System.Collections.Generic;
+using FlappyBird.Gameplay.Basic;
 using FlappyBird.Gameplay.Pipes;
 using FlappyBird.Gameplay.Bird;
-using Entitas;
 
 namespace FlappyBird.Gameplay
 {
     public class GameplayEcs
     {
-        private readonly Contexts _contexts;
-        private readonly IGameLoop _gameLoop;
-        private readonly DataProvider _data;
         private readonly IStateMachine _stateMachine;
-        private Systems _systems;
+        private readonly IGameLoop _gameLoop;
+
+        private List<GameplaySystems> _systems;
+        private readonly DataProvider _data;
+        private Contexts _contexts;
 
         public GameplayEcs(DataProvider data, IStateMachine stateMachine, IGameLoop gameLoop)
         {
-            _contexts = Contexts.sharedInstance = new();
             _stateMachine = stateMachine;
             _gameLoop = gameLoop;
             _data = data;
         }
 
-        public Contexts Contexts 
+        public Contexts Contexts
             => _contexts;
-        
-        public void Initialize(GameplayEcsConfiguration config)
+
+        public BasicSystems BasicSystems;
+        public PreGameplaySystems PreGameplaySystems;
+        public BirdSystems BirdSystems;
+        public PipesSystems PipesSystems;
+        public PreGameOverSystems PreGameOverSystems;
+
+        public void Initialize()
         {
-            _systems = CreateSystems(config);
-            _systems.Initialize();
+            _contexts = Contexts.sharedInstance = new();
+            _systems = CreateSystems();
+
+            foreach (var systems in _systems)
+                systems.Initialize();
         }
 
         public void Dispose()
         {
-            StopSystems();
-            
-            _systems.Cleanup();
-            _systems.DeactivateReactiveSystems();
+            foreach (var systems in _systems)
+            {
+                systems.Stop();
+                systems.Cleanup();
+                systems.DeactivateReactiveSystems();
+            }
+
             _contexts.Reset();
         }
 
-        public void StartSystems()
-            => _gameLoop.OnFixedUpdate += _systems.Execute;
-
-        public void StopSystems()
-            => _gameLoop.OnFixedUpdate -= _systems.Execute;
-
-        private Systems CreateSystems(GameplayEcsConfiguration gameplayConfig)
+        private List<GameplaySystems> CreateSystems()
         {
-            var systems = new Systems();
+            BasicSystems = new(_contexts, _gameLoop);
+            PreGameplaySystems = new(_contexts, _stateMachine, _gameLoop);
+            BirdSystems = new(_contexts, _data.Progress, _gameLoop);
+            PipesSystems = new(_contexts, _data.Progress, _gameLoop);
+            PreGameOverSystems = new(_contexts, BirdSystems, PipesSystems, _stateMachine, _gameLoop);
 
-            systems.Add(new BirdSystems(_contexts, _data.PlayerProgress, gameplayConfig.BirdConfiguration));
-            systems.Add(new PipesSystems(_contexts, _data.PlayerProgress, gameplayConfig.PipesConfiguration));
-            systems.Add(new DevSystems(_contexts, _data, _stateMachine, _gameLoop));
-            systems.Add(new BasicSystems(_contexts, _stateMachine, _gameLoop));
+            var systems = new List<GameplaySystems>();
+
+            systems.Add(BasicSystems);
+            systems.Add(PreGameplaySystems);
+            systems.Add(BirdSystems);
+            systems.Add(PipesSystems);
+            systems.Add(PreGameOverSystems);
 
             return systems;
         }

@@ -1,4 +1,6 @@
 ﻿using FlappyBird.Gameplay;
+using FlappyBird.Gameplay.Bird;
+using FlappyBird.Gameplay.Pipes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -7,17 +9,16 @@ namespace FlappyBird.Infrastructure
 {
     public class LevelStartup : MonoBehaviour
     {
-        [SerializeField] private PlayerProgressConfiguration _progressConfiguration;
         [SerializeField] private GameOverStateConfiguration _gameOverConfiguration;
-        [SerializeField] private GameplayEcsConfiguration _gameplayEcsConfiguration;
 
-        //
-        public Transform PipesSpawnPoint;
-        public GameObject BirdPrefab;
-        public GameObject PipesPrefab;
-
+        public BirdConfiguration BirdConfig;
         public InputAction BirdFlyUpAction;
-        //
+        public GameObject BirdPrefab;
+        public Transform BirdSpawnPoint;
+
+        public PipesConfiguration PipesConfig;
+        public GameObject PipesPrefab;
+        public Transform PipesSpawnPoint;
 
         private IStateMachine _stateMachine;
         private DataProvider _data;
@@ -33,17 +34,31 @@ namespace FlappyBird.Infrastructure
 
         private void Start()
         {
-            _data.PlayerProgress.Initialize(_progressConfiguration);
-            _data.PlayerProgress.GameOverStateConfiguration = _gameOverConfiguration;
-            _data.PlayerProgress.BirdPrefab = BirdPrefab;
-            _data.PlayerProgress.PipesPrefab = PipesPrefab;
-            _data.PlayerProgress.BirdFlyUpAction = BirdFlyUpAction;
-            _data.PlayerProgress.PipesSpawnPointX = PipesSpawnPoint.position.x;
-            //
-            _data.PlayerProgress.Score.Initialize();
-            //
-            _ecs.Initialize(_gameplayEcsConfiguration);
-            _stateMachine.SwitchTo<GameplayState>();
+            _data.GameOverStateConfiguration = _gameOverConfiguration;
+
+            InitBirdData();
+            InitPipesData();
+            InitScore();
+
+            _stateMachine.SwitchTo<PreGameplayState>();
         }
+
+        private void InitBirdData()
+        {
+            _data.Progress.BirdData.StaticData = BirdConfig;
+            _data.Progress.BirdData.BirdFlyUpAction = BirdFlyUpAction;
+            _data.Progress.BirdData.BirdPrefab = BirdPrefab;
+            _data.Progress.BirdData.BirdSpawnPoint = BirdSpawnPoint.position;
+        }
+
+        private void InitPipesData()
+        {
+            _data.Progress.PipesData.StaticData = PipesConfig;
+            _data.Progress.PipesData.PipesPrefab = PipesPrefab;
+            _data.Progress.PipesData.PipesSpawnPointX = PipesSpawnPoint.position.x;
+        }
+
+        private void InitScore() 
+            => _data.Progress.Score._currentScore = 0;
     }
 }

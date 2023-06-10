@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -753,17 +753,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381a9677ea0be2b4fad8b3f15446c341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _progressConfiguration:
-    BirdSpawnTransform: {fileID: 942942115}
   _gameOverConfiguration:
     GameplayUI: {fileID: 1403950845}
     GameOverUI: {fileID: 979180377}
-  _gameplayEcsConfiguration:
-    BirdConfiguration: {fileID: 11400000, guid: aa662a993adc062408a00d075d3b5776, type: 2}
-    PipesConfiguration: {fileID: 11400000, guid: ef4d9f5660104a248acafffa5b292ab7, type: 2}
-  PipesSpawnPoint: {fileID: 1269402345}
-  BirdPrefab: {fileID: 5582752118161707237, guid: a22b63eef227bf54b83bcdffc264b15b, type: 3}
-  PipesPrefab: {fileID: 1163154790420497170, guid: 2cdf8afec1cb7a54daf34e262546a9f7, type: 3}
+  BirdConfig: {fileID: 11400000, guid: aa662a993adc062408a00d075d3b5776, type: 2}
   BirdFlyUpAction:
     m_Name: Bird Fly Up
     m_Type: 1
@@ -797,6 +790,11 @@ MonoBehaviour:
       m_Action: Bird Fly Up
       m_Flags: 0
     m_Flags: 1
+  BirdPrefab: {fileID: 5582752118161707237, guid: a22b63eef227bf54b83bcdffc264b15b, type: 3}
+  BirdSpawnPoint: {fileID: 942942115}
+  PipesConfig: {fileID: 11400000, guid: ef4d9f5660104a248acafffa5b292ab7, type: 2}
+  PipesPrefab: {fileID: 1163154790420497170, guid: 2cdf8afec1cb7a54daf34e262546a9f7, type: 3}
+  PipesSpawnPoint: {fileID: 1269402345}
 --- !u!114 &1200257882
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,13 +12,13 @@ namespace FlappyBird.Infrastructure
         [Inject]
         private void Constructor(DataProvider data)
         {
-            data.PlayerProgress.Score.OnCurrentScoreChanged += UpdateScore;
+            data.Progress.Score.OnCurrentScoreChanged += UpdateScore;
 
             _data = data;
         }
 
         private void OnDestroy()
-            => _data.PlayerProgress.Score.OnCurrentScoreChanged -= UpdateScore;
+            => _data.Progress.Score.OnCurrentScoreChanged -= UpdateScore;
 
         private void UpdateScore(float newScore)
             => _scoreText.text = newScore.ToString();

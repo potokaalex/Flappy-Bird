@@ -11,7 +11,7 @@ namespace FlappyBird.Infrastructure
 
         public void Enter()
         {
-            _ecs.StopSystems();
+            //_ecs.BasicSystems.Stop();
         }
 
         public void Exit()
