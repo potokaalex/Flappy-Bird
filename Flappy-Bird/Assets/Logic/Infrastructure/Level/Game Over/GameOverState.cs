@@ -4,12 +4,12 @@ namespace FlappyBird.Infrastructure
 {
     public class GameOverState : IState
     {
-        private readonly DataProvider _data;
+        private readonly IDataProvider _data;
         private readonly IStateMachine _stateMachine;
         private readonly IGameLoop _gameLoop;
         private readonly GameplayEcs _ecs;
 
-        public GameOverState(DataProvider data, GameplayEcs ecs, IStateMachine stateMachine, IGameLoop gameLoop)
+        public GameOverState(IDataProvider data, GameplayEcs ecs, IStateMachine stateMachine, IGameLoop gameLoop)
         {
             _stateMachine = stateMachine;
             _data = data;
@@ -19,7 +19,7 @@ namespace FlappyBird.Infrastructure
 
         public void Enter()
         {
-            var config = _data.GameOverStateConfiguration;
+            var config = _data.Get<GameOverStateConfiguration>();
 
             config.GameplayUI.Hide();
             config.GameOverUI.Show();

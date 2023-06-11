@@ -21,11 +21,12 @@ namespace FlappyBird.Infrastructure
         public Transform PipesSpawnPoint;
 
         private IStateMachine _stateMachine;
-        private DataProvider _data;
+        private IDataProvider _data;
         private GameplayEcs _ecs;
-
+        private PlayerProgress _playerProgress;
+        
         [Inject]
-        private void Constructor(DataProvider dataProvider, GameplayEcs ecs, IStateMachine stateMachine)
+        private void Constructor(IDataProvider dataProvider, GameplayEcs ecs, IStateMachine stateMachine)
         {
             _stateMachine = stateMachine;
             _data = dataProvider;
@@ -34,7 +35,9 @@ namespace FlappyBird.Infrastructure
 
         private void Start()
         {
-            _data.GameOverStateConfiguration = _gameOverConfiguration;
+            _playerProgress = _data.Get<PlayerProgress>();
+            _data.Get<GameOverStateConfiguration>().GameOverUI = _gameOverConfiguration.GameOverUI;
+            _data.Get<GameOverStateConfiguration>().GameplayUI = _gameOverConfiguration.GameplayUI;
 
             InitBirdData();
             InitPipesData();
@@ -45,20 +48,20 @@ namespace FlappyBird.Infrastructure
 
         private void InitBirdData()
         {
-            _data.Progress.BirdData.StaticData = BirdConfig;
-            _data.Progress.BirdData.BirdFlyUpAction = BirdFlyUpAction;
-            _data.Progress.BirdData.BirdPrefab = BirdPrefab;
-            _data.Progress.BirdData.BirdSpawnPoint = BirdSpawnPoint.position;
+            _playerProgress.BirdData.StaticData = BirdConfig;
+            _playerProgress.BirdData.BirdFlyUpAction = BirdFlyUpAction;
+            _playerProgress.BirdData.BirdPrefab = BirdPrefab;
+            _playerProgress.BirdData.BirdSpawnPoint = BirdSpawnPoint.position;
         }
 
         private void InitPipesData()
         {
-            _data.Progress.PipesData.StaticData = PipesConfig;
-            _data.Progress.PipesData.PipesPrefab = PipesPrefab;
-            _data.Progress.PipesData.PipesSpawnPointX = PipesSpawnPoint.position.x;
+            _playerProgress.PipesData.StaticData = PipesConfig;
+            _playerProgress.PipesData.PipesPrefab = PipesPrefab;
+            _playerProgress.PipesData.PipesSpawnPointX = PipesSpawnPoint.position.x;
         }
 
         private void InitScore() 
-            => _data.Progress.Score._currentScore = 0;
+            => _playerProgress.Score._currentScore = 0;
     }
 }

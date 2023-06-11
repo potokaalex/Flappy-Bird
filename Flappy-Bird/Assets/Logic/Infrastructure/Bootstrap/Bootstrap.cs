@@ -8,16 +8,16 @@ namespace FlappyBird.Infrastructure
         private IStateMachine _stateMachine;
         private IStateFactory _stateFactory;
         private IGameLoop _gameLoop;
-        private DataProvider _data;
+        private IDataProvider _dataProvider;
 
         [Inject]
-        public void Constructor(DataProvider dataProvider, IStateMachine stateMachine,
+        public void Constructor(IDataProvider dataProvider, IStateMachine stateMachine,
             IStateFactory stateFactory, IGameLoop gameLoop)
         {
             _stateMachine = stateMachine;
             _stateFactory = stateFactory;
             _gameLoop = gameLoop;
-            _data = dataProvider;
+            _dataProvider = dataProvider;
 
             Initialize(); //move to start in bootstrap scene.
         }
@@ -25,6 +25,7 @@ namespace FlappyBird.Infrastructure
         private void Initialize()
         {
             InitializeStateMachine();
+            InitializeDataProvider();
         }
 
         private void InitializeStateMachine()
@@ -35,6 +36,13 @@ namespace FlappyBird.Infrastructure
                 _stateFactory.Create<GameplayState>(),
                 _stateFactory.Create<PauseState>(),
                 _stateFactory.Create<GameOverState>());
+        }
+        
+        private void InitializeDataProvider()
+        {
+            _dataProvider.Set(
+                new PlayerProgress(),
+                new GameOverStateConfiguration());
         }
     }
 }

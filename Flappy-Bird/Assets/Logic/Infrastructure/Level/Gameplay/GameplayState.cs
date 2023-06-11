@@ -4,11 +4,11 @@ namespace FlappyBird.Infrastructure
 {
     public class GameplayState : IState
     {
-        private readonly DataProvider _data;
+        private readonly IDataProvider _data;
         private readonly GameplayEcs _ecs;
         private readonly IGameLoop _gameLoop;
 
-        public GameplayState(DataProvider data, GameplayEcs ecs, IGameLoop gameLoop)
+        public GameplayState(IDataProvider data, GameplayEcs ecs, IGameLoop gameLoop)
         {
             _data = data;
             _ecs = ecs;

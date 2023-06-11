@@ -13,14 +13,14 @@ namespace FlappyBird.Gameplay
         private readonly IGameLoop _gameLoop;
 
         private List<GameplaySystems> _systems;
-        private readonly DataProvider _data;
+        private readonly IDataProvider _dataProvider;
         private Contexts _contexts;
 
-        public GameplayEcs(DataProvider data, IStateMachine stateMachine, IGameLoop gameLoop)
+        public GameplayEcs(IDataProvider dataProvider, IStateMachine stateMachine, IGameLoop gameLoop)
         {
             _stateMachine = stateMachine;
             _gameLoop = gameLoop;
-            _data = data;
+            _dataProvider = dataProvider;
         }
 
         public Contexts Contexts
@@ -57,8 +57,8 @@ namespace FlappyBird.Gameplay
         {
             BasicSystems = new(_contexts, _gameLoop);
             PreGameplaySystems = new(_contexts, _stateMachine, _gameLoop);
-            BirdSystems = new(_contexts, _data.Progress, _gameLoop);
-            PipesSystems = new(_contexts, _data.Progress, _gameLoop);
+            BirdSystems = new(_contexts, _dataProvider.Get<PlayerProgress>(), _gameLoop);
+            PipesSystems = new(_contexts, _dataProvider.Get<PlayerProgress>(), _gameLoop);
             PreGameOverSystems = new(_contexts, BirdSystems, PipesSystems, _stateMachine, _gameLoop);
 
             var systems = new List<GameplaySystems>();

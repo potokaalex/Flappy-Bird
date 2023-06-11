@@ -3,7 +3,7 @@ using System;
 namespace FlappyBird.Infrastructure
 {
     [Serializable]
-    public struct GameOverStateConfiguration : IStateParameter
+    public class GameOverStateConfiguration : IStateParameter, IData
     {
         public GameplayUI GameplayUI;
         public GameOverUI GameOverUI;

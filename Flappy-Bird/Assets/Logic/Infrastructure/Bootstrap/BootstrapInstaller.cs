@@ -18,7 +18,8 @@ namespace FlappyBird.Infrastructure
         private void BindDataProvider()
         {
             Container
-                .Bind<DataProvider>()
+                .Bind<IDataProvider>()
+                .To<DataProvider>()
                 .AsSingle();
         }
 

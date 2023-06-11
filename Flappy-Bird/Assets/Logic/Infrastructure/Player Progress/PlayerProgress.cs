@@ -2,7 +2,7 @@ using FlappyBird.Gameplay.Bird;
 
 namespace FlappyBird
 {
-    public class PlayerProgress
+    public class PlayerProgress : IData
     {
         public Score Score { get; } = new();
 

@@ -7,18 +7,18 @@ namespace FlappyBird.Infrastructure
     public class ScoreUI : MonoBehaviour
     {
         [SerializeField] private Text _scoreText;
-        private DataProvider _data;
+        private IDataProvider _data;
 
         [Inject]
-        private void Constructor(DataProvider data)
+        private void Constructor(IDataProvider data)
         {
-            data.Progress.Score.OnCurrentScoreChanged += UpdateScore;
-
             _data = data;
+            
+            _data.Get<PlayerProgress>().Score.OnCurrentScoreChanged += UpdateScore;
         }
 
         private void OnDestroy()
-            => _data.Progress.Score.OnCurrentScoreChanged -= UpdateScore;
+            => _data.Get<PlayerProgress>().Score.OnCurrentScoreChanged -= UpdateScore;
 
         private void UpdateScore(float newScore)
             => _scoreText.text = newScore.ToString();
