@@ -1,6 +1,6 @@
 using Entitas;
 
-namespace FlappyBird.Gameplay.Basic
+namespace FlappyBird.Gameplay.Core
 {
     [Input]
     public class EventComponent : IComponent

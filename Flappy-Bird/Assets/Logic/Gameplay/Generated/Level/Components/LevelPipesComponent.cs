@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    static readonly FlappyBird.Gameplay.Pipes.PipesComponent pipesComponent = new FlappyBird.Gameplay.Pipes.PipesComponent();
+    static readonly FlappyBird.Gameplay.Core.Pipes.PipesComponent pipesComponent = new FlappyBird.Gameplay.Core.Pipes.PipesComponent();
 
     public bool isPipes {
         get { return HasComponent(LevelComponentsLookup.Pipes); }

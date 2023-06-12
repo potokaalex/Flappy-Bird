@@ -1,6 +1,6 @@
 using Entitas;
 
-namespace FlappyBird.Gameplay.Basic
+namespace FlappyBird.Gameplay.Core
 {
     [Level]
     public class ActiveComponent : IComponent

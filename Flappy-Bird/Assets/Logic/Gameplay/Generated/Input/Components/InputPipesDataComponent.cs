@@ -9,12 +9,12 @@
 public partial class InputContext {
 
     public InputEntity pipesDataEntity { get { return GetGroup(InputMatcher.PipesData).GetSingleEntity(); } }
-    public FlappyBird.Gameplay.Pipes.PipesDataComponent pipesData { get { return pipesDataEntity.pipesData; } }
+    public FlappyBird.Gameplay.Core.Pipes.PipesDataComponent pipesData { get { return pipesDataEntity.pipesData; } }
     public bool hasPipesData { get { return pipesDataEntity != null; } }
 
-    public InputEntity SetPipesData(FlappyBird.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
+    public InputEntity SetPipesData(FlappyBird.Gameplay.Core.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
         if (hasPipesData) {
-            throw new Entitas.EntitasException("Could not set PipesData!\n" + this + " already has an entity with FlappyBird.Gameplay.Pipes.PipesDataComponent!",
+            throw new Entitas.EntitasException("Could not set PipesData!\n" + this + " already has an entity with FlappyBird.Gameplay.Core.Pipes.PipesDataComponent!",
                 "You should check if the context already has a pipesDataEntity before setting it or use context.ReplacePipesData().");
         }
         var entity = CreateEntity();
@@ -22,7 +22,7 @@ public partial class InputContext {
         return entity;
     }
 
-    public void ReplacePipesData(FlappyBird.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
+    public void ReplacePipesData(FlappyBird.Gameplay.Core.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
         var entity = pipesDataEntity;
         if (entity == null) {
             entity = SetPipesData(newFactory, newTimeToSpawn, newSpawnRate, newRemoveRate);
@@ -46,12 +46,12 @@ public partial class InputContext {
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    public FlappyBird.Gameplay.Pipes.PipesDataComponent pipesData { get { return (FlappyBird.Gameplay.Pipes.PipesDataComponent)GetComponent(InputComponentsLookup.PipesData); } }
+    public FlappyBird.Gameplay.Core.Pipes.PipesDataComponent pipesData { get { return (FlappyBird.Gameplay.Core.Pipes.PipesDataComponent)GetComponent(InputComponentsLookup.PipesData); } }
     public bool hasPipesData { get { return HasComponent(InputComponentsLookup.PipesData); } }
 
-    public void AddPipesData(FlappyBird.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
+    public void AddPipesData(FlappyBird.Gameplay.Core.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
         var index = InputComponentsLookup.PipesData;
-        var component = (FlappyBird.Gameplay.Pipes.PipesDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Pipes.PipesDataComponent));
+        var component = (FlappyBird.Gameplay.Core.Pipes.PipesDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.Pipes.PipesDataComponent));
         component.Factory = newFactory;
         component.TimeToSpawn = newTimeToSpawn;
         component.SpawnRate = newSpawnRate;
@@ -59,9 +59,9 @@ public partial class InputEntity {
         AddComponent(index, component);
     }
 
-    public void ReplacePipesData(FlappyBird.Gameplay.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
+    public void ReplacePipesData(FlappyBird.Gameplay.Core.Pipes.PipesFactory newFactory, float newTimeToSpawn, float newSpawnRate, float newRemoveRate) {
         var index = InputComponentsLookup.PipesData;
-        var component = (FlappyBird.Gameplay.Pipes.PipesDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Pipes.PipesDataComponent));
+        var component = (FlappyBird.Gameplay.Core.Pipes.PipesDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.Pipes.PipesDataComponent));
         component.Factory = newFactory;
         component.TimeToSpawn = newTimeToSpawn;
         component.SpawnRate = newSpawnRate;

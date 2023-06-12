@@ -1,8 +1,8 @@
-﻿using FlappyBird.Gameplay;
-using FlappyBird.Gameplay.Bird;
-using FlappyBird.Gameplay.Pipes;
+﻿using UnityEngine.InputSystem;
+using FlappyBird.Gameplay;
+using FlappyBird.Gameplay.Core.Bird;
+using FlappyBird.Gameplay.Core.Pipes;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace FlappyBird.Infrastructure

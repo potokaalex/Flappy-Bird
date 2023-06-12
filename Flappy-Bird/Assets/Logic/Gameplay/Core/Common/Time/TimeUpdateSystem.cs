@@ -1,6 +1,6 @@
 using Entitas;
 
-namespace FlappyBird.Gameplay.Basic
+namespace FlappyBird.Gameplay.Core
 {
     public class TimeUpdateSystem : IExecuteSystem
     {

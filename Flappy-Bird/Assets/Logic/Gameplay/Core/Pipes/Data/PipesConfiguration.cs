@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FlappyBird.Gameplay.Pipes
+namespace FlappyBird.Gameplay.Core.Pipes
 {
     [CreateAssetMenu(fileName = "New Pipes Configuration", menuName = "Configurations/Pipes")]
     public class PipesConfiguration : ScriptableObject

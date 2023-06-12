@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    public FlappyBird.Gameplay.Basic.VelocityComponent velocity { get { return (FlappyBird.Gameplay.Basic.VelocityComponent)GetComponent(LevelComponentsLookup.Velocity); } }
+    public FlappyBird.Gameplay.Core.VelocityComponent velocity { get { return (FlappyBird.Gameplay.Core.VelocityComponent)GetComponent(LevelComponentsLookup.Velocity); } }
     public bool hasVelocity { get { return HasComponent(LevelComponentsLookup.Velocity); } }
 
     public void AddVelocity(UnityEngine.Vector2 newValue) {
         var index = LevelComponentsLookup.Velocity;
-        var component = (FlappyBird.Gameplay.Basic.VelocityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Basic.VelocityComponent));
+        var component = (FlappyBird.Gameplay.Core.VelocityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.VelocityComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceVelocity(UnityEngine.Vector2 newValue) {
         var index = LevelComponentsLookup.Velocity;
-        var component = (FlappyBird.Gameplay.Basic.VelocityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Basic.VelocityComponent));
+        var component = (FlappyBird.Gameplay.Core.VelocityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.VelocityComponent));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }

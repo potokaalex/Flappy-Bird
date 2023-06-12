@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    public FlappyBird.Gameplay.Basic.GravityComponent gravity { get { return (FlappyBird.Gameplay.Basic.GravityComponent)GetComponent(LevelComponentsLookup.Gravity); } }
+    public FlappyBird.Gameplay.Core.GravityComponent gravity { get { return (FlappyBird.Gameplay.Core.GravityComponent)GetComponent(LevelComponentsLookup.Gravity); } }
     public bool hasGravity { get { return HasComponent(LevelComponentsLookup.Gravity); } }
 
     public void AddGravity(float newAcceleration) {
         var index = LevelComponentsLookup.Gravity;
-        var component = (FlappyBird.Gameplay.Basic.GravityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Basic.GravityComponent));
+        var component = (FlappyBird.Gameplay.Core.GravityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.GravityComponent));
         component.Acceleration = newAcceleration;
         AddComponent(index, component);
     }
 
     public void ReplaceGravity(float newAcceleration) {
         var index = LevelComponentsLookup.Gravity;
-        var component = (FlappyBird.Gameplay.Basic.GravityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Basic.GravityComponent));
+        var component = (FlappyBird.Gameplay.Core.GravityComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.GravityComponent));
         component.Acceleration = newAcceleration;
         ReplaceComponent(index, component);
     }

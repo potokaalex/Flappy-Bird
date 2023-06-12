@@ -1,6 +1,6 @@
 using Entitas;
 
-namespace FlappyBird.Gameplay.Pipes
+namespace FlappyBird.Gameplay.Core.Pipes
 {
     [Level]
     public class PipesComponent : IComponent

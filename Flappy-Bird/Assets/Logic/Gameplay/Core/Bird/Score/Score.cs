@@ -1,6 +1,6 @@
 using System;
 
-namespace FlappyBird.Gameplay.Bird
+namespace FlappyBird.Gameplay.Core.Bird
 {
     public class Score//score data?
     {

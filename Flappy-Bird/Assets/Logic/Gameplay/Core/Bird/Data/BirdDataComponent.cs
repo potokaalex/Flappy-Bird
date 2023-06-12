@@ -2,7 +2,7 @@
 using UnityEngine.InputSystem;
 using Entitas;
 
-namespace FlappyBird.Gameplay.Bird
+namespace FlappyBird.Gameplay.Core.Bird
 {
     [Input, Unique]
     public class BirdDataComponent : IComponent

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    static readonly FlappyBird.Gameplay.Basic.EventComponent eventComponent = new FlappyBird.Gameplay.Basic.EventComponent();
+    static readonly FlappyBird.Gameplay.Core.EventComponent eventComponent = new FlappyBird.Gameplay.Core.EventComponent();
 
     public bool isEvent {
         get { return HasComponent(InputComponentsLookup.Event); }

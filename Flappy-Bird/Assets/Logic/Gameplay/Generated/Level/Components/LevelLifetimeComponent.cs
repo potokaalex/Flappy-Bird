@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    public FlappyBird.Gameplay.Pipes.LifetimeComponent lifetime { get { return (FlappyBird.Gameplay.Pipes.LifetimeComponent)GetComponent(LevelComponentsLookup.Lifetime); } }
+    public FlappyBird.Gameplay.Core.Pipes.LifetimeComponent lifetime { get { return (FlappyBird.Gameplay.Core.Pipes.LifetimeComponent)GetComponent(LevelComponentsLookup.Lifetime); } }
     public bool hasLifetime { get { return HasComponent(LevelComponentsLookup.Lifetime); } }
 
     public void AddLifetime(float newTimeToRemove) {
         var index = LevelComponentsLookup.Lifetime;
-        var component = (FlappyBird.Gameplay.Pipes.LifetimeComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Pipes.LifetimeComponent));
+        var component = (FlappyBird.Gameplay.Core.Pipes.LifetimeComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.Pipes.LifetimeComponent));
         component.TimeToRemove = newTimeToRemove;
         AddComponent(index, component);
     }
 
     public void ReplaceLifetime(float newTimeToRemove) {
         var index = LevelComponentsLookup.Lifetime;
-        var component = (FlappyBird.Gameplay.Pipes.LifetimeComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Pipes.LifetimeComponent));
+        var component = (FlappyBird.Gameplay.Core.Pipes.LifetimeComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.Pipes.LifetimeComponent));
         component.TimeToRemove = newTimeToRemove;
         ReplaceComponent(index, component);
     }

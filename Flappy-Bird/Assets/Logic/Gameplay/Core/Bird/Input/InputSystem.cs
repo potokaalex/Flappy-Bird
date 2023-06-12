@@ -1,7 +1,7 @@
 ﻿using UnityEngine.EventSystems;
 using Entitas;
 
-namespace FlappyBird.Gameplay.Bird
+namespace FlappyBird.Gameplay.Core.Bird
 {
     public class InputSystem : IExecuteSystem
     {

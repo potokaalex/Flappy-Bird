@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Entitas;
 
-namespace FlappyBird.Gameplay.Bird
+namespace FlappyBird.Gameplay.Core.Bird
 {
     public class FlyUpSystem : ReactiveSystem<InputEntity>
     {

@@ -15,24 +15,14 @@ namespace FlappyBird.Infrastructure
             _gameLoop = gameLoop;
         }
 
-        //private bool a = false;
-
         public void Enter()
         {
-            _ecs.BasicSystems.Start();
-            _ecs.BirdSystems.Start();
-            _ecs.PipesSystems.Start();
-
-            //
-            _ecs.PreGameOverSystems.Start();
+            _ecs.CoreSystems.Start();
         }
 
         public void Exit()
         {
-            _ecs.BasicSystems.Stop();
-            _ecs.BirdSystems.Stop();
-            _ecs.PipesSystems.Stop();
-            //_ecs.GameOverSystems.Start();
+            _ecs.CoreSystems.Stop();
         }
     }
 }

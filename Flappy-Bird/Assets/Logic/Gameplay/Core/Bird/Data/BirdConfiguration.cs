@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FlappyBird.Gameplay.Bird
+namespace FlappyBird.Gameplay.Core.Bird
 {
     [CreateAssetMenu(fileName = "New Bird Configuration", menuName = "Configurations/Bird")]
     public class BirdConfiguration : ScriptableObject

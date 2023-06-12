@@ -1,4 +1,4 @@
-using FlappyBird.Gameplay.Pipes;
+using FlappyBird.Gameplay.Core.Pipes;
 using UnityEngine;
 
 namespace FlappyBird

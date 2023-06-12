@@ -2,7 +2,7 @@ using UnityEngine;
 using Entitas;
 using System;
 
-namespace FlappyBird.Gameplay.Basic
+namespace FlappyBird.Gameplay.Core
 {
     public class VelocitySystem : IExecuteSystem
     {

@@ -8,22 +8,24 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    public FlappyBird.Gameplay.Bird.BirdAnimationsComponent birdAnimations { get { return (FlappyBird.Gameplay.Bird.BirdAnimationsComponent)GetComponent(LevelComponentsLookup.BirdAnimations); } }
+    public FlappyBird.Gameplay.Core.Bird.BirdAnimationsComponent birdAnimations { get { return (FlappyBird.Gameplay.Core.Bird.BirdAnimationsComponent)GetComponent(LevelComponentsLookup.BirdAnimations); } }
     public bool hasBirdAnimations { get { return HasComponent(LevelComponentsLookup.BirdAnimations); } }
 
-    public void AddBirdAnimations(FlappyBird.Gameplay.Bird.BirdAnimator newBirdAnimator, float newVelocityToFallDownAnimation) {
+    public void AddBirdAnimations(FlappyBird.Gameplay.Core.Bird.BirdAnimator newBirdAnimator, float newVelocityToFallDownAnimation, bool newIsFlyUpAnimationPlaying) {
         var index = LevelComponentsLookup.BirdAnimations;
-        var component = (FlappyBird.Gameplay.Bird.BirdAnimationsComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.BirdAnimationsComponent));
+        var component = (FlappyBird.Gameplay.Core.Bird.BirdAnimationsComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.Bird.BirdAnimationsComponent));
         component.BirdAnimator = newBirdAnimator;
         component.VelocityToFallDownAnimation = newVelocityToFallDownAnimation;
+        component.IsFlyUpAnimationPlaying = newIsFlyUpAnimationPlaying;
         AddComponent(index, component);
     }
 
-    public void ReplaceBirdAnimations(FlappyBird.Gameplay.Bird.BirdAnimator newBirdAnimator, float newVelocityToFallDownAnimation) {
+    public void ReplaceBirdAnimations(FlappyBird.Gameplay.Core.Bird.BirdAnimator newBirdAnimator, float newVelocityToFallDownAnimation, bool newIsFlyUpAnimationPlaying) {
         var index = LevelComponentsLookup.BirdAnimations;
-        var component = (FlappyBird.Gameplay.Bird.BirdAnimationsComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.BirdAnimationsComponent));
+        var component = (FlappyBird.Gameplay.Core.Bird.BirdAnimationsComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.Bird.BirdAnimationsComponent));
         component.BirdAnimator = newBirdAnimator;
         component.VelocityToFallDownAnimation = newVelocityToFallDownAnimation;
+        component.IsFlyUpAnimationPlaying = newIsFlyUpAnimationPlaying;
         ReplaceComponent(index, component);
     }
 

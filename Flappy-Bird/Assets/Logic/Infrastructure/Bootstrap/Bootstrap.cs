@@ -35,6 +35,7 @@ namespace FlappyBird.Infrastructure
                 _stateFactory.Create<PreGameplayState>(),
                 _stateFactory.Create<GameplayState>(),
                 _stateFactory.Create<PauseState>(),
+                _stateFactory.Create<PreGameOverState>(),
                 _stateFactory.Create<GameOverState>());
         }
         

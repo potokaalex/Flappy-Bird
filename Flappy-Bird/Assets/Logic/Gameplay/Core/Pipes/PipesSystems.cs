@@ -1,34 +1,19 @@
 using Entitas;
 using Entitas.Unity;
 
-namespace FlappyBird.Gameplay.Pipes
+namespace FlappyBird.Gameplay.Core.Pipes
 {
-    public class PipesSystems : GameplaySystems
+    public class PipesSystems : Feature
     {
         private readonly PlayerProgress _progress;
         private readonly Contexts _contexts;
-        private readonly IGameLoop _gameLoop;
 
-        public PipesSystems(Contexts contexts, PlayerProgress progress, IGameLoop gameLoop)
+        public PipesSystems(Contexts contexts, PlayerProgress progress)
         {
             _contexts = contexts;
-            _gameLoop = gameLoop;
             _progress = progress;
 
             base.Add(CreateSystems(contexts));
-            DeactivateReactiveSystems();
-        }
-
-        public override void Start()
-        {
-            ActivateReactiveSystems();
-            _gameLoop.OnFixedUpdate += base.Execute;
-        }
-
-        public override void Stop()
-        {
-            DeactivateReactiveSystems();
-            _gameLoop.OnFixedUpdate -= base.Execute;
         }
 
         public override void Initialize()
@@ -41,16 +26,6 @@ namespace FlappyBird.Gameplay.Pipes
         {
             base.Cleanup();
             RemoveEntities();
-        }
-
-        private Systems CreateSystems(Contexts contexts)
-        {
-            var systems = new Systems();
-
-            base.Add(new RemoveSystem(contexts.level, contexts.input));
-            base.Add(new SpawnSystem(contexts.level, contexts.input));
-
-            return systems;
         }
 
         private void CreateEntities()
@@ -70,6 +45,16 @@ namespace FlappyBird.Gameplay.Pipes
                 pipes.linkToGameObject.GameObject.Unlink();
                 pipes.Destroy();
             }
+        }
+
+        private Systems CreateSystems(Contexts contexts)
+        {
+            var systems = new Systems();
+
+            base.Add(new RemoveSystem(contexts.level, contexts.input));
+            base.Add(new SpawnSystem(contexts.level, contexts.input));
+
+            return systems;
         }
     }
 }

@@ -1,4 +1,4 @@
-using FlappyBird.Gameplay.Bird;
+using FlappyBird.Gameplay.Core.Bird;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FlappyBird
+﻿namespace FlappyBird
 {
     public interface IStateMachine
     {

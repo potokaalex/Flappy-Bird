@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-namespace FlappyBird.Gameplay.Bird
+namespace FlappyBird.Gameplay.Core.Bird
 {
     public class AnimationSystem : IExecuteSystem
     {
@@ -25,12 +25,12 @@ namespace FlappyBird.Gameplay.Bird
             if (IsFlyUp())
             {
                 bird.birdAnimations.BirdAnimator.PlayFlyUp();
-                _isFlyUpAnimationPlaying = true;
+                bird.birdAnimations.IsFlyUpAnimationPlaying = true;
             }
             else if (IsFallDown(bird))
             {
                 bird.birdAnimations.BirdAnimator.PlayFallDown();
-                _isFlyUpAnimationPlaying = false;
+                bird.birdAnimations.IsFlyUpAnimationPlaying = false;
             }
         }
 
@@ -38,6 +38,7 @@ namespace FlappyBird.Gameplay.Bird
             => _inputContext.isFlyUp;
 
         private bool IsFallDown(LevelEntity bird)
-            => bird.velocity.Value.y <= bird.birdAnimations.VelocityToFallDownAnimation && _isFlyUpAnimationPlaying;
+            => bird.velocity.Value.y <= bird.birdAnimations.VelocityToFallDownAnimation &&
+               bird.birdAnimations.IsFlyUpAnimationPlaying;
     }
 }

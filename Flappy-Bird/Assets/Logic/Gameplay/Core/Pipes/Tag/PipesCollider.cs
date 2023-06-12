@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FlappyBird.Gameplay.Pipes
+namespace FlappyBird.Gameplay.Core.Pipes
 {
     public class PipesCollider : MonoBehaviour
     {

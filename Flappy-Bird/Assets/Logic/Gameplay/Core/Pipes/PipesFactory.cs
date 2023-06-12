@@ -5,7 +5,7 @@ using UnityEngine;
 using Random = Unity.Mathematics.Random;
 using Object = UnityEngine.Object;
 
-namespace FlappyBird.Gameplay.Pipes
+namespace FlappyBird.Gameplay.Core.Pipes
 {
     public class PipesFactory
     {

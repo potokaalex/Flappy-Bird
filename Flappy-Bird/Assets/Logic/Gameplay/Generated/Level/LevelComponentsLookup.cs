@@ -9,44 +9,44 @@
 public static class LevelComponentsLookup {
 
     public const int Active = 0;
-    public const int Gravity = 1;
-    public const int LinkToGameObject = 2;
-    public const int PositionClamp = 3;
-    public const int Position = 4;
-    public const int VelocityClamp = 5;
-    public const int Velocity = 6;
-    public const int BirdAnimations = 7;
-    public const int Bird = 8;
-    public const int Lifetime = 9;
-    public const int Pipes = 10;
+    public const int BirdAnimations = 1;
+    public const int Bird = 2;
+    public const int Gravity = 3;
+    public const int LinkToGameObject = 4;
+    public const int Lifetime = 5;
+    public const int Pipes = 6;
+    public const int PositionClamp = 7;
+    public const int Position = 8;
+    public const int VelocityClamp = 9;
+    public const int Velocity = 10;
 
     public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
         "Active",
+        "BirdAnimations",
+        "Bird",
         "Gravity",
         "LinkToGameObject",
+        "Lifetime",
+        "Pipes",
         "PositionClamp",
         "Position",
         "VelocityClamp",
-        "Velocity",
-        "BirdAnimations",
-        "Bird",
-        "Lifetime",
-        "Pipes"
+        "Velocity"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(FlappyBird.Gameplay.Basic.ActiveComponent),
-        typeof(FlappyBird.Gameplay.Basic.GravityComponent),
-        typeof(FlappyBird.Gameplay.Basic.LinkToGameObjectComponent),
-        typeof(FlappyBird.Gameplay.Basic.PositionClampComponent),
-        typeof(FlappyBird.Gameplay.Basic.PositionComponent),
-        typeof(FlappyBird.Gameplay.Basic.VelocityClampComponent),
-        typeof(FlappyBird.Gameplay.Basic.VelocityComponent),
-        typeof(FlappyBird.Gameplay.Bird.BirdAnimationsComponent),
-        typeof(FlappyBird.Gameplay.Bird.BirdComponent),
-        typeof(FlappyBird.Gameplay.Pipes.LifetimeComponent),
-        typeof(FlappyBird.Gameplay.Pipes.PipesComponent)
+        typeof(FlappyBird.Gameplay.Core.ActiveComponent),
+        typeof(FlappyBird.Gameplay.Core.Bird.BirdAnimationsComponent),
+        typeof(FlappyBird.Gameplay.Core.Bird.BirdComponent),
+        typeof(FlappyBird.Gameplay.Core.GravityComponent),
+        typeof(FlappyBird.Gameplay.Core.LinkToGameObjectComponent),
+        typeof(FlappyBird.Gameplay.Core.Pipes.LifetimeComponent),
+        typeof(FlappyBird.Gameplay.Core.Pipes.PipesComponent),
+        typeof(FlappyBird.Gameplay.Core.PositionClampComponent),
+        typeof(FlappyBird.Gameplay.Core.PositionComponent),
+        typeof(FlappyBird.Gameplay.Core.VelocityClampComponent),
+        typeof(FlappyBird.Gameplay.Core.VelocityComponent)
     };
 }

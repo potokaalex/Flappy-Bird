@@ -1,9 +1,7 @@
 ﻿using FlappyBird.Gameplay.PreGameplay;
 using FlappyBird.Gameplay.GameOver;
 using System.Collections.Generic;
-using FlappyBird.Gameplay.Basic;
-using FlappyBird.Gameplay.Pipes;
-using FlappyBird.Gameplay.Bird;
+using FlappyBird.Gameplay.Core;
 
 namespace FlappyBird.Gameplay
 {
@@ -18,6 +16,7 @@ namespace FlappyBird.Gameplay
 
         public GameplayEcs(IDataProvider dataProvider, IStateMachine stateMachine, IGameLoop gameLoop)
         {
+            _contexts = Contexts.sharedInstance = new();
             _stateMachine = stateMachine;
             _gameLoop = gameLoop;
             _dataProvider = dataProvider;
@@ -25,20 +24,17 @@ namespace FlappyBird.Gameplay
 
         public Contexts Contexts
             => _contexts;
-
-        public BasicSystems BasicSystems;
+        
         public PreGameplaySystems PreGameplaySystems;
-        public BirdSystems BirdSystems;
-        public PipesSystems PipesSystems;
+        public CoreSystems CoreSystems;
         public PreGameOverSystems PreGameOverSystems;
 
         public void Initialize()
         {
-            _contexts = Contexts.sharedInstance = new();
             _systems = CreateSystems();
 
-            foreach (var systems in _systems)
-                systems.Initialize();
+            //foreach (var systems in _systems)
+            //    systems.Initialize();
         }
 
         public void Dispose()
@@ -55,18 +51,14 @@ namespace FlappyBird.Gameplay
 
         private List<GameplaySystems> CreateSystems()
         {
-            BasicSystems = new(_contexts, _gameLoop);
             PreGameplaySystems = new(_contexts, _stateMachine, _gameLoop);
-            BirdSystems = new(_contexts, _dataProvider.Get<PlayerProgress>(), _gameLoop);
-            PipesSystems = new(_contexts, _dataProvider.Get<PlayerProgress>(), _gameLoop);
-            PreGameOverSystems = new(_contexts, BirdSystems, PipesSystems, _stateMachine, _gameLoop);
+            CoreSystems = new(_contexts,_dataProvider.Get<PlayerProgress>(),_stateMachine, _gameLoop);
+            PreGameOverSystems = new(_contexts, _stateMachine, _gameLoop);
 
             var systems = new List<GameplaySystems>();
-
-            systems.Add(BasicSystems);
+            
             systems.Add(PreGameplaySystems);
-            systems.Add(BirdSystems);
-            systems.Add(PipesSystems);
+            systems.Add(CoreSystems);
             systems.Add(PreGameOverSystems);
 
             return systems;

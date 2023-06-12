@@ -1,8 +1,7 @@
-using FlappyBird.Gameplay.Basic;
 using Entitas.Unity;
 using UnityEngine;
 
-namespace FlappyBird.Gameplay.Bird
+namespace FlappyBird.Gameplay.Core.Bird
 {
     public class BirdFactory
     {
@@ -52,7 +51,7 @@ namespace FlappyBird.Gameplay.Bird
             entity.AddGravity(_progress.BirdData.StaticData.GravityAcceleration);
             entity.AddBirdAnimations(
                 new(gameObject.GetComponent<Animator>()),
-                _progress.BirdData.StaticData.VelocityToFallAnimation);
+                _progress.BirdData.StaticData.VelocityToFallAnimation, false);
 
             entity.AddLinkToGameObject(gameObject);
             entity.isBird = true;

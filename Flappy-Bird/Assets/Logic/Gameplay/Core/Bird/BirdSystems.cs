@@ -1,38 +1,19 @@
 ﻿using Entitas.Unity;
 using Entitas;
 
-namespace FlappyBird.Gameplay.Bird
+namespace FlappyBird.Gameplay.Core.Bird
 {
-    public class BirdSystems : GameplaySystems
+    public class BirdSystems : Feature
     {
         private readonly PlayerProgress _progress;
         private readonly Contexts _contexts;
-        private readonly IGameLoop _gameLoop;
 
-        public BirdSystems(Contexts contexts, PlayerProgress progress, IGameLoop gameLoop)
+        public BirdSystems(Contexts contexts, PlayerProgress progress)
         {
             _contexts = contexts;
-            _gameLoop = gameLoop;
             _progress = progress;
 
             base.Add(CreateSystems(contexts, progress));
-            DeactivateReactiveSystems();
-        }
-
-        public override void Start()
-        {
-            _contexts.input.birdData.FlyUpAction.Enable();
-
-            ActivateReactiveSystems();
-            _gameLoop.OnFixedUpdate += base.Execute;
-        }
-
-        public override void Stop()
-        {
-            _contexts.input.birdData.FlyUpAction.Disable();
-
-            DeactivateReactiveSystems();
-            _gameLoop.OnFixedUpdate -= base.Execute;
         }
 
         public override void Initialize()
@@ -45,18 +26,6 @@ namespace FlappyBird.Gameplay.Bird
         {
             base.Cleanup();
             RemoveEntities();
-        }
-
-        private Systems CreateSystems(Contexts contexts, PlayerProgress progress)
-        {
-            var systems = new Systems();
-
-            systems.Add(new InputSystem(contexts.input));
-            systems.Add(new FlyUpSystem(contexts.level, contexts.input));
-            systems.Add(new AnimationSystem(contexts.level, contexts.input));
-            systems.Add(new ScoreSystem(contexts.input, progress.Score));
-
-            return systems;
         }
 
         private void CreateEntities()
@@ -81,6 +50,18 @@ namespace FlappyBird.Gameplay.Bird
                 bird.linkToGameObject.GameObject.Unlink();
                 bird.Destroy();
             }
+        }
+        
+        private Systems CreateSystems(Contexts contexts, PlayerProgress progress)
+        {
+            var systems = new Systems();
+
+            systems.Add(new InputSystem(contexts.input));
+            systems.Add(new FlyUpSystem(contexts.level, contexts.input));
+            systems.Add(new AnimationSystem(contexts.level, contexts.input));
+            systems.Add(new ScoreSystem(contexts.input, progress.Score));
+
+            return systems;
         }
     }
 }

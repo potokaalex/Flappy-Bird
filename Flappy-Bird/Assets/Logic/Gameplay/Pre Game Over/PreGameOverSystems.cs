@@ -1,5 +1,5 @@
-using FlappyBird.Gameplay.Pipes;
-using FlappyBird.Gameplay.Bird;
+using FlappyBird.Gameplay.Core.Bird;
+using FlappyBird.Gameplay.Core;
 using Entitas;
 
 namespace FlappyBird.Gameplay.GameOver
@@ -8,12 +8,11 @@ namespace FlappyBird.Gameplay.GameOver
     {
         private readonly IGameLoop _gameLoop;
 
-        public PreGameOverSystems(Contexts contexts, BirdSystems birdSystems, PipesSystems pipesSystems,
-            IStateMachine stateMachine, IGameLoop gameLoop)
+        public PreGameOverSystems(Contexts contexts, IStateMachine stateMachine, IGameLoop gameLoop)
         {
             _gameLoop = gameLoop;
 
-            base.Add(CreateSystems(contexts, birdSystems, pipesSystems, stateMachine));
+            base.Add(CreateSystems(contexts, gameLoop, stateMachine));
             DeactivateReactiveSystems();
         }
 
@@ -29,13 +28,15 @@ namespace FlappyBird.Gameplay.GameOver
             _gameLoop.OnFixedUpdate -= base.Execute;
         }
 
-        private Systems CreateSystems(Contexts contexts, BirdSystems birdSystems, PipesSystems pipesSystems,
-            IStateMachine stateMachine)
+        private Systems CreateSystems(Contexts contexts, IGameLoop gameLoop, IStateMachine stateMachine)
         {
             var systems = new Systems();
 
+            systems.Add(new RebuildSystem(contexts.level));
             systems.Add(new AnimationSystem(contexts.level, contexts.input));
-            systems.Add(new RebuildSystem(contexts.level, birdSystems, pipesSystems, contexts.input));
+            systems.Add(new GravitySystem(contexts.level, contexts.input));
+            systems.Add(new TransformSystems(contexts));
+            systems.Add(new TimeUpdateSystem(contexts.input, gameLoop.FixedDeltaTime));
             systems.Add(new GameOverStartStateSystem(stateMachine, contexts.input));
 
             return systems;

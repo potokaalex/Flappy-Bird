@@ -2,7 +2,7 @@
 using Entitas;
 using System;
 
-namespace FlappyBird.Gameplay.Bird
+namespace FlappyBird.Gameplay.Core.Bird
 {
     [Serializable, Input, Unique]
     public class FlyUpComponent : IComponent

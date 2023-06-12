@@ -4,7 +4,7 @@ namespace FlappyBird
 {
     public class DataProvider : IDataProvider
     {
-        private List<IData> _data = new();
+        private readonly List<IData> _data = new();
 
         public T Get<T>() where T : IData
         {

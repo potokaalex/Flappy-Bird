@@ -9,12 +9,12 @@
 public partial class InputContext {
 
     public InputEntity birdDataEntity { get { return GetGroup(InputMatcher.BirdData).GetSingleEntity(); } }
-    public FlappyBird.Gameplay.Bird.BirdDataComponent birdData { get { return birdDataEntity.birdData; } }
+    public FlappyBird.Gameplay.Core.Bird.BirdDataComponent birdData { get { return birdDataEntity.birdData; } }
     public bool hasBirdData { get { return birdDataEntity != null; } }
 
     public InputEntity SetBirdData(UnityEngine.InputSystem.InputAction newFlyUpAction, float newFlyUpVelocity) {
         if (hasBirdData) {
-            throw new Entitas.EntitasException("Could not set BirdData!\n" + this + " already has an entity with FlappyBird.Gameplay.Bird.BirdDataComponent!",
+            throw new Entitas.EntitasException("Could not set BirdData!\n" + this + " already has an entity with FlappyBird.Gameplay.Core.Bird.BirdDataComponent!",
                 "You should check if the context already has a birdDataEntity before setting it or use context.ReplaceBirdData().");
         }
         var entity = CreateEntity();
@@ -46,12 +46,12 @@ public partial class InputContext {
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    public FlappyBird.Gameplay.Bird.BirdDataComponent birdData { get { return (FlappyBird.Gameplay.Bird.BirdDataComponent)GetComponent(InputComponentsLookup.BirdData); } }
+    public FlappyBird.Gameplay.Core.Bird.BirdDataComponent birdData { get { return (FlappyBird.Gameplay.Core.Bird.BirdDataComponent)GetComponent(InputComponentsLookup.BirdData); } }
     public bool hasBirdData { get { return HasComponent(InputComponentsLookup.BirdData); } }
 
     public void AddBirdData(UnityEngine.InputSystem.InputAction newFlyUpAction, float newFlyUpVelocity) {
         var index = InputComponentsLookup.BirdData;
-        var component = (FlappyBird.Gameplay.Bird.BirdDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.BirdDataComponent));
+        var component = (FlappyBird.Gameplay.Core.Bird.BirdDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.Bird.BirdDataComponent));
         component.FlyUpAction = newFlyUpAction;
         component.FlyUpVelocity = newFlyUpVelocity;
         AddComponent(index, component);
@@ -59,7 +59,7 @@ public partial class InputEntity {
 
     public void ReplaceBirdData(UnityEngine.InputSystem.InputAction newFlyUpAction, float newFlyUpVelocity) {
         var index = InputComponentsLookup.BirdData;
-        var component = (FlappyBird.Gameplay.Bird.BirdDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Bird.BirdDataComponent));
+        var component = (FlappyBird.Gameplay.Core.Bird.BirdDataComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.Bird.BirdDataComponent));
         component.FlyUpAction = newFlyUpAction;
         component.FlyUpVelocity = newFlyUpVelocity;
         ReplaceComponent(index, component);

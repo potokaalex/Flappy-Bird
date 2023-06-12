@@ -1,31 +1,18 @@
 using Entitas;
 
-namespace FlappyBird.Gameplay.Basic
+namespace FlappyBird.Gameplay.Core
 {
-    public class BasicSystems : GameplaySystems
+    public class CommonSystems : Feature
     {
         private readonly IGameLoop _gameLoop;
         private readonly Contexts _contexts;
 
-        public BasicSystems(Contexts contexts, IGameLoop gameLoop)
+        public CommonSystems(Contexts contexts, IGameLoop gameLoop)
         {
             _contexts = contexts;
             _gameLoop = gameLoop;
 
             base.Add(CreateSystems(contexts, gameLoop));
-            DeactivateReactiveSystems();
-        }
-
-        public override void Start()
-        {
-            ActivateReactiveSystems();
-            _gameLoop.OnLateFixedUpdate += base.Execute;
-        }
-
-        public override void Stop()
-        {
-            DeactivateReactiveSystems();
-            _gameLoop.OnLateFixedUpdate -= base.Execute;
         }
 
         public override void Initialize()
@@ -40,6 +27,12 @@ namespace FlappyBird.Gameplay.Basic
             RemoveEntities();
         }
 
+        private void CreateEntities()
+            => _contexts.input.SetTime(_gameLoop.FixedDeltaTime.Value);
+
+        private void RemoveEntities()
+            => _contexts.input.RemoveTime();
+
         private Systems CreateSystems(Contexts contexts, IGameLoop gameLoop)
         {
             var systems = new Systems();
@@ -51,11 +44,5 @@ namespace FlappyBird.Gameplay.Basic
 
             return systems;
         }
-
-        private void CreateEntities()
-            => _contexts.input.SetTime(_gameLoop.FixedDeltaTime.Value);
-
-        private void RemoveEntities()
-            => _contexts.input.RemoveTime();
     }
 }

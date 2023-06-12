@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class LevelEntity {
 
-    public FlappyBird.Gameplay.Basic.PositionComponent position { get { return (FlappyBird.Gameplay.Basic.PositionComponent)GetComponent(LevelComponentsLookup.Position); } }
+    public FlappyBird.Gameplay.Core.PositionComponent position { get { return (FlappyBird.Gameplay.Core.PositionComponent)GetComponent(LevelComponentsLookup.Position); } }
     public bool hasPosition { get { return HasComponent(LevelComponentsLookup.Position); } }
 
     public void AddPosition(UnityEngine.Vector2 newValue) {
         var index = LevelComponentsLookup.Position;
-        var component = (FlappyBird.Gameplay.Basic.PositionComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Basic.PositionComponent));
+        var component = (FlappyBird.Gameplay.Core.PositionComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.PositionComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplacePosition(UnityEngine.Vector2 newValue) {
         var index = LevelComponentsLookup.Position;
-        var component = (FlappyBird.Gameplay.Basic.PositionComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Basic.PositionComponent));
+        var component = (FlappyBird.Gameplay.Core.PositionComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.PositionComponent));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
