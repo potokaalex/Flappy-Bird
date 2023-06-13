@@ -1,6 +1,6 @@
 using FlappyBird.Gameplay.Core.Bird;
-using Entitas;
 using FlappyBird.Gameplay.Core;
+using Entitas;
 
 namespace FlappyBird.Gameplay.PreGameplay
 {
@@ -13,7 +13,7 @@ namespace FlappyBird.Gameplay.PreGameplay
         {
             _gameLoop = gameLoop;
             _contexts = contexts;
-            
+
             base.Add(CreateSystems(contexts, stateMachine));
             DeactivateReactiveSystems();
         }
@@ -21,7 +21,7 @@ namespace FlappyBird.Gameplay.PreGameplay
         public override void Start()
         {
             _contexts.input.birdData.FlyUpAction.Enable();
-            
+
             ActivateReactiveSystems();
             _gameLoop.OnFixedUpdate += base.Execute;
         }
@@ -38,6 +38,8 @@ namespace FlappyBird.Gameplay.PreGameplay
         {
             var systems = new Systems();
 
+            systems.Add(new Core.Grass.AnimationSystem(contexts.input));
+            systems.Add(new TimeUpdateSystem(_contexts.input, _gameLoop.FixedDeltaTime));
             systems.Add(new InputSystem(contexts.input));
             systems.Add(new GameplayStartStateSystem(stateMachine, contexts.input));
             systems.Add(new EventCleanupSystem(contexts.input));

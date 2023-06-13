@@ -1,36 +1,30 @@
-using System.Collections.Generic;
+using FlappyBird.Gameplay.Core.Grass;
+using FlappyBird.Gameplay.Core.Bird;
 using FlappyBird.Infrastructure;
 using Entitas;
-using FlappyBird.Gameplay.Core.Bird;
 
 namespace FlappyBird.Gameplay.GameOver
 {
-    public class GameOverStartStateSystem : ReactiveSystem<InputEntity>, IInitializeSystem
+    public class GameOverStartStateSystem : IInitializeSystem, IExecuteSystem
     {
+        private readonly IGroup<InputEntity> _collisions;
         private readonly IStateMachine _stateMachine;
-        private readonly InputContext _inputContext;
 
-        public GameOverStartStateSystem(IStateMachine stateMachine, InputContext inputContext) : base(inputContext)
+        public GameOverStartStateSystem(IStateMachine stateMachine, InputContext inputContext)
         {
-            _inputContext = inputContext;
+            _collisions = inputContext.GetGroup(InputMatcher.Collision);
             _stateMachine = stateMachine;
         }
 
-        public void Initialize()
+        public void Initialize() 
+            => Execute();
+
+        public void Execute()
         {
-            foreach (var collision in _inputContext.GetEntities(InputMatcher.Collision))
-                if (Filter(collision))
+            foreach (var collision in _collisions)
+                if (IsSenderHasBird(collision) && IsTriggerHasGrass(collision))
                     StartState();
         }
-
-        protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context)
-            => context.CreateCollector(InputMatcher.Collision);
-
-        protected override bool Filter(InputEntity entity)
-            => IsSenderHasBird(entity) && IsTriggerHasGrass(entity);
-
-        protected override void Execute(List<InputEntity> entities)
-            => StartState();
 
         private bool IsTriggerHasGrass(InputEntity inputEntity)
             => inputEntity.collision.Info.collider.TryGetComponent<GrassCollider>(out _);

@@ -64,7 +64,7 @@ namespace FlappyBird.Gameplay.Core.Pipes
         private void AddComponents(LevelEntity entity, GameObject gameObject)
         {
             entity.AddPosition(gameObject.transform.position);
-            entity.AddVelocity(new(_progress.PipesData.StaticData.Velocity, 0));
+            entity.AddVelocity(new(_progress.PipesData.StaticData.VelocityY, 0));
             entity.AddLifetime(_progress.PipesData.StaticData.RemoveRate);
 
             entity.AddLinkToGameObject(gameObject);

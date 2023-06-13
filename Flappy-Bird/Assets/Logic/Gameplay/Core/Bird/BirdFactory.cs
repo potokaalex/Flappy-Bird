@@ -45,8 +45,8 @@ namespace FlappyBird.Gameplay.Core.Bird
 
             entity.AddVelocity(Vector2.zero);
             entity.AddVelocityClamp(
-                new(float.MinValue, _progress.BirdData.StaticData.MinVelocity),
-                new(float.MaxValue, _progress.BirdData.StaticData.MaxVelocity));
+                new(float.MinValue, _progress.BirdData.StaticData.MinVelocityY),
+                new(float.MaxValue, _progress.BirdData.StaticData.MaxVelocityY));
 
             entity.AddGravity(_progress.BirdData.StaticData.GravityAcceleration);
             entity.AddBirdAnimations(

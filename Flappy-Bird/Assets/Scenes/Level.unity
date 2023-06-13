@@ -795,6 +795,8 @@ MonoBehaviour:
   PipesConfig: {fileID: 11400000, guid: ef4d9f5660104a248acafffa5b292ab7, type: 2}
   PipesPrefab: {fileID: 1163154790420497170, guid: 2cdf8afec1cb7a54daf34e262546a9f7, type: 3}
   PipesSpawnPoint: {fileID: 1269402345}
+  GrassConfig: {fileID: 11400000, guid: 2b9bf26c040700e409c561755839ebf5, type: 2}
+  GrassMesh: {fileID: 7548452509813612925}
 --- !u!114 &1200257882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1673,6 +1675,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Land
       objectReference: {fileID: 0}
+    - target: {fileID: 4797115344651670406, guid: 6d2215160f9480a48ba51cf626364808, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4797115344651670407, guid: 6d2215160f9480a48ba51cf626364808, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1726,6 +1732,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 810651341369818707, guid: 5dfa676c83a10ae4d8be7791b9da3e75, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 745ecef5bc1742d4ea58c3366115e7e1, type: 3}
+    - target: {fileID: 810651341369818707, guid: 5dfa676c83a10ae4d8be7791b9da3e75, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 810651341369818707, guid: 5dfa676c83a10ae4d8be7791b9da3e75, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c89d138dd12bb5c45a909ebe9a8afacb, type: 2}
+    - target: {fileID: 3665020238987394992, guid: 5dfa676c83a10ae4d8be7791b9da3e75, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4468800709565988709, guid: 5dfa676c83a10ae4d8be7791b9da3e75, type: 3}
       propertyPath: m_Name
       value: Grass
@@ -1774,5 +1796,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4468800709565988715, guid: 5dfa676c83a10ae4d8be7791b9da3e75, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468800709565988715, guid: 5dfa676c83a10ae4d8be7791b9da3e75, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468800709565988715, guid: 5dfa676c83a10ae4d8be7791b9da3e75, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021077641127481252, guid: 5dfa676c83a10ae4d8be7791b9da3e75, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5dfa676c83a10ae4d8be7791b9da3e75, type: 3}
+--- !u!23 &7548452509813612925 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 9077323164368480122, guid: 5dfa676c83a10ae4d8be7791b9da3e75, type: 3}
+  m_PrefabInstance: {fileID: 7548452509813612924}
+  m_PrefabAsset: {fileID: 0}

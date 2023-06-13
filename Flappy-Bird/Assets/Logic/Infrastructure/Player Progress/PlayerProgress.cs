@@ -9,6 +9,8 @@ namespace FlappyBird
         public BirdData BirdData { get; } = new();
         
         public PipesData PipesData { get; } = new();
+        
+        public GrassData GrassData { get; } = new();
 
         // save/load
         

@@ -9,13 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3de0739d37b4406bf0c371fdaf82579, type: 3}
-  m_Name: Pipes Config
+  m_Script: {fileID: 11500000, guid: a3409f40add34ff79ff433863165e5c3, type: 3}
+  m_Name: Grass Config
   m_EditorClassIdentifier: 
-  _spawnDelay: 0
-  _spawnRate: 1.2
-  _removeRate: 4
-  _velocityY: -2.5
-  _minPositionY: -1.22
-  _maxPositionY: 3
-  _maxOffsetY: 6
+  _scrollVelocityY: -1.25

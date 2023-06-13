@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gravityAcceleration: -22
   _flyUpVelocity: 6.3
-  _minVelocity: -20
-  _maxVelocity: 20
+  _velocityToFallAnimation: -3.5
+  _minVelocityY: -20
+  _maxVelocityY: 20
   _minPositionY: -2.7
   _maxPositionY: 6
-  _velocityToFallAnimation: -3.5

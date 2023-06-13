@@ -1,3 +1,4 @@
+using FlappyBird.Gameplay.Core.Grass;
 using FlappyBird.Gameplay.Core.Pipes;
 using FlappyBird.Gameplay.Core.Bird;
 using Entitas;
@@ -41,6 +42,7 @@ namespace FlappyBird.Gameplay.Core
 
             base.Add(new BirdSystems(contexts, progress));
             base.Add(new PipesSystems(contexts, progress));
+            base.Add(new GrassSystems(contexts, progress));
             base.Add(new GameOverCheckSystem(stateMachine, contexts.input));
             base.Add(new CommonSystems(contexts, gameLoop));
 

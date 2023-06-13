@@ -5,7 +5,7 @@ namespace FlappyBird
 {
     public class PipesData
     {
-        public PipesConfiguration StaticData;
+        public PipesStaticData StaticData;
         public GameObject PipesPrefab;
         public float PipesSpawnPointX;
     }

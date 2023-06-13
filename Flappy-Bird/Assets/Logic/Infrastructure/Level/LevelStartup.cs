@@ -1,6 +1,7 @@
 ﻿using UnityEngine.InputSystem;
 using FlappyBird.Gameplay;
 using FlappyBird.Gameplay.Core.Bird;
+using FlappyBird.Gameplay.Core.Grass;
 using FlappyBird.Gameplay.Core.Pipes;
 using UnityEngine;
 using Zenject;
@@ -11,14 +12,17 @@ namespace FlappyBird.Infrastructure
     {
         [SerializeField] private GameOverStateConfiguration _gameOverConfiguration;
 
-        public BirdConfiguration BirdConfig;
+        public BirdStaticData BirdConfig;
         public InputAction BirdFlyUpAction;
         public GameObject BirdPrefab;
         public Transform BirdSpawnPoint;
 
-        public PipesConfiguration PipesConfig;
+        public PipesStaticData PipesConfig;
         public GameObject PipesPrefab;
         public Transform PipesSpawnPoint;
+
+        public GrassStaticData GrassConfig;
+        public MeshRenderer GrassMesh;
 
         private IStateMachine _stateMachine;
         private IDataProvider _data;
@@ -42,8 +46,15 @@ namespace FlappyBird.Infrastructure
             InitBirdData();
             InitPipesData();
             InitScore();
+            InitGrass();
 
             _stateMachine.SwitchTo<PreGameplayState>();
+        }
+
+        private void InitGrass()
+        {
+            _playerProgress.GrassData.StaticData = GrassConfig;
+            _playerProgress.GrassData.MeshRenderer = GrassMesh;
         }
 
         private void InitBirdData()
