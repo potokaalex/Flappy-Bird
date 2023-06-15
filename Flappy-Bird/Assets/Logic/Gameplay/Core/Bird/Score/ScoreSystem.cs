@@ -20,9 +20,9 @@ namespace FlappyBird.Gameplay.Core.Bird
             => _score.IncreaseScore();
 
         private bool IsSenderHasBird(InputEntity inputEntity)
-            => inputEntity.collision.Info.otherCollider.TryGetComponent<BirdCollider>(out _);
+            => inputEntity.collision.Info.OtherCollider.TryGetComponent<BirdCollider>(out _);
 
         private bool IsTriggerHasScore(InputEntity inputEntity)
-            => inputEntity.collision.Info.collider.TryGetComponent<ScoreCollider>(out _);
+            => inputEntity.collision.Info.Collider.TryGetComponent<ScoreCollider>(out _);
     }
 }

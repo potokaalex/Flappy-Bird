@@ -1,6 +1,8 @@
+using FlappyBird.Gameplay.PreGameOver;
 using FlappyBird.Gameplay.Core.Grass;
 using FlappyBird.Gameplay.Core.Pipes;
 using FlappyBird.Gameplay.Core.Bird;
+using FlappyBird.Gameplay.GameOver;
 using Entitas;
 
 namespace FlappyBird.Gameplay.Core
@@ -8,31 +10,25 @@ namespace FlappyBird.Gameplay.Core
     public class CoreSystems : GameplaySystems
     {
         private readonly Contexts _contexts;
-        private readonly IGameLoop _gameLoop;
 
-        public CoreSystems(Contexts contexts, PlayerProgress progress, IStateMachine stateMachine, IGameLoop gameLoop)
+        public CoreSystems(Contexts contexts, PlayerProgress progress,
+            IStateMachine stateMachine, IGameLoop gameLoop) : base(gameLoop)
         {
             _contexts = contexts;
-            _gameLoop = gameLoop;
 
             base.Add(CreateSystems(contexts, progress, stateMachine, gameLoop));
-            DeactivateReactiveSystems();
         }
 
         public override void Start()
         {
+            base.Start();
             _contexts.input.birdData.FlyUpAction.Enable();
-
-            ActivateReactiveSystems();
-            _gameLoop.OnFixedUpdate += base.Execute;
         }
 
         public override void Stop()
         {
+            base.Stop();
             _contexts.input.birdData.FlyUpAction.Disable();
-
-            DeactivateReactiveSystems();
-            _gameLoop.OnFixedUpdate -= base.Execute;
         }
 
         private Systems CreateSystems(Contexts contexts, PlayerProgress progress,
@@ -43,7 +39,8 @@ namespace FlappyBird.Gameplay.Core
             base.Add(new BirdSystems(contexts, progress));
             base.Add(new PipesSystems(contexts, progress));
             base.Add(new GrassSystems(contexts, progress));
-            base.Add(new GameOverCheckSystem(stateMachine, contexts.input));
+            base.Add(new PreGameOverStartStateSystem(stateMachine, contexts.input));
+            base.Add(new GameOverStartStateSystem(stateMachine, contexts.input));
             base.Add(new CommonSystems(contexts, gameLoop));
 
             return systems;

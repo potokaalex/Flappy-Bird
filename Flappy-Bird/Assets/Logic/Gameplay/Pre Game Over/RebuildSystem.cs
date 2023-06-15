@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Entitas;
 
-namespace FlappyBird.Gameplay.GameOver
+namespace FlappyBird.Gameplay.PreGameOver
 {
     public class RebuildSystem : IInitializeSystem
     {

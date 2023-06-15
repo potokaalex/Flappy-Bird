@@ -1,32 +1,14 @@
 using FlappyBird.Gameplay.Core.Bird;
+using FlappyBird.Gameplay.GameOver;
 using FlappyBird.Gameplay.Core;
 using Entitas;
 
-namespace FlappyBird.Gameplay.GameOver
+namespace FlappyBird.Gameplay.PreGameOver
 {
     public class PreGameOverSystems : GameplaySystems
     {
-        private readonly IGameLoop _gameLoop;
-
-        public PreGameOverSystems(Contexts contexts, IStateMachine stateMachine, IGameLoop gameLoop)
-        {
-            _gameLoop = gameLoop;
-
-            base.Add(CreateSystems(contexts, gameLoop, stateMachine));
-            DeactivateReactiveSystems();
-        }
-
-        public override void Start()
-        {
-            ActivateReactiveSystems();
-            _gameLoop.OnFixedUpdate += base.Execute;
-        }
-
-        public override void Stop()
-        {
-            DeactivateReactiveSystems();
-            _gameLoop.OnFixedUpdate -= base.Execute;
-        }
+        public PreGameOverSystems(Contexts contexts, IStateMachine stateMachine, IGameLoop gameLoop) : base(gameLoop) 
+            => base.Add(CreateSystems(contexts, gameLoop, stateMachine));
 
         private Systems CreateSystems(Contexts contexts, IGameLoop gameLoop, IStateMachine stateMachine)
         {

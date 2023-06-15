@@ -3,18 +3,20 @@ using UnityEngine;
 using Entitas;
 using FlappyBird;
 
-public class TestSystem : IExecuteSystem
+public class TestSystem : IInitializeSystem, IExecuteSystem
 {
     private readonly Contexts _contexts;
     private readonly DataProvider _data;
 
-    public TestSystem(Contexts contexts, DataProvider data,
-        IStateMachine stateMachine, IGameLoop gameLoop)
+    public TestSystem(Contexts contexts, IStateMachine stateMachine, IGameLoop gameLoop)
     {
         _contexts = contexts;
-        _data = data;
     }
 
+    public void Initialize()
+    {
+    }
+    
     public void Execute()
     {
     }

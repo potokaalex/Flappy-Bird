@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace FlappyBird.Gameplay.Core.Grass
 {
-    public class AnimationSystem : IExecuteSystem
+    public class GrassAnimationSystem : IExecuteSystem
     {
         private readonly InputContext _inputContext;
 
-        public AnimationSystem(InputContext inputContext)
+        public GrassAnimationSystem(InputContext inputContext)
             => _inputContext = inputContext;
 
         public void Execute()

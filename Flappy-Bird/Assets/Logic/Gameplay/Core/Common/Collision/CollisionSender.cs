@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Entitas;
+using UnityEngine;
 
 namespace FlappyBird.Gameplay.Core
 {
@@ -11,12 +12,17 @@ namespace FlappyBird.Gameplay.Core
 
         private void OnCollisionEnter2D(Collision2D collision)
             => SendCollisionEvent(collision);
-        
+
         private void SendCollisionEvent(Collision2D collision)
         {
             var entity = _context.CreateEntity();
 
-            entity.AddCollision(collision);
+            entity.AddCollision(new()
+            {
+                Collider =  collision.collider,
+                OtherCollider = collision.otherCollider
+            });
+            
             entity.isEvent = true;
         }
     }

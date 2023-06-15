@@ -19,10 +19,10 @@ namespace FlappyBird.Infrastructure
 
         public void Enter()
         {
-            var config = _data.Get<GameOverStateConfiguration>();
-
-            config.GameplayUI.Hide();
-            config.GameOverUI.Show();
+            _ecs.GameOverSystems.Initialize();
+            _ecs.GameOverSystems.Start();
+            
+            _data.Get<GameOverStateConfiguration>().GameOverUI.Show();
         }
 
         public void Exit()

@@ -44,7 +44,7 @@ namespace FlappyBird.Gameplay.Core.Grass
         {
             var systems = new Systems();
 
-            base.Add(new AnimationSystem(contexts.input));
+            base.Add(new GrassAnimationSystem(contexts.input));
 
             return systems;
         }

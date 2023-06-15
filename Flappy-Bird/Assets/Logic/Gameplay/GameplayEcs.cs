@@ -1,7 +1,8 @@
 ﻿using FlappyBird.Gameplay.PreGameplay;
-using FlappyBird.Gameplay.GameOver;
 using System.Collections.Generic;
 using FlappyBird.Gameplay.Core;
+using FlappyBird.Gameplay.GameOver;
+using FlappyBird.Gameplay.PreGameOver;
 
 namespace FlappyBird.Gameplay
 {
@@ -24,10 +25,11 @@ namespace FlappyBird.Gameplay
 
         public Contexts Contexts
             => _contexts;
-        
+
         public PreGameplaySystems PreGameplaySystems;
         public CoreSystems CoreSystems;
         public PreGameOverSystems PreGameOverSystems;
+        public GameOverSystems GameOverSystems;
 
         public void Initialize()
         {
@@ -43,7 +45,6 @@ namespace FlappyBird.Gameplay
             {
                 systems.Stop();
                 systems.Cleanup();
-                systems.DeactivateReactiveSystems();
             }
 
             _contexts.Reset();
@@ -52,14 +53,16 @@ namespace FlappyBird.Gameplay
         private List<GameplaySystems> CreateSystems()
         {
             PreGameplaySystems = new(_contexts, _stateMachine, _gameLoop);
-            CoreSystems = new(_contexts,_dataProvider.Get<PlayerProgress>(),_stateMachine, _gameLoop);
+            CoreSystems = new(_contexts, _dataProvider.Get<PlayerProgress>(), _stateMachine, _gameLoop);
             PreGameOverSystems = new(_contexts, _stateMachine, _gameLoop);
+            GameOverSystems = new(_contexts, _gameLoop);
 
             var systems = new List<GameplaySystems>();
-            
+
             systems.Add(PreGameplaySystems);
             systems.Add(CoreSystems);
             systems.Add(PreGameOverSystems);
+            systems.Add(GameOverSystems);
 
             return systems;
         }

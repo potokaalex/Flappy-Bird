@@ -11,14 +11,14 @@ public partial class InputEntity {
     public FlappyBird.Gameplay.Core.CollisionComponent collision { get { return (FlappyBird.Gameplay.Core.CollisionComponent)GetComponent(InputComponentsLookup.Collision); } }
     public bool hasCollision { get { return HasComponent(InputComponentsLookup.Collision); } }
 
-    public void AddCollision(UnityEngine.Collision2D newInfo) {
+    public void AddCollision(FlappyBird.Gameplay.Core.CollisionInfo newInfo) {
         var index = InputComponentsLookup.Collision;
         var component = (FlappyBird.Gameplay.Core.CollisionComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.CollisionComponent));
         component.Info = newInfo;
         AddComponent(index, component);
     }
 
-    public void ReplaceCollision(UnityEngine.Collision2D newInfo) {
+    public void ReplaceCollision(FlappyBird.Gameplay.Core.CollisionInfo newInfo) {
         var index = InputComponentsLookup.Collision;
         var component = (FlappyBird.Gameplay.Core.CollisionComponent)CreateComponent(index, typeof(FlappyBird.Gameplay.Core.CollisionComponent));
         component.Info = newInfo;

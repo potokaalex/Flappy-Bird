@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3409f40add34ff79ff433863165e5c3, type: 3}
   m_Name: Grass Config
   m_EditorClassIdentifier: 
-  _scrollVelocityY: -1.25
+  _scrollVelocityY: -0.435

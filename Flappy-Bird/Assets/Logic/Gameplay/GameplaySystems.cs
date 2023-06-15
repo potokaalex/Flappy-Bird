@@ -2,8 +2,24 @@ namespace FlappyBird.Gameplay
 {
     public abstract class GameplaySystems : Feature
     {
-        public abstract void Start();
+        private readonly IGameLoop _gameLoop;
 
-        public abstract void Stop();
+        protected GameplaySystems(IGameLoop gameLoop)
+        {
+            DeactivateReactiveSystems();
+            _gameLoop = gameLoop;
+        }
+
+        public virtual void Start()
+        {
+            ActivateReactiveSystems();
+            _gameLoop.OnFixedUpdate += Execute;
+        }
+
+        public virtual void Stop()
+        {
+            DeactivateReactiveSystems();
+            _gameLoop.OnFixedUpdate -= Execute;
+        }
     }
 }
