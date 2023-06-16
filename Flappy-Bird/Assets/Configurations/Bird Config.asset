@@ -18,4 +18,4 @@ MonoBehaviour:
   _minVelocityY: -20
   _maxVelocityY: 20
   _minPositionY: -2.7
-  _maxPositionY: 6
+  _maxPositionY: 5.5

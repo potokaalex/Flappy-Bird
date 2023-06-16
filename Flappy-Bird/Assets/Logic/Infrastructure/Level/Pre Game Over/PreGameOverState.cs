@@ -19,7 +19,7 @@ namespace FlappyBird
             _ecs.PreGameOverSystems.Initialize();
             _ecs.PreGameOverSystems.Start();
 
-            _dataProvider.Get<GameOverStateConfiguration>().GameplayUI.Hide();
+            _dataProvider.Get<GameOverStateConfiguration>().GameplayUI.PlayCloseAnimation();
         }
 
         public void Exit()

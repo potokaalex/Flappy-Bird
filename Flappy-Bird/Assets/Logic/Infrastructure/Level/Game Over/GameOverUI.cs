@@ -4,13 +4,10 @@ namespace FlappyBird.Infrastructure
 {
     public class GameOverUI : MonoBehaviour
     {
-        public void Show()
-        {
-            gameObject.SetActive(true);
-        }
-
-        public void Hide()
-        {
-        }
+        private static readonly int _openAnimation = Animator.StringToHash("Open");
+        [SerializeField] private Animator _gameOverUIAnimator;
+        
+        public void PlayOpenAnimation() 
+            => _gameOverUIAnimator.SetTrigger(_openAnimation);
     }
 }

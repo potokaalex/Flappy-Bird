@@ -22,7 +22,7 @@ namespace FlappyBird.Infrastructure
             _ecs.GameOverSystems.Initialize();
             _ecs.GameOverSystems.Start();
             
-            _data.Get<GameOverStateConfiguration>().GameOverUI.Show();
+            _data.Get<GameOverStateConfiguration>().GameOverUI.PlayOpenAnimation();
         }
 
         public void Exit()
