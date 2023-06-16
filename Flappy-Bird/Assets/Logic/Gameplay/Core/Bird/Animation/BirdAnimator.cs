@@ -17,5 +17,10 @@ namespace FlappyBird.Gameplay.Core.Bird
 
         public void PlayFallDown()
             => _animator.SetTrigger(_fallDownStateHash);
+
+        public void SetActive(bool isActive)
+        {
+            _animator.enabled = isActive;
+        }
     }
 }

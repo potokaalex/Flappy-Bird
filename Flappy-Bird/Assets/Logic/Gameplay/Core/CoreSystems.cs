@@ -22,12 +22,14 @@ namespace FlappyBird.Gameplay.Core
         public override void Start()
         {
             base.Start();
+            _contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(true);
             _contexts.input.birdData.FlyUpAction.Enable();
         }
 
         public override void Stop()
         {
             base.Stop();
+            _contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(false);
             _contexts.input.birdData.FlyUpAction.Disable();
         }
 
