@@ -4,10 +4,14 @@ namespace FlappyBird.Infrastructure
 {
     public class PreGameplayState : IState
     {
+        private readonly IDataProvider _dataProvider;
         private readonly GameplayEcs _ecs;
 
-        public PreGameplayState(GameplayEcs ecs)
-            => _ecs = ecs;
+        public PreGameplayState(GameplayEcs ecs, IDataProvider dataProvider)
+        {
+            _dataProvider = dataProvider;
+            _ecs = ecs;
+        }
 
         public void Enter()
         {
@@ -20,6 +24,9 @@ namespace FlappyBird.Infrastructure
         }
 
         public void Exit()
-            => _ecs.PreGameplaySystems.Stop();
+        {
+            _dataProvider.Get<GameOverStateConfiguration>().GameplayUI.PlayOpenAnimation();
+            _ecs.PreGameplaySystems.Stop();
+        }
     }
 }

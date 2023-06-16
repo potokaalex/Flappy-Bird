@@ -10,6 +10,7 @@ namespace FlappyBird.Infrastructure
         [SerializeField] private Sprite _pauseSprite;
         [SerializeField] private Sprite _resumeSprite;
         private IStateMachine _stateMachine;
+        private IState _lastState;
         private bool _isPause;
 
         [Inject]
