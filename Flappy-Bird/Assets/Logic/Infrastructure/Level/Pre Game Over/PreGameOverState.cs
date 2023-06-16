@@ -16,10 +16,11 @@ namespace FlappyBird
 
         public void Enter()
         {
+            _dataProvider.Get<GameOverStateConfiguration>().GameplayUI.PlayCloseAnimation();
+            _ecs.Contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(true);
+            
             _ecs.PreGameOverSystems.Initialize();
             _ecs.PreGameOverSystems.Start();
-
-            _dataProvider.Get<GameOverStateConfiguration>().GameplayUI.PlayCloseAnimation();
         }
 
         public void Exit()
