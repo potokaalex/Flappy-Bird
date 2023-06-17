@@ -1,3 +1,5 @@
+using System;
+using FlappyBird.Gameplay;
 using UnityEngine.UI;
 using UnityEngine;
 using Zenject;
@@ -7,20 +9,21 @@ namespace FlappyBird.Infrastructure
     public class ScoreUI : MonoBehaviour
     {
         [SerializeField] private Text _scoreText;
-        private IDataProvider _data;
+        private GameplayEcs _ecs;
 
         [Inject]
-        private void Constructor(IDataProvider data)
+        private void Constructor(GameplayEcs ecs)
         {
-            _data = data;
-            
-            _data.Get<PlayerProgress>().Score.OnCurrentScoreChanged += UpdateScore;
+            _ecs = ecs;
         }
 
-        private void OnDestroy()
-            => _data.Get<PlayerProgress>().Score.OnCurrentScoreChanged -= UpdateScore;
+        private void Start() 
+            => _ecs.Contexts.input.scoreData.OnCurrentScoreChanged += UpdateScore;
 
-        private void UpdateScore(float newScore)
+        private void OnDisable()
+            => _ecs.Contexts.input.scoreData.OnCurrentScoreChanged -= UpdateScore;
+
+        private void UpdateScore(uint newScore)
             => _scoreText.text = newScore.ToString();
     }
 }

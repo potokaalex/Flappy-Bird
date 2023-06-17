@@ -5,15 +5,15 @@ namespace FlappyBird.Gameplay.Core.Bird
 {
     public class BirdSystems : Feature
     {
-        private readonly PlayerProgress _progress;
         private readonly Contexts _contexts;
+        private readonly IDataProvider _dataProvider;
 
-        public BirdSystems(Contexts contexts, PlayerProgress progress)
+        public BirdSystems(Contexts contexts, IDataProvider dataProvider)
         {
             _contexts = contexts;
-            _progress = progress;
+            _dataProvider = dataProvider;
 
-            base.Add(CreateSystems(contexts, progress));
+            base.Add(CreateSystems(contexts));
         }
 
         public override void Initialize()
@@ -30,11 +30,13 @@ namespace FlappyBird.Gameplay.Core.Bird
 
         private void CreateEntities()
         {
-            _contexts.input.SetBirdData(
-                _progress.BirdData.BirdFlyUpAction,
-                _progress.BirdData.StaticData.FlyUpVelocity);
+            var staticData = _dataProvider.Get<BirdStaticData>();
+            var sceneData = _dataProvider.Get<BirdSceneData>();
+            var progress = _dataProvider.Get<ProgressData>();
+            
+            _contexts.input.SetBirdData(staticData.FlyUpAction, staticData.FlyUpVelocity);
 
-            new BirdFactory(_contexts.level, _contexts.input, _progress).Create();
+            new BirdFactory(_contexts.level, _contexts.input, staticData, progress.Bird, sceneData).Create();
 
             _contexts.input.birdData.FlyUpAction.Enable();
         }
@@ -51,15 +53,14 @@ namespace FlappyBird.Gameplay.Core.Bird
                 bird.Destroy();
             }
         }
-        
-        private Systems CreateSystems(Contexts contexts, PlayerProgress progress)
+
+        private Systems CreateSystems(Contexts contexts)
         {
             var systems = new Systems();
 
             systems.Add(new InputSystem(contexts.input));
             systems.Add(new FlyUpSystem(contexts.level, contexts.input));
             systems.Add(new AnimationSystem(contexts.level, contexts.input));
-            systems.Add(new ScoreSystem(contexts.input, progress.Score));
 
             return systems;
         }

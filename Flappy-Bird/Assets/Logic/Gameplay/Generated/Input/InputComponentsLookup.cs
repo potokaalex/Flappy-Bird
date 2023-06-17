@@ -14,9 +14,10 @@ public static class InputComponentsLookup {
     public const int Event = 3;
     public const int GrassData = 4;
     public const int PipesData = 5;
-    public const int Time = 6;
+    public const int ScoreData = 6;
+    public const int Time = 7;
 
-    public const int TotalComponents = 7;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
         "BirdData",
@@ -25,6 +26,7 @@ public static class InputComponentsLookup {
         "Event",
         "GrassData",
         "PipesData",
+        "ScoreData",
         "Time"
     };
 
@@ -35,6 +37,7 @@ public static class InputComponentsLookup {
         typeof(FlappyBird.Gameplay.Core.EventComponent),
         typeof(FlappyBird.Gameplay.Core.Grass.GrassDataComponent),
         typeof(FlappyBird.Gameplay.Core.Pipes.PipesDataComponent),
+        typeof(FlappyBird.Gameplay.Core.Score.ScoreDataComponent),
         typeof(FlappyBird.Gameplay.Core.TimeComponent)
     };
 }

@@ -1,17 +1,17 @@
-using Entitas;
 using Entitas.Unity;
+using Entitas;
 
 namespace FlappyBird.Gameplay.Core.Pipes
 {
     public class PipesSystems : Feature
     {
-        private readonly PlayerProgress _progress;
+        private readonly IDataProvider _dataProvider;
         private readonly Contexts _contexts;
 
-        public PipesSystems(Contexts contexts, PlayerProgress progress)
+        public PipesSystems(Contexts contexts, IDataProvider dataProvider)
         {
             _contexts = contexts;
-            _progress = progress;
+            _dataProvider = dataProvider;
 
             base.Add(CreateSystems(contexts));
         }
@@ -30,10 +30,13 @@ namespace FlappyBird.Gameplay.Core.Pipes
 
         private void CreateEntities()
         {
-            var pipesFactory = new PipesFactory(_contexts.level, _progress);
+            var staticData = _dataProvider.Get<PipesStaticData>();
+            var sceneData = _dataProvider.Get<PipesSceneData>();
 
-            _contexts.input.SetPipesData(pipesFactory, _progress.PipesData.StaticData.SpawnDelay,
-                _progress.PipesData.StaticData.SpawnRate, _progress.PipesData.StaticData.RemoveRate);
+            var pipesFactory = new PipesFactory(_contexts.level, staticData, sceneData);
+
+            _contexts.input.SetPipesData(pipesFactory, staticData.SpawnDelay,
+                staticData.SpawnRate, staticData.RemoveRate);
         }
 
         private void RemoveEntities()

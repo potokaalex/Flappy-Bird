@@ -5,13 +5,13 @@ namespace FlappyBird.Gameplay.Core.Grass
 {
     public class GrassSystems : Feature
     {
-        private readonly PlayerProgress _progress;
+        private readonly IDataProvider _dataProvider;
         private readonly Contexts _contexts;
 
-        public GrassSystems(Contexts contexts, PlayerProgress progress)
+        public GrassSystems(Contexts contexts, IDataProvider dataProvider)
         {
             _contexts = contexts;
-            _progress = progress;
+            _dataProvider = dataProvider;
 
             base.Add(CreateSystems(contexts));
         }
@@ -30,11 +30,12 @@ namespace FlappyBird.Gameplay.Core.Grass
 
         private void CreateEntities()
         {
-            var material = new Material(_progress.GrassData.MeshRenderer.material);
+            var staticData = _dataProvider.Get<GrassStaticData>();
+            var sceneData = _dataProvider.Get<GrassSceneData>();
+            var material = new Material(sceneData.MeshRenderer.material);
 
-            _progress.GrassData.MeshRenderer.material = material;
-
-            _contexts.input.SetGrassData(material, _progress.GrassData.StaticData.ScrollVelocity);
+            sceneData.MeshRenderer.material = material;
+            _contexts.input.SetGrassData(material, staticData.ScrollVelocity);
         }
 
         private void RemoveEntities()

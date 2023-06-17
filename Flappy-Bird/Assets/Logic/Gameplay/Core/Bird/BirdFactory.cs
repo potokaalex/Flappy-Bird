@@ -7,13 +7,18 @@ namespace FlappyBird.Gameplay.Core.Bird
     {
         private readonly LevelContext _levelContext;
         private readonly InputContext _inputContext;
-        private readonly PlayerProgress _progress;
+        private readonly BirdProgressData _progressData;
+        private readonly BirdStaticData _staticData;
+        private readonly BirdSceneData _sceneData;
 
-        public BirdFactory(LevelContext levelContext, InputContext inputContext, PlayerProgress progress)
+        public BirdFactory(LevelContext levelContext, InputContext inputContext, BirdStaticData staticData,
+            BirdProgressData progressData, BirdSceneData sceneData)
         {
             _levelContext = levelContext;
             _inputContext = inputContext;
-            _progress = progress;
+            _staticData = staticData;
+            _progressData = progressData;
+            _sceneData = sceneData;
         }
 
         public void Create()
@@ -23,12 +28,13 @@ namespace FlappyBird.Gameplay.Core.Bird
 
             AddComponents(entity, gameObject);
             InitializeCollisionSender(gameObject);
+            InitializeSkin(gameObject);
         }
 
         private GameObject CreateBirdGameObject(LevelEntity entity)
         {
-            var gameObject = Object.Instantiate(_progress.BirdData.BirdPrefab,
-                _progress.BirdData.BirdSpawnPoint, Quaternion.identity);
+            var gameObject = Object.Instantiate(_staticData.Appearance.Prefab,
+                _sceneData.BirdSpawnPoint.position, Quaternion.identity);
 
             gameObject.Link(entity);
 
@@ -38,20 +44,20 @@ namespace FlappyBird.Gameplay.Core.Bird
         private void AddComponents(LevelEntity entity, GameObject gameObject)
         {
             entity.AddPositionClamp(
-                new(float.MinValue, _progress.BirdData.StaticData.MinPositionY),
-                new(float.MaxValue, _progress.BirdData.StaticData.MaxPositionY));
+                new(float.MinValue, _staticData.MinPositionY),
+                new(float.MaxValue, _staticData.MaxPositionY));
 
-            entity.AddPosition(_progress.BirdData.BirdSpawnPoint);
+            entity.AddPosition(_sceneData.BirdSpawnPoint.position);
 
             entity.AddVelocity(Vector2.zero);
             entity.AddVelocityClamp(
-                new(float.MinValue, _progress.BirdData.StaticData.MinVelocityY),
-                new(float.MaxValue, _progress.BirdData.StaticData.MaxVelocityY));
+                new(float.MinValue, _staticData.MinVelocityY),
+                new(float.MaxValue, _staticData.MaxVelocityY));
 
-            entity.AddGravity(_progress.BirdData.StaticData.GravityAcceleration);
+            entity.AddGravity(_staticData.GravityAcceleration);
             entity.AddBirdAnimations(
                 new(gameObject.GetComponent<Animator>()),
-                _progress.BirdData.StaticData.VelocityToFallAnimation, false);
+                _staticData.VelocityToFallAnimation, false);
 
             entity.AddLinkToGameObject(gameObject);
             entity.isBird = true;
@@ -61,6 +67,12 @@ namespace FlappyBird.Gameplay.Core.Bird
         {
             if (bird.TryGetComponent<CollisionSender>(out var collisionSender))
                 collisionSender.Initialize(_inputContext);
+        }
+
+        private void InitializeSkin(GameObject bird)
+        {
+            if (bird.TryGetComponent<SpriteRenderer>(out var renderer))
+                renderer.sprite = _staticData.Appearance.GetSkin(_progressData.CurrentBirdSkinIndex);
         }
     }
 }

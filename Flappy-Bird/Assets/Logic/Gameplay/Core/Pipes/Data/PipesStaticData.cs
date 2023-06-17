@@ -3,16 +3,20 @@ using UnityEngine;
 namespace FlappyBird.Gameplay.Core.Pipes
 {
     [CreateAssetMenu(fileName = "New Pipes Configuration", menuName = "Configurations/Pipes")]
-    public class PipesStaticData : ScriptableObject
+    public class PipesStaticData : ScriptableObject, IData
     {
+        [SerializeField] private GameObject _prefab;
+
         [SerializeField] private float _spawnDelay;
         [SerializeField] private float _spawnRate;
         [SerializeField] private float _removeRate;
-        
+
         [SerializeField] private float _velocityY;
         [SerializeField] private float _minPositionY;
         [SerializeField] private float _maxPositionY;
         [SerializeField] private float _maxOffsetY;
+
+        public GameObject Prefab => _prefab;
 
         public float VelocityY => _velocityY;
 

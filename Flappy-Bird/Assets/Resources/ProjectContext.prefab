@@ -87,5 +87,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd72bd9ebb44e9da56164e4eafcb27b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dataProviderConfiguration:
-    LevelLoadingConfig: {fileID: 11400000, guid: 78434e935203b6c488d5dbb9f3cbed3b, type: 2}
+  BirdStaticData: {fileID: 11400000, guid: aa662a993adc062408a00d075d3b5776, type: 2}
+  PipesStaticData: {fileID: 11400000, guid: ef4d9f5660104a248acafffa5b292ab7, type: 2}
+  GrassStaticData: {fileID: 11400000, guid: 2b9bf26c040700e409c561755839ebf5, type: 2}

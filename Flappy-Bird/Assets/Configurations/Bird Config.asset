@@ -12,6 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d069142b9e6b0b34f8797e716770c6dc, type: 3}
   m_Name: Bird Config
   m_EditorClassIdentifier: 
+  _flyUpAction:
+    m_Name: Fly Up
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 4c63a31f-8bf1-4eeb-8bb8-b54eca26fbf1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a87b79bf-0a45-4ff4-b654-930ada4d6c07
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fly Up
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 7c732065-3dd0-4c3f-8c84-b4b3bf2a3fb7
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fly Up
+      m_Flags: 0
+    - m_Name: 
+      m_Id: f6adbc68-f9fc-43ba-a988-270b16464848
+      m_Path: <Keyboard>/anyKey
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fly Up
+      m_Flags: 0
+    m_Flags: 1
+  _appearance:
+    _prefab: {fileID: 5582752118161707237, guid: a22b63eef227bf54b83bcdffc264b15b, type: 3}
+    _skins:
+    - {fileID: 21300000, guid: aa6d1386857cea24e97ade1f8b696c47, type: 3}
   _gravityAcceleration: -22
   _flyUpVelocity: 6.3
   _velocityToFallAnimation: -3.5

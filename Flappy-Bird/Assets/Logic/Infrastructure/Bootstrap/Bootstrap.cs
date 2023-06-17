@@ -1,3 +1,6 @@
+using FlappyBird.Gameplay.Core.Bird;
+using FlappyBird.Gameplay.Core.Grass;
+using FlappyBird.Gameplay.Core.Pipes;
 using UnityEngine;
 using Zenject;
 
@@ -5,6 +8,10 @@ namespace FlappyBird.Infrastructure
 {
     public class Bootstrap : MonoBehaviour
     {
+        public BirdStaticData BirdStaticData;
+        public PipesStaticData PipesStaticData;
+        public GrassStaticData GrassStaticData;
+
         private IStateMachine _stateMachine;
         private IStateFactory _stateFactory;
         private IGameLoop _gameLoop;
@@ -42,7 +49,10 @@ namespace FlappyBird.Infrastructure
         private void InitializeDataProvider()
         {
             _dataProvider.Set(
-                new PlayerProgress(),
+                BirdStaticData,
+                PipesStaticData,
+                GrassStaticData,
+                new ProgressData(),
                 new GameOverStateConfiguration());
         }
     }

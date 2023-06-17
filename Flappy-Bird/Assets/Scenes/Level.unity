@@ -986,47 +986,12 @@ MonoBehaviour:
   _gameOverConfiguration:
     GameplayUI: {fileID: 1403950845}
     GameOverUI: {fileID: 979180377}
-  BirdConfig: {fileID: 11400000, guid: aa662a993adc062408a00d075d3b5776, type: 2}
-  BirdFlyUpAction:
-    m_Name: Bird Fly Up
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 34f2a5de-bbb1-4f3a-abd6-2d12a51b3792
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: a79da3e6-d102-4ce0-870e-f2314c232281
-      m_Path: <Mouse>/leftButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Bird Fly Up
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 88b74a14-d52a-4987-b59b-2f7c38d12cf8
-      m_Path: <Mouse>/rightButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Bird Fly Up
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 328b8cf1-f0bf-4f4c-9368-9fa67fb02630
-      m_Path: <Keyboard>/anyKey
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Bird Fly Up
-      m_Flags: 0
-    m_Flags: 1
-  BirdPrefab: {fileID: 5582752118161707237, guid: a22b63eef227bf54b83bcdffc264b15b, type: 3}
-  BirdSpawnPoint: {fileID: 942942115}
-  PipesConfig: {fileID: 11400000, guid: ef4d9f5660104a248acafffa5b292ab7, type: 2}
-  PipesPrefab: {fileID: 1163154790420497170, guid: 2cdf8afec1cb7a54daf34e262546a9f7, type: 3}
-  PipesSpawnPoint: {fileID: 1269402345}
-  GrassConfig: {fileID: 11400000, guid: 2b9bf26c040700e409c561755839ebf5, type: 2}
-  GrassMesh: {fileID: 7548452509813612925}
+  _birdData:
+    BirdSpawnPoint: {fileID: 942942115}
+  _pipesData:
+    PipesSpawnPoint: {fileID: 1269402345}
+  _grassData:
+    MeshRenderer: {fileID: 7548452509813612925}
 --- !u!114 &1200257882
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -53,7 +53,7 @@ namespace FlappyBird.Gameplay
         private List<GameplaySystems> CreateSystems()
         {
             PreGameplaySystems = new(_contexts, _stateMachine, _gameLoop);
-            CoreSystems = new(_contexts, _dataProvider.Get<PlayerProgress>(), _stateMachine, _gameLoop);
+            CoreSystems = new(_contexts, _dataProvider, _stateMachine, _gameLoop);
             PreGameOverSystems = new(_contexts, _stateMachine, _gameLoop);
             GameOverSystems = new(_contexts, _gameLoop);
 

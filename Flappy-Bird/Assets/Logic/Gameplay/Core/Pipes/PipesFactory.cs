@@ -9,17 +9,19 @@ namespace FlappyBird.Gameplay.Core.Pipes
 {
     public class PipesFactory
     {
-        private readonly PlayerProgress _progress;
+        private readonly PipesStaticData _staticData;
+        private readonly PipesSceneData _sceneData;
         private readonly LevelContext _context;
         private Random _random;
         private float _lastPositionY;
 
-        public PipesFactory(LevelContext context, PlayerProgress progress)
+        public PipesFactory(LevelContext context, PipesStaticData staticData, PipesSceneData sceneData)
         {
             _random = new Random((uint)System.DateTime.Now.Ticks);
 
-            _progress = progress;
             _context = context;
+            _staticData = staticData;
+            _sceneData = sceneData;
         }
 
         public void Create()
@@ -34,27 +36,27 @@ namespace FlappyBird.Gameplay.Core.Pipes
         public void ResetPosition(LevelEntity pipes)
         {
             var offsetY = _random.NextFloat(
-                -_progress.PipesData.StaticData.MaxOffsetY, _progress.PipesData.StaticData.MaxOffsetY) / 2f;
+                -_staticData.MaxOffsetY, _staticData.MaxOffsetY) / 2f;
             var positionY = math.clamp(_lastPositionY + offsetY,
-                _progress.PipesData.StaticData.MinPositionY, _progress.PipesData.StaticData.MaxPositionY);
+                _staticData.MinPositionY, _staticData.MaxPositionY);
 
             if (positionY == _lastPositionY)
             {
-                if (positionY <= _progress.PipesData.StaticData.MinPositionY)
+                if (positionY <= _staticData.MinPositionY)
                     positionY -= offsetY;
 
-                else if (positionY >= _progress.PipesData.StaticData.MaxPositionY)
+                else if (positionY >= _staticData.MaxPositionY)
                     positionY -= offsetY;
             }
 
-            pipes.position.Value = new(_progress.PipesData.PipesSpawnPointX, positionY);
+            pipes.position.Value = new(_sceneData.PipesSpawnPoint.position.x, positionY);
 
             _lastPositionY = positionY;
         }
 
         private GameObject CreateGameObject(LevelEntity entity)
         {
-            var gameObject = Object.Instantiate(_progress.PipesData.PipesPrefab, Vector3.zero, Quaternion.identity);
+            var gameObject = Object.Instantiate(_staticData.Prefab, Vector3.zero, Quaternion.identity);
 
             gameObject.Link(entity);
 
@@ -64,8 +66,8 @@ namespace FlappyBird.Gameplay.Core.Pipes
         private void AddComponents(LevelEntity entity, GameObject gameObject)
         {
             entity.AddPosition(gameObject.transform.position);
-            entity.AddVelocity(new(_progress.PipesData.StaticData.VelocityY, 0));
-            entity.AddLifetime(_progress.PipesData.StaticData.RemoveRate);
+            entity.AddVelocity(new(_staticData.VelocityY, 0));
+            entity.AddLifetime(_staticData.RemoveRate);
 
             entity.AddLinkToGameObject(gameObject);
             entity.isActive = true;
