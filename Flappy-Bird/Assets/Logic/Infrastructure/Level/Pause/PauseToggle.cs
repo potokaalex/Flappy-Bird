@@ -19,6 +19,9 @@ namespace FlappyBird.Infrastructure
 
         private protected override void OnClick()
         {
+            if (!_isPause && _stateMachine.GetCurrentState().GetType() != typeof(GameplayState))
+                return;
+            
             _isPause = !_isPause;
 
             if (_isPause)

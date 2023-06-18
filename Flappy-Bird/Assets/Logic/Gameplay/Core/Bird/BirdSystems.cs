@@ -36,7 +36,7 @@ namespace FlappyBird.Gameplay.Core.Bird
             
             _contexts.input.SetBirdData(staticData.FlyUpAction, staticData.FlyUpVelocity);
 
-            new BirdFactory(_contexts.level, _contexts.input, staticData, progress.Bird, sceneData).Create();
+            new BirdFactory(_contexts.level, _contexts.input, staticData, progress, sceneData).Create();
 
             _contexts.input.birdData.FlyUpAction.Enable();
         }

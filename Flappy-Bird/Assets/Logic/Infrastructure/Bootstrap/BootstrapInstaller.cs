@@ -7,14 +7,24 @@ namespace FlappyBird.Infrastructure
     {
         public override void InstallBindings()
         {
+            BindPlayerProgress();
             BindDataProvider();
             BindStateMachine();
             BindStateFactory();
             BindSceneLoader();
             BindGameplayEcs();
             BindGameLoop();
+            
         }
 
+        private void BindPlayerProgress()
+        {
+            Container
+                .Bind<IPlayerProgress>()
+                .To<PlayerProgress>()
+                .AsSingle();
+        }
+        
         private void BindDataProvider()
         {
             Container

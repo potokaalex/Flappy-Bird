@@ -7,12 +7,12 @@ namespace FlappyBird.Gameplay.Core.Bird
     {
         private readonly LevelContext _levelContext;
         private readonly InputContext _inputContext;
-        private readonly BirdProgressData _progressData;
+        private readonly ProgressData _progressData;
         private readonly BirdStaticData _staticData;
         private readonly BirdSceneData _sceneData;
 
         public BirdFactory(LevelContext levelContext, InputContext inputContext, BirdStaticData staticData,
-            BirdProgressData progressData, BirdSceneData sceneData)
+            ProgressData progressData, BirdSceneData sceneData)
         {
             _levelContext = levelContext;
             _inputContext = inputContext;
@@ -72,7 +72,7 @@ namespace FlappyBird.Gameplay.Core.Bird
         private void InitializeSkin(GameObject bird)
         {
             if (bird.TryGetComponent<SpriteRenderer>(out var renderer))
-                renderer.sprite = _staticData.Appearance.GetSkin(_progressData.CurrentBirdSkinIndex);
+                renderer.sprite = _staticData.Appearance.GetSkin(_progressData.BirdCurrentSkinIndex);
         }
     }
 }

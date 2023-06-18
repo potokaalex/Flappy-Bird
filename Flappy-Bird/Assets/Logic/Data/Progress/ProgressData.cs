@@ -1,27 +1,15 @@
-using FlappyBird.Gameplay.Core.Grass;
-using FlappyBird.Gameplay.Core.Pipes;
-using FlappyBird.Gameplay.Core.Score;
-using FlappyBird.Gameplay.Core.Bird;
+using System;
 
 namespace FlappyBird
 {
+    [Serializable]
     public class ProgressData : IData
     {
-        public BirdProgressData Bird { get; } = new();
+        public int BirdCurrentSkinIndex;
+        public int BirdOpenSkinsAmount;
 
-        public ScoreProgressData Score { get; } = new();
+        public uint MaxScore;
         
-        // save/load
-        
-        //Сохранять:
-        //максимальный score
-        //баланс (score)
-        //купленные скини.
-        //настройки: бинды, звуки(вкл/выкл), действующие скины
-        
-        //progress reader/writer (s)
-        
-        
-        //в прогресс нелья писать напрямую?!
+        public bool IsSoundPlaying;
     }
 }

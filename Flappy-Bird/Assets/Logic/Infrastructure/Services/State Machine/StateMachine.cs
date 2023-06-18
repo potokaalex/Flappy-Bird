@@ -16,6 +16,9 @@ namespace FlappyBird
                 _states.Add(state.GetType(), state);
         }
 
+        public IState GetCurrentState() 
+            => _currentState;
+
         public void SwitchTo<StateType>()
             where StateType : IState
         {
