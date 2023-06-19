@@ -5,6 +5,8 @@ namespace FlappyBird
         public void Initialize(ProgressData defaultData);
         
         public void RegisterWatcher(IProgressDataWatcher watcher);
+        
+        public void UnregisterWatcher(IProgressDataWatcher watcher);
 
         public void SaveData();
 

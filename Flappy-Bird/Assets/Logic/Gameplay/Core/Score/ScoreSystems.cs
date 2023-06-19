@@ -6,11 +6,11 @@ namespace FlappyBird.Gameplay.Core.Score
     {
         private readonly Contexts _contexts;
 
-        public ScoreSystems(Contexts contexts)
+        public ScoreSystems(Contexts contexts, IPlayerProgress playerProgress)
         {
             _contexts = contexts;
 
-            base.Add(CreateSystems(contexts));
+            base.Add(CreateSystems(contexts, playerProgress));
         }
 
         public override void Initialize()
@@ -25,17 +25,17 @@ namespace FlappyBird.Gameplay.Core.Score
             RemoveEntities();
         }
 
-        private void CreateEntities() 
+        private void CreateEntities()
             => _contexts.input.SetScoreData(0);
 
         private void RemoveEntities()
             => _contexts.input.RemoveScoreData();
 
-        private Systems CreateSystems(Contexts contexts)
+        private Systems CreateSystems(Contexts contexts, IPlayerProgress playerProgress)
         {
             var systems = new Systems();
 
-            base.Add(new ScoreSystem(contexts.input));
+            base.Add(new ScoreCountSystem(contexts.input, playerProgress));
 
             return systems;
         }

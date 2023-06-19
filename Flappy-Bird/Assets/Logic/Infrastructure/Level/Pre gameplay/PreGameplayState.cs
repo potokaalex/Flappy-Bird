@@ -6,16 +6,18 @@ namespace FlappyBird.Infrastructure
     {
         private readonly IDataProvider _dataProvider;
         private readonly GameplayEcs _ecs;
+        private readonly IPlayerProgress _playerProgress;
 
-        public PreGameplayState(GameplayEcs ecs, IDataProvider dataProvider)
+        public PreGameplayState(GameplayEcs ecs,IPlayerProgress playerProgress, IDataProvider dataProvider)
         {
             _dataProvider = dataProvider;
             _ecs = ecs;
+            _playerProgress = playerProgress;
         }
 
         public void Enter()
         {
-            _ecs.Initialize(); //To level loading state.
+            _ecs.CreateSystems(); //To level loading state.
 
             _ecs.CoreSystems.Initialize(); //создание сущностей !
             _ecs.PreGameplaySystems.Initialize();

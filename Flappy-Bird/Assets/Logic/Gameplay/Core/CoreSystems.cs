@@ -12,12 +12,12 @@ namespace FlappyBird.Gameplay.Core
     {
         private readonly Contexts _contexts;
 
-        public CoreSystems(Contexts contexts, IDataProvider dataProvider,
-            IStateMachine stateMachine, IGameLoop gameLoop) : base(gameLoop)
+        public CoreSystems(Contexts contexts, IDataProvider dataProvider, IStateMachine stateMachine,
+            IGameLoop gameLoop, IPlayerProgress playerProgress) : base(gameLoop)
         {
             _contexts = contexts;
 
-            base.Add(CreateSystems(contexts, dataProvider, stateMachine, gameLoop));
+            base.Add(CreateSystems(contexts, dataProvider, stateMachine, gameLoop, playerProgress));
         }
 
         public override void Start()
@@ -35,14 +35,14 @@ namespace FlappyBird.Gameplay.Core
         }
 
         private Systems CreateSystems(Contexts contexts, IDataProvider dataProvider,
-            IStateMachine stateMachine, IGameLoop gameLoop)
+            IStateMachine stateMachine, IGameLoop gameLoop, IPlayerProgress playerProgress)
         {
             var systems = new Systems();
 
             base.Add(new BirdSystems(contexts, dataProvider));
             base.Add(new PipesSystems(contexts, dataProvider));
             base.Add(new GrassSystems(contexts, dataProvider));
-            base.Add(new ScoreSystems(contexts));
+            base.Add(new ScoreSystems(contexts, playerProgress));
             base.Add(new PreGameOverStartStateSystem(stateMachine, contexts.input));
             base.Add(new GameOverStartStateSystem(stateMachine, contexts.input));
             base.Add(new CommonSystems(contexts, gameLoop));

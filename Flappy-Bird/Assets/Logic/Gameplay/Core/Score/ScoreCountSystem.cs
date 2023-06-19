@@ -4,12 +4,16 @@ using Entitas;
 
 namespace FlappyBird.Gameplay.Core.Score
 {
-    public class ScoreSystem : ReactiveSystem<InputEntity>
+    public class ScoreCountSystem : ReactiveSystem<InputEntity>
     {
+        private readonly IPlayerProgress _playerProgress;
         private readonly InputContext _inputContext;
 
-        public ScoreSystem(InputContext inputContext) : base(inputContext)
-            => _inputContext = inputContext;
+        public ScoreCountSystem(InputContext inputContext, IPlayerProgress playerProgress) : base(inputContext)
+        {
+            _playerProgress = playerProgress;
+            _inputContext = inputContext;
+        }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context)
             => context.CreateCollector(InputMatcher.Collision.Added());
@@ -18,7 +22,10 @@ namespace FlappyBird.Gameplay.Core.Score
             => IsSenderHasBird(inputEntity) && IsTriggerHasScore(inputEntity);
 
         protected override void Execute(List<InputEntity> entities)
-            => _inputContext.scoreData.CurrentScore++;
+        {
+            _inputContext.scoreData.CurrentScore++;
+            _playerProgress.SaveData();
+        }
 
         private bool IsSenderHasBird(InputEntity inputEntity)
             => inputEntity.collision.Info.OtherCollider.TryGetComponent<BirdCollider>(out _);

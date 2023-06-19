@@ -2,7 +2,6 @@ using FlappyBird.Gameplay.Core.Bird;
 using FlappyBird.Gameplay.Core.Grass;
 using FlappyBird.Gameplay.Core.Pipes;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace FlappyBird.Infrastructure

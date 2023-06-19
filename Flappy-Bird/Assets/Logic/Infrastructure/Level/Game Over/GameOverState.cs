@@ -19,6 +19,8 @@ namespace FlappyBird.Infrastructure
 
         public void Enter()
         {
+            //проверка, чтобы выдать скин.
+            
             _ecs.GameOverSystems.Initialize();
             _ecs.GameOverSystems.Start();
             

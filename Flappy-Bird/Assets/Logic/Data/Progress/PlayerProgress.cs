@@ -20,7 +20,7 @@ namespace FlappyBird
 
         public void Initialize(ProgressData defaultData)
         {
-            if (IsNoSavedProgress()) 
+            if (IsNoSavedProgress())
                 SaveProgressData(defaultData);
 
             LoadData();
@@ -33,6 +33,15 @@ namespace FlappyBird
 
             if (watcher is IProgressDataWriter writer)
                 _dataWriters.Add(writer);
+        }
+
+        public void UnregisterWatcher(IProgressDataWatcher watcher)
+        {
+            if (watcher is IProgressDataReader reader)
+                _dataReaders.Remove(reader);
+
+            if (watcher is IProgressDataWriter writer)
+                _dataWriters.Remove(writer);
         }
 
         public void SaveData()

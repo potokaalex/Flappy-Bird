@@ -1,42 +1,48 @@
 ﻿using FlappyBird.Gameplay.PreGameplay;
-using System.Collections.Generic;
-using FlappyBird.Gameplay.Core;
-using FlappyBird.Gameplay.GameOver;
 using FlappyBird.Gameplay.PreGameOver;
+using FlappyBird.Gameplay.GameOver;
+using FlappyBird.Gameplay.Core;
 
 namespace FlappyBird.Gameplay
 {
     public class GameplayEcs
     {
+        private readonly IDataProvider _dataProvider;
         private readonly IStateMachine _stateMachine;
+        private readonly IPlayerProgress _playerProgress;
         private readonly IGameLoop _gameLoop;
 
-        private List<GameplaySystems> _systems;
-        private readonly IDataProvider _dataProvider;
-        private Contexts _contexts;
+        private GameplaySystems[] _systems;
 
-        public GameplayEcs(IDataProvider dataProvider, IStateMachine stateMachine, IGameLoop gameLoop)
+        public GameplayEcs(IDataProvider dataProvider, IStateMachine stateMachine,
+            IPlayerProgress playerProgress, IGameLoop gameLoop)
         {
-            _contexts = Contexts.sharedInstance = new();
-            _stateMachine = stateMachine;
-            _gameLoop = gameLoop;
             _dataProvider = dataProvider;
+            _stateMachine = stateMachine;
+            _playerProgress = playerProgress;
+            _gameLoop = gameLoop;
+            
+            Contexts = Contexts.sharedInstance = new();
         }
 
-        public Contexts Contexts
-            => _contexts;
+        public Contexts Contexts { get; }
 
-        public PreGameplaySystems PreGameplaySystems;
-        public CoreSystems CoreSystems;
-        public PreGameOverSystems PreGameOverSystems;
-        public GameOverSystems GameOverSystems;
+        public PreGameplaySystems PreGameplaySystems { get; private set; }
 
-        public void Initialize()
+        public CoreSystems CoreSystems { get; private set; }
+
+        public PreGameOverSystems PreGameOverSystems { get; private set; }
+
+        public GameOverSystems GameOverSystems { get; private set; }
+
+        public void CreateSystems()
         {
-            _systems = CreateSystems();
+            _systems = new GameplaySystems[4];
 
-            //foreach (var systems in _systems)
-            //    systems.Initialize();
+            _systems[0] = PreGameplaySystems = new(Contexts, _stateMachine, _gameLoop);
+            _systems[1] = CoreSystems = new(Contexts, _dataProvider, _stateMachine, _gameLoop, _playerProgress);
+            _systems[2] = PreGameOverSystems = new(Contexts, _stateMachine, _gameLoop);
+            _systems[3] = GameOverSystems = new(Contexts, _gameLoop);
         }
 
         public void Dispose()
@@ -47,24 +53,7 @@ namespace FlappyBird.Gameplay
                 systems.Cleanup();
             }
 
-            _contexts.Reset();
-        }
-
-        private List<GameplaySystems> CreateSystems()
-        {
-            PreGameplaySystems = new(_contexts, _stateMachine, _gameLoop);
-            CoreSystems = new(_contexts, _dataProvider, _stateMachine, _gameLoop);
-            PreGameOverSystems = new(_contexts, _stateMachine, _gameLoop);
-            GameOverSystems = new(_contexts, _gameLoop);
-
-            var systems = new List<GameplaySystems>();
-
-            systems.Add(PreGameplaySystems);
-            systems.Add(CoreSystems);
-            systems.Add(PreGameOverSystems);
-            systems.Add(GameOverSystems);
-
-            return systems;
+            Contexts.Reset();
         }
     }
 }
