@@ -13,25 +13,31 @@ namespace FlappyBird.Gameplay.Core
         private readonly Contexts _contexts;
 
         public CoreSystems(Contexts contexts, IDataProvider dataProvider, IStateMachine stateMachine,
-            IGameLoop gameLoop, IPlayerProgress playerProgress) : base(gameLoop)
+            IGameLoop gameLoop, IPlayerProgress playerProgress)
         {
             _contexts = contexts;
 
             base.Add(CreateSystems(contexts, dataProvider, stateMachine, gameLoop, playerProgress));
         }
 
-        public override void Start()
+        public override void Start(IGameLoop gameLoop)
         {
-            base.Start();
             _contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(true);
             _contexts.input.birdData.FlyUpAction.Enable();
+            
+            ActivateReactiveSystems();
+            gameLoop.OnFixedUpdate += Execute;
+            base.Start(gameLoop);
         }
 
-        public override void Stop()
+        public override void Stop(IGameLoop gameLoop)
         {
-            base.Stop();
             _contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(false);
             _contexts.input.birdData.FlyUpAction.Disable();
+            
+            DeactivateReactiveSystems();
+            gameLoop.OnFixedUpdate -= Execute;
+            base.Stop(gameLoop);
         }
 
         private Systems CreateSystems(Contexts contexts, IDataProvider dataProvider,

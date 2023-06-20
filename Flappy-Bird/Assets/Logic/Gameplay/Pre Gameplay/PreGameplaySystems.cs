@@ -5,26 +5,32 @@ using Entitas;
 
 namespace FlappyBird.Gameplay.PreGameplay
 {
-    public class PreGameplaySystems : GameplaySystems
+    public class PreGameplaySystems : Feature, ISwitchableSystem
     {
         private readonly Contexts _contexts;
 
-        public PreGameplaySystems(Contexts contexts, IStateMachine stateMachine, IGameLoop gameLoop) : base(gameLoop)
+        public PreGameplaySystems(Contexts contexts, IStateMachine stateMachine, IGameLoop gameLoop)
         {
             _contexts = contexts;
 
             base.Add(CreateSystems(contexts, gameLoop, stateMachine));
         }
 
-        public override void Start()
+        public void Start(IGameLoop gameLoop)
         {
-            base.Start();
+            ActivateReactiveSystems();
+            gameLoop.OnFixedUpdate += Execute;
+
+            _contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(true);
             _contexts.input.birdData.FlyUpAction.Enable();
         }
 
-        public override void Stop()
+        public void Stop(IGameLoop gameLoop)
         {
-            base.Stop();
+            DeactivateReactiveSystems();
+            gameLoop.OnFixedUpdate -= Execute;
+
+            _contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(false);
             _contexts.input.birdData.FlyUpAction.Disable();
         }
 

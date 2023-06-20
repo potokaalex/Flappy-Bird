@@ -983,15 +983,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381a9677ea0be2b4fad8b3f15446c341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameOverConfiguration:
-    GameplayUI: {fileID: 1403950845}
-    GameOverUI: {fileID: 979180377}
   _birdData:
     BirdSpawnPoint: {fileID: 942942115}
   _pipesData:
     PipesSpawnPoint: {fileID: 1269402345}
   _grassData:
     MeshRenderer: {fileID: 7548452509813612925}
+  _uiData:
+    GameplayUI: {fileID: 1403950845}
+    GameOverUI: {fileID: 979180377}
 --- !u!114 &1200257882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1525,7 +1525,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8104292046704052610, guid: 8e6e9cd1292e2ee45927dba8f2bef097, type: 3}
   m_PrefabInstance: {fileID: 1600830689}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1600830693
+--- !u!114 &1600830699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1534,13 +1534,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1600830692}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca7504808aaa4286a4ec9d92bdeac374, type: 3}
+  m_Script: {fileID: 11500000, guid: 3af4fa31ded2456ca493b4613eb8b75d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _selectableButton: {fileID: 1600830691}
-  _configuration:
-    LoadSceneMode: 0
-    SceneName: Menu
 --- !u!1 &1641250271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1774,7 +1771,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8104292046704052611, guid: 8e6e9cd1292e2ee45927dba8f2bef097, type: 3}
   m_PrefabInstance: {fileID: 1715572132}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1715572134
+--- !u!114 &1715572136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1783,13 +1780,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 810808599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca7504808aaa4286a4ec9d92bdeac374, type: 3}
+  m_Script: {fileID: 11500000, guid: 242a52422a14486283b6776f25a434ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _selectableButton: {fileID: 1271499718}
-  _configuration:
-    LoadSceneMode: 0
-    SceneName: Level
 --- !u!1 &1731371819
 GameObject:
   m_ObjectHideFlags: 0

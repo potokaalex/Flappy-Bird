@@ -26,14 +26,5 @@ namespace FlappyBird
             _currentState = _states[typeof(StateType)];
             _currentState.Enter();
         }
-
-        public void SwitchTo<StateType, ParameterType>(ParameterType parameter)
-            where StateType : IState<ParameterType>
-            where ParameterType : IStateParameter
-        {
-            _currentState?.Exit();
-            _currentState = _states[typeof(StateType)];
-            (_currentState as IState<ParameterType>).Enter(parameter);
-        }
     }
 }

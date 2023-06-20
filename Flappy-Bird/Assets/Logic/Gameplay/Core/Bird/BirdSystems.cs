@@ -3,7 +3,7 @@ using Entitas;
 
 namespace FlappyBird.Gameplay.Core.Bird
 {
-    public class BirdSystems : Feature
+    public class BirdSystems : Feature, IFactorySystem
     {
         private readonly Contexts _contexts;
         private readonly IDataProvider _dataProvider;
@@ -16,32 +16,20 @@ namespace FlappyBird.Gameplay.Core.Bird
             base.Add(CreateSystems(contexts));
         }
 
-        public override void Initialize()
+        public void CreateEntities()
         {
-            CreateEntities();
-            base.Initialize();
-        }
-
-        public override void Cleanup()
-        {
-            base.Cleanup();
-            RemoveEntities();
-        }
-
-        private void CreateEntities()
-        {
+            var progressData = _dataProvider.Get<ProgressData>();
             var staticData = _dataProvider.Get<BirdStaticData>();
             var sceneData = _dataProvider.Get<BirdSceneData>();
-            var progress = _dataProvider.Get<ProgressData>();
-            
+
             _contexts.input.SetBirdData(staticData.FlyUpAction, staticData.FlyUpVelocity);
 
-            new BirdFactory(_contexts.level, _contexts.input, staticData, progress, sceneData).Create();
+            new BirdFactory(_contexts.level, _contexts.input, staticData, progressData, sceneData).Create();
 
             _contexts.input.birdData.FlyUpAction.Enable();
         }
 
-        private void RemoveEntities()
+        public void RemoveEntities()
         {
             _contexts.input.birdData.FlyUpAction.Disable();
 

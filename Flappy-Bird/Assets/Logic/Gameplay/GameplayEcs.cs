@@ -7,21 +7,20 @@ namespace FlappyBird.Gameplay
 {
     public class GameplayEcs
     {
+        private readonly IPlayerProgress _playerProgress;
         private readonly IDataProvider _dataProvider;
         private readonly IStateMachine _stateMachine;
-        private readonly IPlayerProgress _playerProgress;
         private readonly IGameLoop _gameLoop;
+        private GameplaySystems _systems;
 
-        private GameplaySystems[] _systems;
-
-        public GameplayEcs(IDataProvider dataProvider, IStateMachine stateMachine,
-            IPlayerProgress playerProgress, IGameLoop gameLoop)
+        public GameplayEcs(IPlayerProgress playerProgress, IDataProvider dataProvider,
+            IStateMachine stateMachine, IGameLoop gameLoop)
         {
+            _playerProgress = playerProgress;
             _dataProvider = dataProvider;
             _stateMachine = stateMachine;
-            _playerProgress = playerProgress;
             _gameLoop = gameLoop;
-            
+
             Contexts = Contexts.sharedInstance = new();
         }
 
@@ -34,26 +33,31 @@ namespace FlappyBird.Gameplay
         public PreGameOverSystems PreGameOverSystems { get; private set; }
 
         public GameOverSystems GameOverSystems { get; private set; }
-
-        public void CreateSystems()
+        
+        public void Initialize()
         {
-            _systems = new GameplaySystems[4];
-
-            _systems[0] = PreGameplaySystems = new(Contexts, _stateMachine, _gameLoop);
-            _systems[1] = CoreSystems = new(Contexts, _dataProvider, _stateMachine, _gameLoop, _playerProgress);
-            _systems[2] = PreGameOverSystems = new(Contexts, _stateMachine, _gameLoop);
-            _systems[3] = GameOverSystems = new(Contexts, _gameLoop);
+            CreateSystems();
+            _systems.CreateEntities();
+            _systems.Initialize();
+            _systems.Stop(_gameLoop);
         }
 
         public void Dispose()
         {
-            foreach (var systems in _systems)
-            {
-                systems.Stop();
-                systems.Cleanup();
-            }
-
+            _systems.Stop(_gameLoop);
+            _systems.Cleanup();
+            _systems.RemoveEntities();
             Contexts.Reset();
+        }
+        
+        private void CreateSystems()
+        {
+            _systems = new GameplaySystems();
+
+            _systems.Add(PreGameplaySystems = new(Contexts, _stateMachine, _gameLoop));
+            _systems.Add(CoreSystems = new(Contexts, _dataProvider, _stateMachine, _gameLoop, _playerProgress));
+            _systems.Add(PreGameOverSystems = new(Contexts, _stateMachine, _gameLoop));
+            _systems.Add(GameOverSystems = new(Contexts, _gameLoop));
         }
     }
 }

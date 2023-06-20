@@ -26,14 +26,14 @@ namespace FlappyBird.Infrastructure
         {
             _playerProgress.RegisterWatcher(_scoreProgressWriter);
 
-            _ecs.CoreSystems.Start();
+            _ecs.CoreSystems.Start(_gameLoop);
         }
 
         public void Exit()
         {
             _playerProgress.UnregisterWatcher(_scoreProgressWriter);
 
-            _ecs.CoreSystems.Stop();
+            _ecs.CoreSystems.Stop(_gameLoop);
         }
     }
 }

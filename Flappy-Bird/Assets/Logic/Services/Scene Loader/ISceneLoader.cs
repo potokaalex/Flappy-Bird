@@ -1,7 +1,9 @@
-﻿namespace FlappyBird
+﻿using UnityEngine.SceneManagement;
+
+namespace FlappyBird
 {
     public interface ISceneLoader
     {
-        public void LoadScene(SceneLoadingConfiguration config);
+        public void LoadScene(string sceneName, LoadSceneMode loadMode);
     }
 }

@@ -3,7 +3,7 @@ using Entitas;
 
 namespace FlappyBird.Gameplay.Core.Grass
 {
-    public class GrassSystems : Feature
+    public class GrassSystems : Feature, IFactorySystem
     {
         private readonly IDataProvider _dataProvider;
         private readonly Contexts _contexts;
@@ -16,19 +16,7 @@ namespace FlappyBird.Gameplay.Core.Grass
             base.Add(CreateSystems(contexts));
         }
 
-        public override void Initialize()
-        {
-            CreateEntities();
-            base.Initialize();
-        }
-
-        public override void Cleanup()
-        {
-            base.Cleanup();
-            RemoveEntities();
-        }
-
-        private void CreateEntities()
+        public void CreateEntities()
         {
             var staticData = _dataProvider.Get<GrassStaticData>();
             var sceneData = _dataProvider.Get<GrassSceneData>();
@@ -38,7 +26,7 @@ namespace FlappyBird.Gameplay.Core.Grass
             _contexts.input.SetGrassData(material, staticData.ScrollVelocity);
         }
 
-        private void RemoveEntities()
+        public void RemoveEntities()
             => _contexts.input.RemoveGrassData();
 
         private Systems CreateSystems(Contexts contexts)

@@ -2,7 +2,7 @@ using Entitas;
 
 namespace FlappyBird.Gameplay.Core
 {
-    public class CommonSystems : Feature
+    public class CommonSystems : Feature, IFactorySystem
     {
         private readonly IGameLoop _gameLoop;
         private readonly Contexts _contexts;
@@ -15,22 +15,10 @@ namespace FlappyBird.Gameplay.Core
             base.Add(CreateSystems(contexts, gameLoop));
         }
 
-        public override void Initialize()
-        {
-            CreateEntities();
-            base.Initialize();
-        }
-
-        public override void Cleanup()
-        {
-            base.Cleanup();
-            RemoveEntities();
-        }
-
-        private void CreateEntities()
+        public void CreateEntities()
             => _contexts.input.SetTime(_gameLoop.FixedDeltaTime.Value);
 
-        private void RemoveEntities()
+        public void RemoveEntities()
             => _contexts.input.RemoveTime();
 
         private Systems CreateSystems(Contexts contexts, IGameLoop gameLoop)

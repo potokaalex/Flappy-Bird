@@ -3,7 +3,7 @@ using Entitas;
 
 namespace FlappyBird.Gameplay.Core.Pipes
 {
-    public class PipesSystems : Feature
+    public class PipesSystems : Feature, IFactorySystem
     {
         private readonly IDataProvider _dataProvider;
         private readonly Contexts _contexts;
@@ -16,19 +16,7 @@ namespace FlappyBird.Gameplay.Core.Pipes
             base.Add(CreateSystems(contexts));
         }
 
-        public override void Initialize()
-        {
-            CreateEntities();
-            base.Initialize();
-        }
-
-        public override void Cleanup()
-        {
-            base.Cleanup();
-            RemoveEntities();
-        }
-
-        private void CreateEntities()
+        public void CreateEntities()
         {
             var staticData = _dataProvider.Get<PipesStaticData>();
             var sceneData = _dataProvider.Get<PipesSceneData>();
@@ -39,7 +27,7 @@ namespace FlappyBird.Gameplay.Core.Pipes
                 staticData.SpawnRate, staticData.RemoveRate);
         }
 
-        private void RemoveEntities()
+        public void RemoveEntities()
         {
             _contexts.input.RemovePipesData();
 

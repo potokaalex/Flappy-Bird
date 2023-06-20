@@ -22,9 +22,9 @@ namespace FlappyBird.Infrastructure
             //проверка, чтобы выдать скин.
             
             _ecs.GameOverSystems.Initialize();
-            _ecs.GameOverSystems.Start();
+            _ecs.GameOverSystems.Start(_gameLoop);
             
-            _data.Get<GameOverStateConfiguration>().GameOverUI.PlayOpenAnimation();
+            _data.Get<UISceneData>().GameOverUI.PlayOpenAnimation();
         }
 
         public void Exit()

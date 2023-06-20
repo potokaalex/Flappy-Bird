@@ -4,10 +4,22 @@ using Entitas;
 
 namespace FlappyBird.Gameplay.GameOver
 {
-    public class GameOverSystems : GameplaySystems
+    public class GameOverSystems : Feature, ISwitchableSystem
     {
-        public GameOverSystems(Contexts contexts, IGameLoop gameLoop) : base(gameLoop) 
+        public GameOverSystems(Contexts contexts, IGameLoop gameLoop)
             => base.Add(CreateSystems(contexts, gameLoop));
+
+        public void Start(IGameLoop gameLoop)
+        {
+            ActivateReactiveSystems();
+            gameLoop.OnFixedUpdate += Execute;
+        }
+
+        public void Stop(IGameLoop gameLoop)
+        {
+            DeactivateReactiveSystems();
+            gameLoop.OnFixedUpdate -= Execute;
+        }
 
         private Systems CreateSystems(Contexts contexts, IGameLoop gameLoop)
         {

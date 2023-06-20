@@ -4,7 +4,7 @@ namespace FlappyBird
 {
     public class SceneLoader : ISceneLoader
     {
-        public void LoadScene(SceneLoadingConfiguration config)
-            => SceneManager.LoadScene(config.SceneName, config.LoadSceneMode);
+        public void LoadScene(string sceneName, LoadSceneMode loadMode)
+            => SceneManager.LoadScene(sceneName, loadMode);
     }
 }

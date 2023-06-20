@@ -5,30 +5,28 @@ namespace FlappyBird.Infrastructure
     public class PreGameplayState : IState
     {
         private readonly IDataProvider _dataProvider;
+        private readonly IGameLoop _gameLoop;
         private readonly GameplayEcs _ecs;
-        private readonly IPlayerProgress _playerProgress;
 
-        public PreGameplayState(GameplayEcs ecs,IPlayerProgress playerProgress, IDataProvider dataProvider)
+        public PreGameplayState(GameplayEcs ecs, IGameLoop gameLoop, IDataProvider dataProvider)
         {
             _dataProvider = dataProvider;
+            _gameLoop = gameLoop;
             _ecs = ecs;
-            _playerProgress = playerProgress;
         }
 
         public void Enter()
         {
-            _ecs.CreateSystems(); //To level loading state.
+            _ecs.Initialize();
 
-            _ecs.CoreSystems.Initialize(); //создание сущностей !
-            _ecs.PreGameplaySystems.Initialize();
-
-            _ecs.PreGameplaySystems.Start();
+            _ecs.PreGameplaySystems.Start(_gameLoop);
         }
 
         public void Exit()
         {
-            _dataProvider.Get<GameOverStateConfiguration>().GameplayUI.PlayOpenAnimation();
-            _ecs.PreGameplaySystems.Stop();
+            _dataProvider.Get<UISceneData>().GameplayUI.PlayOpenAnimation();
+
+            _ecs.PreGameplaySystems.Stop(_gameLoop);
         }
     }
 }

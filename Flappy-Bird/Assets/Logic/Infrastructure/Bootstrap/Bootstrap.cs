@@ -45,7 +45,8 @@ namespace FlappyBird.Infrastructure
         private void InitializeStateMachine()
         {
             _stateMachine.Initialize(
-                _stateFactory.Create<SceneLoadingState>(),
+                _stateFactory.Create<MenuLoadingState>(),
+                _stateFactory.Create<LevelLoadingState>(),
                 _stateFactory.Create<PreGameplayState>(),
                 _stateFactory.Create<GameplayState>(),
                 _stateFactory.Create<PauseState>(),
@@ -58,8 +59,7 @@ namespace FlappyBird.Infrastructure
             _dataProvider.Set(
                 BirdStaticData,
                 PipesStaticData,
-                GrassStaticData,
-                new GameOverStateConfiguration());
+                GrassStaticData);
         }
     }
 }
