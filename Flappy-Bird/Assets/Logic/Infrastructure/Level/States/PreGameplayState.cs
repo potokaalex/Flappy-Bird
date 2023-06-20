@@ -24,7 +24,7 @@ namespace FlappyBird.Infrastructure
 
         public void Exit()
         {
-            _dataProvider.Get<UISceneData>().GameplayUI.PlayOpenAnimation();
+            _dataProvider.Get<LevelSceneData>().GameplayUI.PlayOpenAnimation();
 
             _ecs.PreGameplaySystems.Stop(_gameLoop);
         }

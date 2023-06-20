@@ -9,8 +9,8 @@ namespace FlappyBird.Infrastructure
         [SerializeField] private Image _buttonImage;
         [SerializeField] private Sprite _pauseSprite;
         [SerializeField] private Sprite _resumeSprite;
+        
         private IStateMachine _stateMachine;
-        private IState _lastState;
         private bool _isPause;
 
         [Inject]
@@ -19,28 +19,29 @@ namespace FlappyBird.Infrastructure
 
         private protected override void OnClick()
         {
-            if (!_isPause && _stateMachine.GetCurrentState().GetType() != typeof(GameplayState))
+            if (_stateMachine.GetCurrentState().GetType() != typeof(GameplayState) &&
+                _stateMachine.GetCurrentState().GetType() != typeof(PauseState))
                 return;
-            
-            _isPause = !_isPause;
 
             if (_isPause)
-                GameplayPause();
-            else
                 GameplayResume();
+            else
+                GameplayPause();
         }
 
         private void GameplayPause()
         {
-            _buttonImage.sprite = _resumeSprite;
+            _isPause = true;
 
+            _buttonImage.sprite = _resumeSprite;
             _stateMachine.SwitchTo<PauseState>();
         }
 
         private void GameplayResume()
         {
-            _buttonImage.sprite = _pauseSprite;
+            _isPause = false;
 
+            _buttonImage.sprite = _pauseSprite;
             _stateMachine.SwitchTo<GameplayState>();
         }
     }

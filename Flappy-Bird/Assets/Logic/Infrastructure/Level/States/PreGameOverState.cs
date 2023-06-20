@@ -18,7 +18,7 @@ namespace FlappyBird
 
         public void Enter()
         {
-            _dataProvider.Get<UISceneData>().GameplayUI.PlayCloseAnimation();
+            _dataProvider.Get<LevelSceneData>().GameplayUI.PlayCloseAnimation();
             _ecs.Contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(true);
             
             _ecs.PreGameOverSystems.Initialize();

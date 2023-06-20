@@ -14,7 +14,6 @@ namespace FlappyBird.Infrastructure
             BindSceneLoader();
             BindGameplayEcs();
             BindGameLoop();
-            
         }
 
         private void BindPlayerProgress()

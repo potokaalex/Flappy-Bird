@@ -24,7 +24,7 @@ namespace FlappyBird.Infrastructure
             _ecs.GameOverSystems.Initialize();
             _ecs.GameOverSystems.Start(_gameLoop);
             
-            _data.Get<UISceneData>().GameOverUI.PlayOpenAnimation();
+            _data.Get<LevelSceneData>().GameOverUI.PlayOpenAnimation();
         }
 
         public void Exit()

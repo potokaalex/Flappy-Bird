@@ -11,7 +11,7 @@ namespace FlappyBird.Infrastructure
         [SerializeField] private BirdSceneData _birdData;
         [SerializeField] private PipesSceneData _pipesData;
         [SerializeField] private GrassSceneData _grassData;
-        [SerializeField] private UISceneData _uiData;
+        [SerializeField] private LevelSceneData _sceneData;
 
         private IStateMachine _stateMachine;
         private IDataProvider _data;
@@ -25,7 +25,7 @@ namespace FlappyBird.Infrastructure
 
         private void Start()
         {
-            _data.Set(_birdData, _pipesData, _grassData, _uiData);
+            _data.Set(_birdData, _pipesData, _grassData, _sceneData);
             
             _stateMachine.SwitchTo<PreGameplayState>();
         }

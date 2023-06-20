@@ -1,6 +1,6 @@
-using FlappyBird.Gameplay.Core.Bird;
-using FlappyBird.Gameplay.Core.Grass;
 using FlappyBird.Gameplay.Core.Pipes;
+using FlappyBird.Gameplay.Core.Grass;
+using FlappyBird.Gameplay.Core.Bird;
 using UnityEngine;
 using Zenject;
 
@@ -15,20 +15,18 @@ namespace FlappyBird.Infrastructure
 
         private IStateMachine _stateMachine;
         private IStateFactory _stateFactory;
-        private IGameLoop _gameLoop;
         private IDataProvider _dataProvider;
         private IPlayerProgress _playerProgress;
 
         [Inject]
-        public void Constructor(IDataProvider dataProvider,IPlayerProgress playerProgress, IStateMachine stateMachine,
-            IStateFactory stateFactory, IGameLoop gameLoop)
+        public void Constructor(IDataProvider dataProvider, IPlayerProgress playerProgress, IStateMachine stateMachine,
+            IStateFactory stateFactory)
         {
             _stateMachine = stateMachine;
             _stateFactory = stateFactory;
-            _gameLoop = gameLoop;
             _dataProvider = dataProvider;
             _playerProgress = playerProgress;
-            
+
             Initialize(); //move to start in bootstrap scene.
         }
 
@@ -39,7 +37,7 @@ namespace FlappyBird.Infrastructure
             InitializePlayerProgress();
         }
 
-        private void InitializePlayerProgress() 
+        private void InitializePlayerProgress()
             => _playerProgress.Initialize(DefaultProgressData);
 
         private void InitializeStateMachine()
@@ -53,7 +51,7 @@ namespace FlappyBird.Infrastructure
                 _stateFactory.Create<PreGameOverState>(),
                 _stateFactory.Create<GameOverState>());
         }
-        
+
         private void InitializeDataProvider()
         {
             _dataProvider.Set(

@@ -989,7 +989,7 @@ MonoBehaviour:
     PipesSpawnPoint: {fileID: 1269402345}
   _grassData:
     MeshRenderer: {fileID: 7548452509813612925}
-  _uiData:
+  _sceneData:
     GameplayUI: {fileID: 1403950845}
     GameOverUI: {fileID: 979180377}
 --- !u!114 &1200257882

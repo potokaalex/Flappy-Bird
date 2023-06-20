@@ -1,4 +1,3 @@
-using System;
 using FlappyBird.Gameplay;
 using UnityEngine.UI;
 using UnityEngine;
