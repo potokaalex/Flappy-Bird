@@ -1,10 +1,13 @@
 ﻿using FlappyBird.Gameplay;
+using UnityEngine;
 using Zenject;
 
 namespace FlappyBird.Infrastructure
 {
     public class BootstrapInstaller : MonoInstaller
     {
+        [SerializeField] private SceneLoader _sceneLoader;
+
         public override void InstallBindings()
         {
             BindPlayerProgress();
@@ -23,7 +26,7 @@ namespace FlappyBird.Infrastructure
                 .To<PlayerProgress>()
                 .AsSingle();
         }
-        
+
         private void BindDataProvider()
         {
             Container
@@ -52,7 +55,7 @@ namespace FlappyBird.Infrastructure
         {
             Container
                 .Bind<ISceneLoader>()
-                .To<SceneLoader>()
+                .FromComponentInNewPrefab(_sceneLoader)
                 .AsSingle();
         }
 

@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7923a1c5e7eac94e9fce096aac55a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneLoader: {fileID: 8331618716546594080, guid: 257a0330f3e5c2840bf8cb40874c3638, type: 3}
 --- !u!114 &2551893242908846967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,3 +91,8 @@ MonoBehaviour:
   BirdStaticData: {fileID: 11400000, guid: aa662a993adc062408a00d075d3b5776, type: 2}
   PipesStaticData: {fileID: 11400000, guid: ef4d9f5660104a248acafffa5b292ab7, type: 2}
   GrassStaticData: {fileID: 11400000, guid: 2b9bf26c040700e409c561755839ebf5, type: 2}
+  DefaultProgressData:
+    BirdCurrentSkinIndex: 0
+    BirdOpenSkinsAmount: 0
+    MaxScore: 0
+    IsSoundPlaying: 0
