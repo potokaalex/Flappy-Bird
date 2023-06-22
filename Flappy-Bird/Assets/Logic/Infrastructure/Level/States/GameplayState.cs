@@ -18,20 +18,16 @@ namespace FlappyBird.Infrastructure
             _playerProgress = playerProgress;
             _ecs = ecs;
             _gameLoop = gameLoop;
-
-            _scoreProgressWriter = new ScoreProgressWriter(_ecs.Contexts);
         }
 
         public void Enter()
         {
-            _playerProgress.RegisterWatcher(_scoreProgressWriter);
 
             _ecs.CoreSystems.Start(_gameLoop);
         }
 
         public void Exit()
         {
-            _playerProgress.UnregisterWatcher(_scoreProgressWriter);
 
             _ecs.CoreSystems.Stop(_gameLoop);
         }

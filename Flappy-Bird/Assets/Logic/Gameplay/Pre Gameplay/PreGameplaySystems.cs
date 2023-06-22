@@ -19,8 +19,9 @@ namespace FlappyBird.Gameplay.PreGameplay
         public void Start(IGameLoop gameLoop)
         {
             ActivateReactiveSystems();
+            Initialize();
             gameLoop.OnFixedUpdate += Execute;
-
+            
             _contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(true);
             _contexts.input.birdData.FlyUpAction.Enable();
         }
@@ -28,6 +29,7 @@ namespace FlappyBird.Gameplay.PreGameplay
         public void Stop(IGameLoop gameLoop)
         {
             DeactivateReactiveSystems();
+            Cleanup();
             gameLoop.OnFixedUpdate -= Execute;
 
             _contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(false);

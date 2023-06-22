@@ -1,5 +1,5 @@
-using FlappyBird.Gameplay;
 using FlappyBird.Infrastructure;
+using FlappyBird.Gameplay;
 
 namespace FlappyBird
 {
@@ -19,9 +19,7 @@ namespace FlappyBird
         public void Enter()
         {
             _dataProvider.Get<LevelSceneData>().GameplayUI.PlayCloseAnimation();
-            _ecs.Contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(true);
-            
-            _ecs.PreGameOverSystems.Initialize();
+
             _ecs.PreGameOverSystems.Start(_gameLoop);
         }
 

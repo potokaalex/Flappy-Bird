@@ -27,6 +27,7 @@ namespace FlappyBird.Infrastructure
             _dataProvider = dataProvider;
             _playerProgress = playerProgress;
 
+            //_playerProgress.ClearData();
             Initialize(); //move to start in bootstrap scene.
         }
 

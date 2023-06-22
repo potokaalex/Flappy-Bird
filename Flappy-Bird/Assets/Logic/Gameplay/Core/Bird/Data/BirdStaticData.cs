@@ -1,6 +1,5 @@
 ﻿using UnityEngine.InputSystem;
 using UnityEngine;
-using System;
 
 namespace FlappyBird.Gameplay.Core.Bird
 {
@@ -36,18 +35,5 @@ namespace FlappyBird.Gameplay.Core.Bird
         public float MinPositionY => _minPositionY;
 
         public float MaxPositionY => _maxPositionY;
-    }
-
-    [Serializable]
-    public struct BirdAppearance 
-    {
-        [SerializeField] private GameObject _prefab;
-        [SerializeField] private Sprite[] _skins;
-
-        public GameObject Prefab
-            => _prefab;
-        
-        public Sprite GetSkin(int index)
-            => _skins[index];
     }
 }

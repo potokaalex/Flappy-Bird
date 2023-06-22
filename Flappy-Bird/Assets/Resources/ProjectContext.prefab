@@ -93,6 +93,7 @@ MonoBehaviour:
   GrassStaticData: {fileID: 11400000, guid: 2b9bf26c040700e409c561755839ebf5, type: 2}
   DefaultProgressData:
     BirdCurrentSkinIndex: 0
-    BirdOpenSkinsAmount: 0
+    BirdOpenSkinsAmount: 1
+    MaxOpenSkinsAmount: 3
+    CurrentScore: 0
     MaxScore: 0
-    IsSoundPlaying: 0

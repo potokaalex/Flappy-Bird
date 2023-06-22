@@ -1,4 +1,4 @@
-namespace FlappyBird.Gameplay.Core.Score
+namespace FlappyBird
 {
     public class ScoreProgressWriter : IProgressDataWriter
     {
@@ -13,6 +13,8 @@ namespace FlappyBird.Gameplay.Core.Score
 
             if (currentScore > data.MaxScore)
                 data.MaxScore = currentScore;
+
+            data.CurrentScore = currentScore;
         }
     }
 }

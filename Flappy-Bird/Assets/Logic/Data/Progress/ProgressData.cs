@@ -7,9 +7,9 @@ namespace FlappyBird
     {
         public int BirdCurrentSkinIndex;
         public int BirdOpenSkinsAmount;
+        public int MaxOpenSkinsAmount;
 
+        public uint CurrentScore;
         public uint MaxScore;
-        
-        public bool IsSoundPlaying;
     }
 }

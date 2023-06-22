@@ -49,6 +49,8 @@ MonoBehaviour:
     _prefab: {fileID: 5582752118161707237, guid: a22b63eef227bf54b83bcdffc264b15b, type: 3}
     _skins:
     - {fileID: 21300000, guid: aa6d1386857cea24e97ade1f8b696c47, type: 3}
+    - {fileID: 21300000, guid: 537f21f1a108ee740aa07b52218ab210, type: 3}
+    - {fileID: 21300000, guid: 80bc571a793d6e3428ed8f5107911083, type: 3}
   _gravityAcceleration: -22
   _flyUpVelocity: 6.3
   _velocityToFallAnimation: -3.5

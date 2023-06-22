@@ -38,14 +38,12 @@ namespace FlappyBird.Gameplay
         {
             CreateSystems();
             _systems.CreateEntities();
-            _systems.Initialize();
             _systems.Stop(_gameLoop);
         }
 
         public void Dispose()
         {
             _systems.Stop(_gameLoop);
-            _systems.Cleanup();
             _systems.RemoveEntities();
             Contexts.Reset();
         }

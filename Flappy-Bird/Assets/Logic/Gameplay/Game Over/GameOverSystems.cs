@@ -12,12 +12,14 @@ namespace FlappyBird.Gameplay.GameOver
         public void Start(IGameLoop gameLoop)
         {
             ActivateReactiveSystems();
+            Initialize();
             gameLoop.OnFixedUpdate += Execute;
         }
 
         public void Stop(IGameLoop gameLoop)
         {
             DeactivateReactiveSystems();
+            Cleanup();
             gameLoop.OnFixedUpdate -= Execute;
         }
 

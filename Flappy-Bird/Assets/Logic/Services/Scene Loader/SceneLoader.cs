@@ -12,7 +12,9 @@ namespace FlappyBird
             var loadingOperation = SceneManager.LoadSceneAsync(sceneName, loadMode);
             loadingOperation.allowSceneActivation = false;
 
-            _animator.PlayCloseAnimation(() =>
+            _animator.PlayCloseAnimation();
+            
+            _animator.StartActionAfterCurrentAnimation(() =>
             {
                 loadingOperation.allowSceneActivation = true;
                 _animator.PlayOpenAnimation();

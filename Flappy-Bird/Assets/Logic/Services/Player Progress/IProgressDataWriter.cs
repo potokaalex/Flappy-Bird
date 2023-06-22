@@ -1,6 +1,6 @@
 namespace FlappyBird
 {
-    public interface IProgressDataWriter : IProgressDataWatcher
+    public interface IProgressDataWriter
     {
         public void OnDataSave(ProgressData data);
     }

@@ -7,18 +7,27 @@ namespace FlappyBird.Gameplay.PreGameOver
 {
     public class PreGameOverSystems : Feature, ISwitchableSystem
     {
+        private readonly Contexts _contexts;
+
         public PreGameOverSystems(Contexts contexts, IStateMachine stateMachine, IGameLoop gameLoop)
-            => base.Add(CreateSystems(contexts, gameLoop, stateMachine));
-        
+        {
+            _contexts = contexts;
+            base.Add(CreateSystems(contexts, gameLoop, stateMachine));
+        }
+
         public void Start(IGameLoop gameLoop)
         {
+            _contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(true);
+
             ActivateReactiveSystems();
+            Initialize();
             gameLoop.OnFixedUpdate += Execute;
         }
 
         public void Stop(IGameLoop gameLoop)
         {
             DeactivateReactiveSystems();
+            Cleanup();
             gameLoop.OnFixedUpdate -= Execute;
         }
         
