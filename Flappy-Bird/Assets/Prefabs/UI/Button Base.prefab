@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 8104292048220130706}
   - component: {fileID: 8104292048220130705}
   - component: {fileID: 8104292048220130704}
-  - component: {fileID: 8104292048220130711}
+  - component: {fileID: 2081612378790754047}
   m_Layer: 5
   m_Name: Model
   m_TagString: Untagged
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!95 &8104292048220130711
+--- !u!95 &2081612378790754047
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
