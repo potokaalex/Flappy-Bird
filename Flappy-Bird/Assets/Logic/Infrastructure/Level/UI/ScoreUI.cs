@@ -1,3 +1,4 @@
+using FlappyBird.Gameplay.Core.Score;
 using FlappyBird.Gameplay;
 using UnityEngine.UI;
 using UnityEngine;
@@ -11,12 +12,10 @@ namespace FlappyBird.Infrastructure
         private GameplayEcs _ecs;
 
         [Inject]
-        private void Constructor(GameplayEcs ecs)
-        {
-            _ecs = ecs;
-        }
+        private void Constructor(GameplayEcs ecs) 
+            => _ecs = ecs;
 
-        private void Start() 
+        private void Start()
             => _ecs.Contexts.input.scoreData.OnCurrentScoreChanged += UpdateScore;
 
         private void OnDisable()

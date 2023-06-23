@@ -9,12 +9,10 @@ namespace FlappyBird
 
         public void OnDataSave(ProgressData data)
         {
-            var currentScore = _contexts.input.scoreData.CurrentScore;
+            data.CurrentScore = _contexts.input.scoreData.CurrentScore;
 
-            if (currentScore > data.MaxScore)
-                data.MaxScore = currentScore;
-
-            data.CurrentScore = currentScore;
+            if (data.CurrentScore > data.MaxScore)
+                data.MaxScore = data.CurrentScore;
         }
     }
 }
