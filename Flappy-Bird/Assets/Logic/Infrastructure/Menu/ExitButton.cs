@@ -1,11 +1,12 @@
-using FlappyBird;
-
-public class ExitButton : ButtonBase
+namespace FlappyBird.Infrastructure
 {
-    private protected override void OnClick()
+    public class ExitButton : ButtonBase
+    {
+        private protected override void OnClick()
 #if UNITY_EDITOR
             => UnityEditor.EditorApplication.isPlaying = false;
 #else
         => UnityEngine.Application.Quit();
 #endif
+    }
 }
