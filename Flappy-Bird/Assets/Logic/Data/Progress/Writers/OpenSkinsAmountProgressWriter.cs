@@ -6,8 +6,8 @@ namespace FlappyBird.Gameplay.Core.Score
         {
             data.BirdOpenSkinsAmount = data.MaxScore switch
             {
-                >= 10 => 3,
-                >= 5 => 2,
+                >= 5 => 3,
+                >= 1 => 2,
                 _ => 1
             };
         }

@@ -45,6 +45,7 @@ namespace FlappyBird.Infrastructure
         {
             _stateMachine.Initialize(
                 _stateFactory.Create<MenuLoadingState>(),
+                _stateFactory.Create<MenuState>(),
                 _stateFactory.Create<LevelLoadingState>(),
                 _stateFactory.Create<PreGameplayState>(),
                 _stateFactory.Create<GameplayState>(),
