@@ -2,7 +2,7 @@
 
 ## Introduction
 This is an amateur copy of the famous game Flappy Bird, created on the unity engine in order to learn how to create games and design it`s architecture. 
-This project is free and open source.
+This project is open source.
 
 ## Packages used
  - Unity Version 2021.3.24f1
