@@ -44,6 +44,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Fly Up
       m_Flags: 0
+    - m_Name: 
+      m_Id: 218669a9-e7ee-4744-85c6-28306f3d680b
+      m_Path: <Touchscreen>/touch*/Press
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fly Up
+      m_Flags: 0
     m_Flags: 1
   _appearance:
     _prefab: {fileID: 5582752118161707237, guid: a22b63eef227bf54b83bcdffc264b15b, type: 3}

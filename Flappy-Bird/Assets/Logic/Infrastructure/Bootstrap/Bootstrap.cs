@@ -36,6 +36,10 @@ namespace FlappyBird.Infrastructure
             InitializeStateMachine();
             InitializeDataProvider();
             InitializePlayerProgress();
+
+            //Application.targetFrameRate = 60;
+            
+            Application.targetFrameRate = 100;
         }
 
         private void InitializePlayerProgress()
