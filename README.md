@@ -14,4 +14,4 @@ This project is open source.
 Graphic assets are based on [this repository by @samuelcust](https://github.com/samuelcust/flappy-bird-assets)
 
 ## License
-See [here](LICENSE).
+See [here](LICENSE.txt).
