@@ -7,12 +7,15 @@ namespace FlappyBird.Gameplay.Core.Score
     public class ScoreCountSystem : ReactiveSystem<InputEntity>
     {
         private readonly IPlayerProgress _playerProgress;
+        private readonly IDataProvider _dataProvider;
         private readonly InputContext _inputContext;
 
-        public ScoreCountSystem(InputContext inputContext, IPlayerProgress playerProgress) : base(inputContext)
+        public ScoreCountSystem(InputContext inputContext, IDataProvider dataProvider, IPlayerProgress playerProgress) :
+            base(inputContext)
         {
             _playerProgress = playerProgress;
             _inputContext = inputContext;
+            _dataProvider = dataProvider;
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context)
@@ -23,8 +26,18 @@ namespace FlappyBird.Gameplay.Core.Score
 
         protected override void Execute(List<InputEntity> entities)
         {
-            _inputContext.scoreData.CurrentScore++;
-            _playerProgress.SaveData();
+            var progressData = _dataProvider.Get<ProgressData>();
+
+            UpdateScore(progressData);
+            _playerProgress.SaveData(progressData);
+        }
+
+        private void UpdateScore(ProgressData data)
+        {
+            data.CurrentScore = ++_inputContext.scoreData.CurrentScore;
+
+            if (data.CurrentScore > data.MaxScore)
+                data.MaxScore = data.CurrentScore;
         }
 
         private bool IsSenderHasBird(InputEntity inputEntity)

@@ -2,15 +2,11 @@ namespace FlappyBird
 {
     public interface IPlayerProgress
     {
-        public void Initialize(ProgressData defaultData);
-        
-        public void RegisterWriter(IProgressDataWriter writer);
-        
-        public void UnregisterAllWriters();
+        public void Initialize(IProgressData defaultData);
 
-        public void SaveData();
+        public void SaveData(IProgressData data);
 
-        public void LoadData();
+        public IProgressData LoadData();
 
         public void ClearData();
     }

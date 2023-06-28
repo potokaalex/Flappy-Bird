@@ -3,12 +3,11 @@ using System;
 namespace FlappyBird
 {
     [Serializable]
-    public class ProgressData : IData
+    public class ProgressData : IProgressData
     {
         public int BirdCurrentSkinIndex;
         public int BirdOpenSkinsAmount;
-        public int MaxOpenSkinsAmount;
-
+        
         public uint CurrentScore;
         public uint MaxScore;
     }

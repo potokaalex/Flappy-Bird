@@ -49,7 +49,7 @@ namespace FlappyBird.Gameplay.Core
             base.Add(new BirdSystems(contexts, dataProvider));
             base.Add(new PipesSystems(contexts, dataProvider));
             base.Add(new GrassSystems(contexts, dataProvider));
-            base.Add(new ScoreSystems(contexts, playerProgress));
+            base.Add(new ScoreSystems(contexts, dataProvider, playerProgress));
             base.Add(new PreGameOverStartStateSystem(stateMachine, contexts.input));
             base.Add(new GameOverStartStateSystem(stateMachine, contexts.input));
             base.Add(new CommonSystems(contexts, gameLoop));

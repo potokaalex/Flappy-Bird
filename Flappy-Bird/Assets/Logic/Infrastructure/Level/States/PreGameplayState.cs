@@ -1,4 +1,3 @@
-using FlappyBird.Gameplay.Core.Score;
 using FlappyBird.Gameplay;
 
 namespace FlappyBird.Infrastructure
@@ -21,12 +20,9 @@ namespace FlappyBird.Infrastructure
 
         public void Enter()
         {
-            _playerProgress.RegisterWriter(new ScoreProgressWriter(_ecs.Contexts));
-            _playerProgress.RegisterWriter(new OpenSkinsAmountProgressWriter());
-            _playerProgress.LoadData();
-
-            _dataProvider.Get<LevelSceneData>().GameOverUI
-                .Initialize(_dataProvider.Get<ProgressData>().BirdOpenSkinsAmount);
+            _dataProvider.Set(_playerProgress.LoadData());
+            _dataProvider.Get<LevelSceneData>()
+                .GameOverUI.Initialize(_dataProvider.Get<ProgressData>().BirdOpenSkinsAmount);
 
             _ecs.Initialize();
 

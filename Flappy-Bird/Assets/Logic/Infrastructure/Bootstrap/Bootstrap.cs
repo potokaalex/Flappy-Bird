@@ -26,24 +26,15 @@ namespace FlappyBird.Infrastructure
             _stateFactory = stateFactory;
             _dataProvider = dataProvider;
             _playerProgress = playerProgress;
-
-            _playerProgress.ClearData();
-            Initialize(); //move to start in bootstrap scene.
         }
 
-        private void Initialize()
+        private void Start()
         {
             InitializeStateMachine();
             InitializeDataProvider();
             InitializePlayerProgress();
-
-            //Application.targetFrameRate = 60;
-            
-            Application.targetFrameRate = 100;
+            SetTargetFrameRate();
         }
-
-        private void InitializePlayerProgress()
-            => _playerProgress.Initialize(DefaultProgressData);
 
         private void InitializeStateMachine()
         {
@@ -65,5 +56,11 @@ namespace FlappyBird.Infrastructure
                 PipesStaticData,
                 GrassStaticData);
         }
+
+        private void InitializePlayerProgress()
+            => _playerProgress.Initialize(DefaultProgressData);
+
+        private void SetTargetFrameRate()
+            => Application.targetFrameRate = 100;
     }
 }
