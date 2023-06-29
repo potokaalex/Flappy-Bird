@@ -26,6 +26,9 @@ namespace FlappyBird.Infrastructure
 
             _ecs.Initialize();
 
+            //_ecs.Contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(true);
+            //_ecs.Contexts.input.birdData.FlyUpAction.Enable();
+            
             _ecs.PreGameplaySystems.Start(_gameLoop);
         }
 
@@ -33,6 +36,7 @@ namespace FlappyBird.Infrastructure
         {
             _dataProvider.Get<LevelSceneData>().GameplayUI.PlayOpenAnimation();
 
+            //_ecs.Contexts.input.isFlyUp = true;//.birdEntity.birdAnimations.BirdAnimator.PlayFlyUp();
             _ecs.PreGameplaySystems.Stop(_gameLoop);
         }
     }

@@ -19,8 +19,8 @@ namespace FlappyBird.Infrastructure
         private IPlayerProgress _playerProgress;
 
         [Inject]
-        public void Constructor(IDataProvider dataProvider, IPlayerProgress playerProgress, IStateMachine stateMachine,
-            IStateFactory stateFactory)
+        public void Constructor(IDataProvider dataProvider, IPlayerProgress playerProgress,
+            IStateMachine stateMachine, IStateFactory stateFactory)
         {
             _stateMachine = stateMachine;
             _stateFactory = stateFactory;
@@ -39,6 +39,7 @@ namespace FlappyBird.Infrastructure
         private void InitializeStateMachine()
         {
             _stateMachine.Initialize(
+                _stateFactory.Create<ExitState>(),
                 _stateFactory.Create<MenuLoadingState>(),
                 _stateFactory.Create<MenuState>(),
                 _stateFactory.Create<LevelLoadingState>(),

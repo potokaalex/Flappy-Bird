@@ -21,7 +21,7 @@ namespace FlappyBird.Gameplay.PreGameplay
             ActivateReactiveSystems();
             Initialize();
             gameLoop.OnFixedUpdate += Execute;
-            
+
             _contexts.level.birdEntity.birdAnimations.BirdAnimator.SetActive(true);
             _contexts.input.birdData.FlyUpAction.Enable();
         }
@@ -40,9 +40,10 @@ namespace FlappyBird.Gameplay.PreGameplay
         {
             var systems = new Systems();
 
-            systems.Add(new GrassAnimationSystem(contexts.input));
-            systems.Add(new TimeUpdateSystem(_contexts.input, gameLoop.FixedDeltaTime));
+            systems.Add(new TimeUpdateSystem(contexts.input, gameLoop.FixedDeltaTime));
             systems.Add(new InputSystem(contexts.input));
+            systems.Add(new GrassAnimationSystem(contexts.input));
+            systems.Add(new AnimationSystem(contexts.level, contexts.input));
             systems.Add(new GameplayStartStateSystem(stateMachine, contexts.input));
             systems.Add(new EventCleanupSystem(contexts.input));
 

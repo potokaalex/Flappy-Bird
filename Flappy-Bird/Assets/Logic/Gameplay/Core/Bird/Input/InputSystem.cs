@@ -1,4 +1,6 @@
-﻿using UnityEngine.EventSystems;
+﻿using System.Collections.Generic;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using Entitas;
 
 namespace FlappyBird.Gameplay.Core.Bird
@@ -7,13 +9,12 @@ namespace FlappyBird.Gameplay.Core.Bird
     {
         private readonly InputContext _inputContext;
 
-        public InputSystem(InputContext inputContext) 
+        public InputSystem(InputContext inputContext)
             => _inputContext = inputContext;
 
         public void Execute()
         {
-            if (_inputContext.birdData.FlyUpAction.WasPressedThisFrame() &&
-                EventSystem.current.IsPointerOverGameObject() == false)
+            if (_inputContext.birdData.FlyUpAction.WasPressedThisFrame() && !IsPointerOverUIObject())
                 SendFlyUpEvent();
         }
 
@@ -23,6 +24,18 @@ namespace FlappyBird.Gameplay.Core.Bird
 
             entity.isFlyUp = true;
             entity.isEvent = true;
+        }
+
+        private bool IsPointerOverUIObject()
+        {
+            var touchPosition = Touchscreen.current.position.ReadValue();
+            var eventData = new PointerEventData(EventSystem.current);
+            var results = new List<RaycastResult>();
+
+            eventData.position = touchPosition;
+            EventSystem.current.RaycastAll(eventData, results);
+
+            return results.Count > 0;
         }
     }
 }

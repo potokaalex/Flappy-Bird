@@ -1,12 +1,16 @@
+using Zenject;
+
 namespace FlappyBird.Infrastructure
 {
     public class ExitButton : ButtonBase
     {
+        private IStateMachine _stateMachine;
+
+        [Inject]
+        private void Constructor(IStateMachine stateMachine)
+            => _stateMachine = stateMachine;
+
         private protected override void OnClick()
-#if UNITY_EDITOR
-            => UnityEditor.EditorApplication.isPlaying = false;
-#else
-        => UnityEngine.Application.Quit();
-#endif
+            => _stateMachine.SwitchTo<ExitState>();
     }
 }
