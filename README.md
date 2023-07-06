@@ -11,7 +11,7 @@ This project is open source.
  - Entitas Version 1.13.0
 
 ## Design
-Graphic assets are based on [this repository by @samuelcust](https://github.com/samuelcust/flappy-bird-assets)
+Graphic assets are based on [this repository](https://github.com/samuelcust/flappy-bird-assets) by [@samuelcust](https://github.com/samuelcust)
 
 ## Releases
 See [here](https://github.com/Kot-Alenya/Flappy-Bird/releases).
