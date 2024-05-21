@@ -17,4 +17,4 @@ Graphic assets are based on [this repository](https://github.com/samuelcust/flap
 See [here](https://github.com/Kot-Alenya/Flappy-Bird/releases).
 
 ## License
-See [here](LICENSE.txt).
+See [here](LICENSE).
